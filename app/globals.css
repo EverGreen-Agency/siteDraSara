@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #3f2738;
+  --color-primary-hover: #2f1c2a;
+  --color-mauve: #69425d;
+  --color-pink: #fff6fc;
+  --color-surface: #f8f3f6;
+  --color-surface-strong: #f1e8ee;
+  --color-border: #dfd2da;
+  --color-muted: #69727d;
+  --color-ink: #21171e;
+  --color-accent: #9a557f;
+  --font-body: var(--font-manrope), Arial, sans-serif;
+  --font-title: var(--font-tenor), Georgia, serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-title: var(--font-title);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+.font-title {
+  font-family: var(--font-title);
+}
+
+.editorial-rule {
+  background-image: linear-gradient(to right, var(--color-border) 1px, transparent 1px);
+  background-size: 25% 100%;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+body:has([data-landing-layout]) .site-header nav,
+body:has([data-landing-layout]) .site-header details,
+body:has([data-landing-layout]) .site-footer {
+  display: none;
+}
+
+.article-content section > div {
+  max-width: 960px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
