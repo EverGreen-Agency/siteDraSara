@@ -1,7 +1,8 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
+import {ContactView} from "@/components/contact-view";
 import {ContentSectionRenderer} from "@/components/content-section-renderer";
-import {ArticleCard, Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, FAQ, Heading, ImageFrame, LocalClinicBlock, ProfessionalBlock, SEOJsonLd, Section, TreatmentCard} from "@/components/design-system";
+import {ArticleCard, Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, FAQ, Heading, ImageFrame, LocalClinicBlock, ProcedureCarousel, ProfessionalBlock, SEOJsonLd, Section, TreatmentCard} from "@/components/design-system";
 import type {Article, InstitutionalPage, LandingPage, Treatment} from "@/lib/content/types";
 import {getArticles, getContentEntry, getSiteSettings, getStaticSlugs} from "@/lib/sanity/repository";
 
@@ -46,10 +47,10 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
       <SEOJsonLd data={faqData ? [breadcrumbData, webpageData, faqData] : [breadcrumbData, webpageData]} />
       <div data-page-event="treatment_view" data-treatment={treatment.slug} data-specialty={treatment.specialty} data-content-type="treatment" />
       <section className={`overflow-hidden ${darkHero ? "bg-[var(--color-primary)] text-white" : treatment.variant === "symptom-led" ? "bg-[var(--color-surface-strong)]" : "bg-[var(--color-pink)]"}`}>
-        <Container className="py-10 sm:py-14">
+        <Container className="py-6 sm:py-8">
           <Breadcrumbs light={darkHero} items={[{label: "Início", href: "/"}, {label: hubLabel, href: hubHref}, {label: treatment.title}]} />
           <div className={`grid items-center gap-12 ${showImage ? "lg:grid-cols-[1.08fr_0.92fr]" : "lg:grid-cols-[0.72fr_0.28fr]"}`}>
-            <div className="py-8">
+            <div className="py-4">
               <Eyebrow light={darkHero}>{treatment.eyebrow}</Eyebrow>
               <Heading as="h1" className={darkHero ? "text-white" : undefined}>{treatment.title}</Heading>
               <p className={`mt-7 max-w-2xl text-lg leading-8 ${darkHero ? "text-white/75" : "text-[var(--color-muted)]"}`}>{treatment.shortDescription}</p>
@@ -63,7 +64,11 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
       {treatment.aftercare && <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]"><Container className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"><div><Eyebrow>Continuidade do cuidado</Eyebrow><Heading>Acompanhamento e manutenção</Heading></div><div>{treatment.aftercare.body.map((paragraph) => <p key={paragraph} className="mb-4 max-w-2xl leading-7 text-[var(--color-muted)]">{paragraph}</p>)}{treatment.aftercare.href && treatment.aftercare.label && <ButtonLink href={treatment.aftercare.href} variant="secondary" event="treatment_view" location="aftercare">{treatment.aftercare.label}</ButtonLink>}</div></Container></Section>}
       {treatment.clinicalLead && <ProfessionalBlock professional={treatment.clinicalLead} />}
       {treatment.faq.length > 0 && <Section className="bg-[var(--color-pink)]"><Container className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr]"><div><Eyebrow>Perguntas frequentes</Eyebrow><Heading>O que costuma gerar dúvida</Heading></div><FAQ items={treatment.faq} /></Container></Section>}
-      {treatment.relatedTreatments.length > 0 && <Section><Container><div className="max-w-2xl"><Eyebrow>Próximos caminhos</Eyebrow><Heading>Relações clínicas que ajudam a organizar o caso</Heading></div><div className="mt-12 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">{treatment.relatedTreatments.map((item, index) => <TreatmentCard key={item.href} index={`0${index + 1}`} title={item.title} description={item.description ?? "Entenda como esta área pode se relacionar ao planejamento."} href={item.href} />)}</div></Container></Section>}
+      <ProcedureCarousel
+        title="CONHEÇA OUTROS PROCEDIMENTOS"
+        eyebrow="Tratamentos Prioritários"
+        currentSlug={treatment.slug}
+      />
       <CTASection heading="A melhor indicação começa por compreender o seu caso" />
     </>
   );
@@ -71,18 +76,66 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
 
 async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
   const settings = await getSiteSettings();
-  const articles = page.slug === "conteudos" ? await getArticles() : [];
   const isContact = page.slug === "contato";
+
+  if (isContact) {
+    const contactBusinessData = {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      name: settings.legalName,
+      url: `${settings.siteUrl}/contato`,
+      telephone: settings.phone,
+      image: `${settings.siteUrl}/images/clinica-entrada.webp`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: settings.streetAddress ?? "Rodovia Armando Calil Bulos, 6201, salas 217 e 218",
+        addressLocality: "Florianópolis",
+        addressRegion: "SC",
+        postalCode: "88058-001",
+        addressCountry: "BR",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: settings.geo?.latitude ?? -27.4373,
+        longitude: settings.geo?.longitude ?? -48.3998,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "08:30",
+          closes: "19:00",
+        },
+      ],
+      hasMap: "https://maps.google.com/maps?q=-27.4373,-48.3998",
+    };
+
+    return (
+      <>
+        <SEOJsonLd
+          data={[
+            breadcrumbJsonLd(settings.siteUrl, [
+              {name: "Início", path: "/"},
+              {name: page.title, path: `/${page.slug}`},
+            ]),
+            contactBusinessData,
+          ]}
+        />
+        <ContactView settings={settings} page={page} />
+      </>
+    );
+  }
+
+  const articles = page.slug === "conteudos" ? await getArticles() : [];
   const isLegacy = page.slug.startsWith("odontopediatria");
   return (
     <>
       <SEOJsonLd data={breadcrumbJsonLd(settings.siteUrl, [{name: "Início", path: "/"}, {name: page.title, path: `/${page.slug}`}])} />
       <Section className="bg-[var(--color-pink)]"><Container><Breadcrumbs items={[{label: "Início", href: "/"}, {label: page.eyebrow}]} /><div className="grid items-end gap-10 lg:grid-cols-[1fr_0.75fr]"><div><Eyebrow>{page.eyebrow}</Eyebrow><Heading as="h1">{page.title}</Heading></div><p className="text-lg leading-8 text-[var(--color-muted)]">{page.description}</p></div></Container></Section>
-      {page.image && <Section><Container className="grid items-center gap-12 lg:grid-cols-2"><ImageFrame src={page.image} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[520px]" /><div className="lg:px-10"><Eyebrow>{isContact ? "Informações da clínica" : "Planejamento individual"}</Eyebrow><Heading>{isContact ? "Atendimento nos Ingleses" : "Avaliação, diagnóstico e indicação"}</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">{isContact ? "A página reúne a localização da clínica e, quando configurados, os canais oficiais para conversar com a equipe e organizar uma avaliação." : "A avaliação organiza necessidades, esclarece alternativas e ajuda a definir uma sequência de cuidado individual."}</p>{!isContact && <div className="mt-9"><ButtonLink href="/contato">Agendar uma avaliação</ButtonLink></div>}</div></Container></Section>}
+      {page.image && <Section><Container className="grid items-center gap-12 lg:grid-cols-2"><ImageFrame src={page.image} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[520px]" /><div className="lg:px-10"><Eyebrow>Planejamento individual</Eyebrow><Heading>Avaliação, diagnóstico e indicação</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">A avaliação organiza necessidades, esclarece alternativas e ajuda a definir uma sequência de cuidado individual.</p><div className="mt-9"><ButtonLink href="/contato">Agendar uma avaliação</ButtonLink></div></div></Container></Section>}
       {page.linkGroups?.map((group) => <Section key={group.title} className="border-t border-[var(--color-border)]"><Container><Heading>{group.title}</Heading><div className="mt-12 grid gap-x-10 md:grid-cols-2 lg:grid-cols-3">{group.items.map((item, index) => <TreatmentCard key={item.href} index={String(index + 1).padStart(2, "0")} title={item.title} description={item.description} href={item.href} />)}</div></Container></Section>)}
       {page.sections && <ContentSectionRenderer sections={page.sections} />}
       {articles.length > 0 && <Section><Container><div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]"><div><Eyebrow>Publicações</Eyebrow><Heading>Orientações disponíveis</Heading></div><div>{articles.map((article) => <ArticleCard key={article.slug} category={article.categories[0] ?? "Conteúdo"} title={article.title} description={article.excerpt} href={article.path} meta={`Por ${article.author.name}`} />)}</div></div></Container></Section>}
-      {isContact && <Section><Container><LocalClinicBlock heading="Clínica nos Ingleses, Florianópolis" /></Container></Section>}
       {!isLegacy && !isContact && <CTASection />}
     </>
   );
@@ -107,7 +160,7 @@ async function ArticlePage({article}: {article: Article}) {
 function LandingPageView({page}: {page: LandingPage}) {
   return (
     <div data-landing-layout>
-      <section className="overflow-hidden bg-[var(--color-primary)] text-white"><Container className="grid min-h-[calc(100svh-5rem)] items-center gap-12 py-14 lg:grid-cols-[1fr_0.82fr]"><div><Eyebrow light>{page.eyebrow}</Eyebrow><Heading as="h1" className="text-white">{page.title}</Heading><p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">{page.description}</p><div className="mt-9"><ButtonLink href="/contato" variant="light" location="landing_hero">{page.ctaLabel}</ButtonLink></div><p className="mt-8 max-w-xl text-sm leading-6 text-white/55">A indicação depende de avaliação individual e pode incluir a decisão de não realizar um procedimento.</p></div>{page.image && <ImageFrame src={page.image} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="aspect-[4/5] min-h-[520px]" />}</Container></section>
+      <section className="overflow-hidden bg-[var(--color-primary)] text-white"><Container className="grid items-center gap-10 py-8 sm:py-10 lg:grid-cols-[1fr_0.82fr]"><div><Eyebrow light>{page.eyebrow}</Eyebrow><Heading as="h1" className="text-white">{page.title}</Heading><p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">{page.description}</p><div className="mt-9"><ButtonLink href="/contato" variant="light" location="landing_hero">{page.ctaLabel}</ButtonLink></div><p className="mt-8 max-w-xl text-sm leading-6 text-white/55">A indicação depende de avaliação individual e pode incluir a decisão de não realizar um procedimento.</p></div>{page.image && <ImageFrame src={page.image} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="aspect-[4/5] min-h-[520px]" />}</Container></section>
       <ContentSectionRenderer sections={page.sections} />
       <Section className="bg-[var(--color-pink)]"><Container className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr]"><div><Eyebrow>Dúvidas</Eyebrow><Heading>Antes de agendar</Heading></div><FAQ items={page.faq} /></Container></Section>
       <CTASection heading="Planejamento estético começa por uma avaliação completa" />

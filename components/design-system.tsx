@@ -12,7 +12,7 @@ export function Container({children, className}: {children: ReactNode; className
 }
 
 export function Section({children, className, id}: {children: ReactNode; className?: string; id?: string}) {
-  return <section id={id} className={classes("py-20 sm:py-24 lg:py-30", className)}>{children}</section>;
+  return <section id={id} className={classes("py-8 sm:py-10 lg:py-12", className)}>{children}</section>;
 }
 
 export function Eyebrow({children, light = false}: {children: ReactNode; light?: boolean}) {
@@ -23,21 +23,24 @@ export function Heading({as: Tag = "h2", children, className}: {as?: "h1" | "h2"
   return <Tag className={classes("font-title text-balance leading-[1.08] tracking-[-0.02em] text-[var(--color-primary)]", Tag === "h1" ? "text-4xl sm:text-5xl lg:text-[4.5rem]" : Tag === "h2" ? "text-3xl sm:text-4xl lg:text-5xl" : "text-2xl sm:text-3xl", className)}>{children}</Tag>;
 }
 
-export function ButtonLink({href, children, variant = "primary", event = "appointment_cta_click", location}: {href: string; children: ReactNode; variant?: "primary" | "secondary" | "light"; event?: string; location?: string}) {
+export function ButtonLink({href, children, variant = "primary", event = "appointment_cta_click", location, className}: {href: string; children: ReactNode; variant?: "primary" | "secondary" | "light"; event?: string; location?: string; className?: string}) {
   return (
     <Link
       href={href}
       data-track-event={event}
       data-track-location={location}
       className={classes(
-        "inline-flex min-h-12 items-center justify-center border px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]",
+        "group inline-flex min-h-12 items-center justify-center border px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)]",
         variant === "primary" && "border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]",
         variant === "secondary" && "border-[var(--color-primary)] bg-transparent text-[var(--color-primary)] hover:bg-[var(--color-surface)]",
         variant === "light" && "border-white bg-white text-[var(--color-primary)] hover:bg-[var(--color-pink)]",
+        className,
       )}
     >
-      {children}
-      <span aria-hidden="true" className="ml-3">↗</span>
+      <span>{children}</span>
+      <svg className="ml-2.5 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+      </svg>
     </Link>
   );
 }
@@ -138,16 +141,133 @@ export function FAQ({items}: {items: {question: string; answer: string}[]}) {
   );
 }
 
-export function CTASection({heading = "Seu tratamento começa por uma avaliação completa", text = "Converse com a equipe para organizar o diagnóstico, a indicação e os próximos passos."}: {heading?: string; text?: string}) {
+export function CTASection({
+  heading = "Seu tratamento começa por uma avaliação completa",
+  text = "Converse com a equipe para organizar o diagnóstico, a indicação e os próximos passos.",
+  eyebrow = "Planejamento individual",
+}: {
+  heading?: string;
+  text?: string;
+  eyebrow?: string;
+}) {
+  const whatsappUrl = `https://wa.me/5548985063001?text=${encodeURIComponent(
+    "Olá! Gostaria de agendar uma avaliação com a Dra. Sara Michelon nos Ingleses."
+  )}`;
+
   return (
-    <Section className="bg-[var(--color-primary)] text-white">
-      <Container className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
-        <div className="max-w-3xl">
-          <Eyebrow light>Planejamento individual</Eyebrow>
+    <Section className="bg-[var(--color-primary)] py-8 text-white sm:py-10 lg:py-12">
+      <Container className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+        {/* Coluna Esquerda: Contexto, Autoridade e Pilares Clínicos (7 cols) */}
+        <div className="lg:col-span-7">
+          <Eyebrow light>{eyebrow}</Eyebrow>
           <Heading className="text-white">{heading}</Heading>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">{text}</p>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg sm:leading-8">
+            {text}
+          </p>
+
+          {/* Pilares Clínicos de Confiança com Ícones SVG */}
+          <div className="mt-8 grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-3">
+            <div className="flex items-start gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.08] text-white/90">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">Hora Marcada</h4>
+                <p className="mt-0.5 text-xs leading-5 text-white/70">Atendimento pontual com tempo reservado e sem filas.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.08] text-white/90">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693l-1.57-.393m15.6 0l1.196 4.786A2.25 2.25 0 0118.81 22.5H5.19a2.25 2.25 0 01-2.186-2.821l1.196-4.786" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white">Planejamento</h4>
+                <p className="mt-0.5 text-xs leading-5 text-white/70">Tecnologia digital de imagem e plano preventivo.</p>
+              </div>
+            </div>
+
+            <Link
+              href="/contato"
+              data-track-event="directions_click"
+              data-track-location="cta_section_pillar_map"
+              className="group -m-1 flex items-start gap-3 rounded-lg p-1 transition-colors hover:bg-white/[0.04]"
+            >
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.08] text-white/90 transition-colors group-hover:bg-white/[0.15]">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-white">
+                  <span>Norte da Ilha</span>
+                  <svg className="h-3 w-3 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                </h4>
+                <p className="mt-0.5 text-xs leading-5 text-white/70 transition-colors group-hover:text-white/90">Salas 217-218 no Ingleses Office com estacionamento.</p>
+              </div>
+            </Link>
+          </div>
         </div>
-        <ButtonLink href="/contato" variant="light" location="cta_section">Agendar uma avaliação</ButtonLink>
+
+        {/* Coluna Direita: Card de Conversão Direto (5 cols) */}
+        <div className="lg:col-span-5">
+          <div className="rounded-3xl border border-white/10 bg-black/15 p-6 sm:p-8 shadow-xl">
+            <h3 className="font-title text-2xl font-normal text-white">
+              Inicie seu Atendimento
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-white/75 sm:text-sm">
+              Converse diretamente com nossa equipe pelo WhatsApp para verificar disponibilidades e agendar sua avaliação individual:
+            </p>
+
+            {/* Ações de Conversão */}
+            <div className="mt-6 flex flex-col gap-2.5">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-event="whatsapp_click"
+                data-track-location="cta_section_whatsapp"
+                className="group flex min-h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[var(--color-primary)] shadow-md transition-all hover:bg-neutral-100 hover:shadow-lg"
+              >
+                <svg className="h-4 w-4 shrink-0 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
+                <span>Conversar pelo WhatsApp</span>
+              </a>
+
+              {/* Ação Secundária Discreta: Localização, Rotas e Mapa */}
+              <Link
+                href="/contato"
+                data-track-event="directions_click"
+                data-track-location="cta_section_map"
+                className="group flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2.5 text-xs font-semibold text-white/80 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
+              >
+                <svg className="h-3.5 w-3.5 shrink-0 text-white/60 transition-colors group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                <span>Ver localização, rotas e mapa</span>
+                <svg className="h-3 w-3 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Micro Informações no Rodapé do Card */}
+            <div className="mt-5 border-t border-white/10 pt-4 text-center">
+              <p className="text-xs text-white/70">
+                Segunda a Sexta · 08h às 19h · (48) 98506-3001
+              </p>
+            </div>
+          </div>
+        </div>
       </Container>
     </Section>
   );
@@ -181,3 +301,7 @@ export function SEOJsonLd({data}: {data: Record<string, unknown> | Record<string
   const json = JSON.stringify(data).replace(/</g, "\\u003c");
   return <script type="application/ld+json" dangerouslySetInnerHTML={{__html: json}} />;
 }
+
+export {ProcedureCarousel} from "@/components/procedure-carousel";
+export type {ProcedureItem, ProcedureCarouselProps} from "@/components/procedure-carousel";
+

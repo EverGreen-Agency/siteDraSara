@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
-import {ArticleCard, ButtonLink, Container, CTASection, Eyebrow, Heading, ImageFrame, LocalClinicBlock, ProfessionalCard, SEOJsonLd, Section, TreatmentCard} from "@/components/design-system";
+import {ArticleCard, ButtonLink, Container, CTASection, Eyebrow, Heading, ImageFrame, LocalClinicBlock, ProcedureCarousel, ProfessionalCard, SEOJsonLd, Section} from "@/components/design-system";
 import {getArticles, getContentEntry, getProfessionals, getSiteSettings} from "@/lib/sanity/repository";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,8 +17,22 @@ export default async function HomePage() {
     "@type": "Dentist",
     name: settings.legalName,
     url: settings.siteUrl,
+    telephone: settings.phone,
     image: `${settings.siteUrl}/images/dr-sara-hero.webp`,
-    address: {"@type": "PostalAddress", addressLocality: "Florianópolis", addressRegion: "SC", addressCountry: "BR"},
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: settings.streetAddress ?? "Rodovia Armando Calil Bulos, 6201, salas 217 e 218",
+      addressLocality: "Florianópolis",
+      addressRegion: "SC",
+      postalCode: "88058-001",
+      addressCountry: "BR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: settings.geo?.latitude ?? -27.4373,
+      longitude: settings.geo?.longitude ?? -48.3998,
+    },
+    hasMap: "https://maps.google.com/maps?q=-27.4373,-48.3998",
     areaServed: ["Ingleses", "Norte da Ilha", "Florianópolis"],
   };
 
@@ -26,8 +40,8 @@ export default async function HomePage() {
     <>
       <SEOJsonLd data={localBusiness} />
       <section className="overflow-hidden bg-[var(--color-pink)]">
-        <Container className="grid min-h-[calc(100svh-5rem)] items-center gap-10 py-12 lg:grid-cols-[1.08fr_0.92fr] lg:py-16">
-          <div className="max-w-3xl py-8">
+        <Container className="grid items-center gap-8 py-8 lg:grid-cols-[1.08fr_0.92fr] lg:py-10">
+          <div className="max-w-3xl py-4 sm:py-6">
             <Eyebrow>{home.eyebrow}</Eyebrow>
             <Heading as="h1">{home.title}</Heading>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--color-muted)]">{home.description}</p>
@@ -69,26 +83,31 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      <Section id="tratamentos">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><Eyebrow>Tratamentos prioritários</Eyebrow><Heading>Necessidades diferentes pedem caminhos diferentes</Heading></div><p className="max-w-2xl text-lg leading-8 text-[var(--color-muted)]">Conheça algumas das áreas que podem fazer parte do planejamento. A indicação e a sequência dependem da avaliação de cada caso.</p></div>
-          <div className="mt-14 grid gap-x-10 md:grid-cols-2 lg:grid-cols-3">
-            <TreatmentCard index="01" title="Facetas de resina" description="Planejamento conservador de forma, proporção e cor do sorriso." href="/facetas-de-resina" />
-            <TreatmentCard index="02" title="Implantes dentários" description="Planejamento cirúrgico e protético para a reposição de dentes." href="/implantes-dentarios" />
-            <TreatmentCard index="03" title="Invisalign" description="Alinhadores transparentes com planejamento ortodôntico digital." href="/invisalign" />
-            <TreatmentCard index="04" title="Reabilitação oral" description="Organização de casos com diferentes necessidades clínicas." href="/reabilitacao-oral" />
-            <TreatmentCard index="05" title="Periodontia" description="Cuidado com a gengiva e estruturas que sustentam os dentes." href="/periodontia" />
-            <TreatmentCard index="06" title="Estética Orofacial" description="Avaliação da face como um conjunto antes da indicação." href="/estetica-orofacial" />
+      <Section>
+        <Container className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <Eyebrow>Planejamento individual</Eyebrow>
+            <Heading>Cada etapa informa a próxima decisão</Heading>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--color-muted)]">
+              O diagnóstico ajuda a estabelecer prioridades, sequência e limites. A indicação é construída com base no caso, não em uma lista de procedimentos.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 border border-[var(--color-border)]">
+            {["Avaliar", "Diagnosticar", "Indicar", "Acompanhar"].map((item, index) => (
+              <div key={item} className="min-h-40 border border-[var(--color-border)] p-6">
+                <span className="text-xs font-semibold text-[var(--color-mauve)]">0{index + 1}</span>
+                <p className="mt-12 font-title text-2xl text-[var(--color-primary)]">{item}</p>
+              </div>
+            ))}
           </div>
         </Container>
       </Section>
 
-      <Section className="bg-[var(--color-primary)] text-white">
-        <Container className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div><Eyebrow light>Planejamento individual</Eyebrow><Heading className="text-white">Cada etapa informa a próxima decisão</Heading><p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">O diagnóstico ajuda a estabelecer prioridades, sequência e limites. A indicação é construída com base no caso, não em uma lista de procedimentos.</p></div>
-          <div className="grid grid-cols-2 border border-white/15">{["Avaliar", "Diagnosticar", "Indicar", "Acompanhar"].map((item, index) => <div key={item} className="min-h-40 border border-white/10 p-6"><span className="text-xs text-white/40">0{index + 1}</span><p className="mt-12 font-title text-2xl">{item}</p></div>)}</div>
-        </Container>
-      </Section>
+      <ProcedureCarousel
+        id="tratamentos"
+        title="CONHEÇA OUTROS PROCEDIMENTOS"
+        eyebrow="Tratamentos Prioritários"
+      />
 
       <Section>
         <Container className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
