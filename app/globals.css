@@ -75,6 +75,83 @@ body:has([data-landing-layout]) .site-footer {
   max-width: 960px;
 }
 
+.carousel-fade-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 20px,
+    rgba(0, 0, 0, 0.7) 45px,
+    black 70px,
+    black calc(100% - 70px),
+    rgba(0, 0, 0, 0.7) calc(100% - 45px),
+    rgba(0, 0, 0, 0.2) calc(100% - 20px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 20px,
+    rgba(0, 0, 0, 0.7) 45px,
+    black 70px,
+    black calc(100% - 70px),
+    rgba(0, 0, 0, 0.7) calc(100% - 45px),
+    rgba(0, 0, 0, 0.2) calc(100% - 20px),
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .carousel-fade-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 35px,
+      rgba(0, 0, 0, 0.5) 85px,
+      rgba(0, 0, 0, 0.85) 130px,
+      black 175px,
+      black calc(100% - 175px),
+      rgba(0, 0, 0, 0.85) calc(100% - 130px),
+      rgba(0, 0, 0, 0.5) calc(100% - 85px),
+      rgba(0, 0, 0, 0.15) calc(100% - 35px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 35px,
+      rgba(0, 0, 0, 0.5) 85px,
+      rgba(0, 0, 0, 0.85) 130px,
+      black 175px,
+      black calc(100% - 175px),
+      rgba(0, 0, 0, 0.85) calc(100% - 130px),
+      rgba(0, 0, 0, 0.5) calc(100% - 85px),
+      rgba(0, 0, 0, 0.15) calc(100% - 35px),
+      transparent 100%
+    );
+  }
+}
+
+@keyframes marquee-continuous {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-continuous {
+  display: flex;
+  width: max-content;
+  animation: marquee-continuous 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-continuous:hover,
+.animate-marquee-continuous:focus-within {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
