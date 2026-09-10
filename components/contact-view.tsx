@@ -2,7 +2,6 @@
 
 import {useState} from "react";
 import Image from "next/image";
-import Link from "next/link";
 import type {InstitutionalPage, SiteSettings} from "@/lib/content/types";
 import {Breadcrumbs, Container, Eyebrow, Heading, Section} from "@/components/design-system";
 
@@ -11,7 +10,7 @@ interface ContactViewProps {
   page: InstitutionalPage;
 }
 
-export function ContactView({settings, page}: ContactViewProps) {
+export function ContactView({settings}: ContactViewProps) {
   const [copied, setCopied] = useState(false);
 
   const addressForClipboard = "Rodovia Armando Calil Bulos, 6201, Salas 217 e 218, Ingleses do Rio Vermelho, Florianópolis - SC, 88058-001 (Ingleses Saúde & Office)";
@@ -388,17 +387,17 @@ export function ContactView({settings, page}: ContactViewProps) {
       </Section>
 
       {/* 5. ESTRUTURA DO EDIFÍCIO, COMODIDADES & RECONHECIMENTO VISUAL */}
-      <Section className="border-t border-[var(--color-border)] bg-[var(--color-surface-strong)] py-8 sm:py-10">
+      <Section className="border-t border-[var(--color-border)] bg-[var(--color-surface-strong)] py-6 sm:py-8 lg:py-8">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
             <div>
               <Eyebrow>Conforto & Facilidade</Eyebrow>
               <Heading as="h2">Estrutura Pronta para Receber Você</Heading>
-              <p className="mt-5 text-base leading-7 text-[var(--color-muted)] sm:text-lg">
+              <p className="mt-4 text-base leading-7 text-[var(--color-muted)] sm:text-lg">
                 Projetamos cada detalhe para que sua visita seja tranquila, segura e pontual. Desde o estacionamento até o acesso aos consultórios, você conta com comodidade integral.
               </p>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-xl border border-[var(--color-border)] bg-white p-5 shadow-sm">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-surface)] text-[var(--color-primary)]">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -447,52 +446,55 @@ export function ContactView({settings, page}: ContactViewProps) {
                   </p>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            {/* Imagens de Reconhecimento do Prédio e CTA */}
+            <div className="flex flex-col gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
+                  <Image
+                    src="/images/clinica-entrada.webp"
+                    alt="Fachada e entrada do complexo Ingleses Saúde & Office"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Edifício Comercial</p>
+                    <p className="text-sm font-bold">Ingleses Saúde & Office</p>
+                  </div>
+                </div>
+
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
+                  <Image
+                    src="/images/clinica-consultorio.webp"
+                    alt="Consultório da clínica odontológica da Dra. Sara Michelon"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Ambiente Clínico</p>
+                    <p className="text-sm font-bold">Salas 217 e 218</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Botão posicionado abaixo das imagens */}
+              <div className="flex flex-col sm:flex-row">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-track-event="whatsapp_click"
                   data-track-location="amenities_cta"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[var(--color-primary-dark)]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[var(--color-primary-dark)] hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/40 active:scale-[0.99]"
                 >
                   <span>Agendar Consulta pelo WhatsApp</span>
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </a>
-              </div>
-            </div>
-
-            {/* Imagens de Reconhecimento do Prédio */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
-                <Image
-                  src="/images/clinica-entrada.webp"
-                  alt="Fachada e entrada do complexo Ingleses Saúde & Office"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 25vw"
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Edifício Comercial</p>
-                  <p className="text-sm font-bold">Ingleses Saúde & Office</p>
-                </div>
-              </div>
-
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
-                <Image
-                  src="/images/clinica-consultorio.webp"
-                  alt="Consultório da clínica odontológica da Dra. Sara Michelon"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 25vw"
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Ambiente Clínico</p>
-                  <p className="text-sm font-bold">Salas 217 e 218</p>
-                </div>
               </div>
             </div>
           </div>

@@ -77,28 +77,27 @@ export default async function HomePage() {
       <Section className="bg-[var(--color-surface)]">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            <ImageFrame src="/images/dr-sara-planejamento.webp" alt="Dra. Sara Michelon diante de um planejamento odontológico digital" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[520px]" />
-            <div className="lg:px-10"><Eyebrow>Abordagem clínica</Eyebrow><Heading>Planejamento antes da escolha do procedimento</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O objetivo não é escolher um procedimento isolado, mas compreender o contexto e organizar o caminho adequado.</p><ol className="mt-9 grid grid-cols-2 gap-x-6 gap-y-5 text-sm font-semibold text-[var(--color-primary)] sm:grid-cols-3">{["Planejamento", "Diagnóstico", "Indicação", "Tratamento", "Acompanhamento"].map((item, index) => <li key={item} className="border-t border-[var(--color-border)] pt-3"><span className="mr-2 text-[var(--color-mauve)]">0{index + 1}</span>{item}</li>)}</ol></div>
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <Eyebrow>Planejamento individual</Eyebrow>
-            <Heading>Cada etapa informa a próxima decisão</Heading>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--color-muted)]">
-              O diagnóstico ajuda a estabelecer prioridades, sequência e limites. A indicação é construída com base no caso, não em uma lista de procedimentos.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 border border-[var(--color-border)]">
-            {["Avaliar", "Diagnosticar", "Indicar", "Acompanhar"].map((item, index) => (
-              <div key={item} className="min-h-40 border border-[var(--color-border)] p-6">
-                <span className="text-xs font-semibold text-[var(--color-mauve)]">0{index + 1}</span>
-                <p className="mt-12 font-title text-2xl text-[var(--color-primary)]">{item}</p>
-              </div>
-            ))}
+            <ImageFrame
+              src="/images/dr-sara-planejamento.webp"
+              alt="Dra. Sara Michelon diante de um planejamento odontológico digital"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="min-h-[520px]"
+            />
+            <div className="lg:px-10">
+              <Eyebrow>Método de planejamento</Eyebrow>
+              <Heading>Planejamento antes da escolha do procedimento</Heading>
+              <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+                A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O diagnóstico estabelece prioridades, limites e sequência — a indicação é construída com base no caso real, não em uma lista pré-definida de procedimentos.
+              </p>
+              <ol className="mt-9 grid grid-cols-2 gap-x-6 gap-y-5 text-sm font-semibold text-[var(--color-primary)] sm:grid-cols-3">
+                {["Avaliação", "Diagnóstico", "Indicação", "Tratamento", "Acompanhamento"].map((item, index) => (
+                  <li key={item} className="border-t border-[var(--color-border)] pt-3">
+                    <span className="mr-2 text-[var(--color-mauve)]">0{index + 1}</span>{item}
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </Container>
       </Section>

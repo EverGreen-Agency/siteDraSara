@@ -12,7 +12,8 @@ export function Container({children, className}: {children: ReactNode; className
 }
 
 export function Section({children, className, id}: {children: ReactNode; className?: string; id?: string}) {
-  return <section id={id} className={classes("py-8 sm:py-10 lg:py-12", className)}>{children}</section>;
+  const hasCustomPadding = className && (className.includes("py-") || className.includes("pt-") || className.includes("pb-"));
+  return <section id={id} className={classes(!hasCustomPadding && "py-8 sm:py-10 lg:py-12", className)}>{children}</section>;
 }
 
 export function Eyebrow({children, light = false}: {children: ReactNode; light?: boolean}) {
@@ -53,16 +54,43 @@ export function ImageFrame({className, alt, ...props}: ImageProps & {className?:
   );
 }
 
-export function Breadcrumbs({items, light = false}: {items: {label: string; href?: string}[]; light?: boolean}) {
+export function Breadcrumbs({items, light = false, className, hideCurrentOnMobile = false}: {items: {label: string; href?: string}[]; light?: boolean; className?: string; hideCurrentOnMobile?: boolean}) {
   return (
-    <nav aria-label="Navegação estrutural" className={`mb-8 text-sm ${light ? "text-white/65" : "text-[var(--color-muted)]"}`}>
-      <ol className="flex flex-wrap items-center gap-2">
-        {items.map((item, index) => (
-          <li key={item.label} className="flex items-center gap-2">
-            {index > 0 && <span aria-hidden="true">/</span>}
-            {item.href ? <Link className="underline-offset-4 hover:underline" href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
-          </li>
-        ))}
+    <nav aria-label="Navegação estrutural" className={classes("text-xs sm:text-sm", light ? "text-white/70" : "text-[var(--color-muted)]", className ?? "mb-8")}>
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {items.map((item, index) => {
+          const isCurrent = !item.href;
+          return (
+            <li
+              key={item.label}
+              className={classes(
+                "flex items-center gap-2",
+                isCurrent && hideCurrentOnMobile && "hidden sm:flex",
+              )}
+            >
+              {index > 0 && (
+                <span
+                  aria-hidden="true"
+                  className={classes(
+                    light ? "text-white/35" : "text-[var(--color-border)]",
+                    isCurrent && hideCurrentOnMobile && "hidden sm:inline",
+                  )}
+                >
+                  /
+                </span>
+              )}
+              {item.href ? (
+                <Link className={classes("transition-colors", light ? "hover:text-white" : "hover:text-[var(--color-primary)]")} href={item.href}>
+                  {item.label}
+                </Link>
+              ) : (
+                <span aria-current="page" className={classes("font-medium", light ? "text-white" : "text-[var(--color-primary)]")}>
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );

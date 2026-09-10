@@ -1,10 +1,8 @@
 import type {Metadata} from "next";
-import Link from "next/link";
 import {notFound} from "next/navigation";
-import {ContentSectionRenderer} from "@/components/content-section-renderer";
 import {Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, Gallery, Heading, ImageFrame, Section} from "@/components/design-system";
 import {VirtualTour} from "@/components/virtual-tour";
-import {getContentEntry, getSiteSettings} from "@/lib/sanity/repository";
+import {getContentEntry} from "@/lib/sanity/repository";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContentEntry("clinica");
@@ -13,10 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ClinicaPage() {
-  const [page, settings] = await Promise.all([
-    getContentEntry("clinica"),
-    getSiteSettings(),
-  ]);
+  const page = await getContentEntry("clinica");
 
   if (!page || page.contentType !== "page") notFound();
 
@@ -77,7 +72,79 @@ export default async function ClinicaPage() {
       {/* 3. O TOUR VIRTUAL GUIADO POR AMBIENTES (Interativo, Mobile-First com Hotspots) */}
       <VirtualTour />
 
-      {page.sections && <ContentSectionRenderer sections={page.sections} />}
+      {/* 4. PILARES CLÍNICOS DA MATRIZ: ESTRUTURA, TECNOLOGIA & BIOSSEGURANÇA */}
+      <Section className="bg-[var(--color-primary)] py-12 text-white sm:py-16">
+        <Container>
+          <div className="max-w-2xl">
+            <Eyebrow light>Pilares de Atendimento</Eyebrow>
+            <Heading as="h2" className="text-white">
+              Estrutura, Tecnologia e Biossegurança a Serviço do Seu Cuidado
+            </Heading>
+            <p className="mt-4 text-base leading-7 text-white/75 sm:text-lg">
+              Nosso espaço foi desenhado para unir rigor técnico e tranquilidade. Cada detalhe das salas 217 e 218 reflete o compromisso com a sua saúde e bem-estar.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {/* Pilar 1: Estrutura */}
+            <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 hover:shadow-xl">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-white">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                  </svg>
+                </div>
+                <span className="mt-6 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Pilar 01</span>
+                <h3 className="mt-2 font-title text-2xl text-white">Estrutura & Conforto</h3>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  Ambientes privativos, climatizados e com acústica planejada na Torre Comercial do Ingleses Saúde & Office. Acessibilidade total com elevadores e estacionamento rotativo.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-white/10 pt-4">
+                <span className="text-xs font-medium text-white/60">Privacidade, ergonomia e acolhimento</span>
+              </div>
+            </div>
+
+            {/* Pilar 2: Tecnologia */}
+            <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 hover:shadow-xl">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-white">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 01-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                  </svg>
+                </div>
+                <span className="mt-6 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Pilar 02</span>
+                <h3 className="mt-2 font-title text-2xl text-white">Tecnologia & Precisão</h3>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  Integração de diagnóstico digital, escaneamento intraoral e tomografia computadorizada. Planejamento 3D para intervenções minimamente invasivas e resultados previsíveis.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-white/10 pt-4">
+                <span className="text-xs font-medium text-white/60">Diagnóstico digital e conservador</span>
+              </div>
+            </div>
+
+            {/* Pilar 3: Biossegurança */}
+            <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 hover:shadow-xl">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-white transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-white">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                </div>
+                <span className="mt-6 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Pilar 03</span>
+                <h3 className="mt-2 font-title text-2xl text-white">Biossegurança Rigorosa</h3>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  Processos hospitalares de assepsia e esterilização monitorada em autoclave. Barreiras de proteção individuais, materiais descartáveis e rastreabilidade sanitária total.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-white/10 pt-4">
+                <span className="text-xs font-medium text-white/60">Controle sanitário em nível hospitalar</span>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
 
       {/* 4. Galeria de Ambientes */}
       <Section className="py-8 sm:py-10">

@@ -3,7 +3,7 @@
 import {useState, useRef} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {Container, Eyebrow, Heading, Section} from "@/components/design-system";
+import {Container, Heading, Section} from "@/components/design-system";
 
 export interface JourneyStep {
   id: string;

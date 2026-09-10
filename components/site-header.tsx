@@ -67,22 +67,24 @@ function MenuIcon({className}: {className?: string}) {
 
 export function SiteHeader({settings}: {settings: SiteSettings}) {
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
 
+  // Close menus when route changes
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpenDropdown(null);
+    setIsDrawerOpen(false);
+    setOpenMobileGroup(null);
+  }
+
   // Active navigation item with mega-menu
   const activeItem = fallbackNavigation.find(
     (item) => item.label === openDropdown && item.groups && item.groups.length > 0
   );
-
-  // Close everything on route changes
-  useEffect(() => {
-    setOpenDropdown(null);
-    setIsDrawerOpen(false);
-    setOpenMobileGroup(null);
-  }, [pathname]);
 
   // Handle click outside to close desktop dropdowns
   useEffect(() => {
@@ -348,7 +350,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
           >
             <Image
               src="/images/logo-icon-dra-sara.webp"
-              alt=""
+              alt={`Ícone da clínica ${settings.clinicName}`}
               width={36}
               height={36}
               className="h-8 w-8 object-contain"
