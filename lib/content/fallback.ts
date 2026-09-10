@@ -107,7 +107,6 @@ function createSections(seed: TreatmentSeed): ContentSection[] {
 }
 
 function createTreatment(seed: TreatmentSeed): Treatment {
-  const face = seed.specialty === "Estética Orofacial";
   const clinicalLead = professionalBySlug[seed.lead];
   return {
     contentType: "treatment",
@@ -115,8 +114,8 @@ function createTreatment(seed: TreatmentSeed): Treatment {
     slug: seed.slug,
     eyebrow: seed.specialty,
     shortDescription: seed.description,
-    heroImage: clinicalLead?.image ?? (face ? "/images/dr-sara-estetica.webp" : "/images/dr-sara-planejamento.webp"),
-    heroImageAlt: clinicalLead ? `Retrato profissional de ${clinicalLead.name}` : "Planejamento clínico na clínica da Dra. Sara Michelon",
+    heroImage: undefined,
+    heroImageAlt: undefined,
     specialty: seed.specialty,
     variant: seed.variant,
     clinicalLead,
@@ -375,7 +374,18 @@ export const fallbackPages: Record<string, InstitutionalPage> = {
   home: {contentType: "page", slug: "home", eyebrow: "Odontologia e Estética · Florianópolis", title: "Dentista nos Ingleses: odontologia e estética com planejamento individual", description: "Clínica odontológica nos Ingleses, Norte da Ilha de Florianópolis, com cuidado integrado e tratamentos definidos a partir de uma avaliação completa.", image: "/images/dr-sara-hero.webp", imageAlt: "Dra. Sara Michelon em retrato profissional", seo: {title: "Dentista nos Ingleses, Florianópolis | Dra. Sara Michelon", description: "Odontologia e estética nos Ingleses, Florianópolis. Conheça a clínica, equipe e tratamentos da Dra. Sara Michelon e agende sua avaliação.", canonical: "/", index: true}},
   clinica: {
     contentType: "page", slug: "clinica", eyebrow: "A clínica", title: "Uma clínica organizada para avaliar, planejar e acompanhar", description: "Ambientes reais nos Ingleses, Norte da Ilha, conectados a uma experiência de atendimento clara e individual.", image: "/images/clinica-consultorio.webp", imageAlt: "Consultório da clínica da Dra. Sara Michelon", seo: {title: "Clínica Odontológica nos Ingleses | Dra. Sara Michelon", description: "Conheça os ambientes da clínica odontológica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/clinica", index: true},
-    sections: [{_key: "clinic-planning", _type: "richText", heading: "Informação clínica organizada para definir o caminho", body: ["O planejamento integra diagnóstico, indicação e sequência de cuidado. Cada recurso disponível participa do atendimento conforme a necessidade do caso."]}],
+    sections: [
+      {
+        _key: "clinic-pillars",
+        _type: "cardGrid",
+        heading: "Estrutura, Tecnologia e Biossegurança a Serviço do Seu Cuidado",
+        items: [
+          {title: "Estrutura & Conforto", text: "Ambientes privativos, climatizados e com acústica planejada na Torre Comercial do Ingleses Saúde & Office. Acessibilidade total e estacionamento rotativo."},
+          {title: "Tecnologia & Precisão", text: "Integração de diagnóstico digital, escaneamento intraoral e tomografia computadorizada para intervenções minimamente invasivas."},
+          {title: "Biossegurança Rigorosa", text: "Processos hospitalares de assepsia, esterilização monitorada em autoclave e rastreabilidade sanitária total para sua segurança."}
+        ]
+      }
+    ],
   },
   equipe: {
     contentType: "page", slug: "equipe", eyebrow: "Equipe odontológica", title: "Especialistas conectados ao planejamento integrado", description: "Cada caso pode envolver diferentes necessidades. A equipe organiza essas relações em um plano único, com responsabilidades clínicas claras.", image: "/images/equipe.webp", imageAlt: "Equipe da clínica da Dra. Sara Michelon", seo: {title: "Equipe de Dentistas em Florianópolis | Dra. Sara Michelon", description: "Conheça a equipe odontológica da clínica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/equipe", index: true},
@@ -398,7 +408,7 @@ export const fallbackPages: Record<string, InstitutionalPage> = {
     sections: [{_key: "sara-approach", _type: "richText", heading: "Uma visão integrada do caso", body: ["A atuação parte da avaliação para relacionar saúde, função e estética. O planejamento organiza prioridades e permite discutir alternativas antes da indicação."]}, {_key: "sara-areas", _type: "cardGrid", heading: "Áreas conectadas pela mesma abordagem", items: [{title: "Odontologia", text: "Prevenção, estética do sorriso e reabilitação organizadas por necessidade.", href: "/odontologia"}, {title: "Estética Orofacial", text: "Análise facial, naturalidade e indicação individual.", href: "/estetica-orofacial"}]}],
   },
   conteudos: {contentType: "page", slug: "conteudos", eyebrow: "Conteúdos e orientações", title: "Conteúdos sobre odontologia, prevenção e estética", description: "Respostas clínicas úteis escritas ou revisadas pela equipe e conectadas aos tratamentos relacionados.", image: "/images/clinica-consultorio.webp", imageAlt: "Consultório da clínica da Dra. Sara Michelon", seo: {title: "Conteúdos sobre Odontologia e Estética | Dra. Sara Michelon", description: "Conteúdos sobre odontologia, prevenção e estética, com autoria e revisão clínica identificadas.", canonical: "/conteudos", index: true}},
-  contato: {contentType: "page", slug: "contato", eyebrow: "Contato e localização", title: "Clínica Odontológica nos Ingleses, Florianópolis", description: "Atendimento com hora marcada no complexo Ingleses Saúde & Office. Conecte-se com nossa equipe via WhatsApp, telefone ou trace sua rota direta via Waze, Uber ou Google Maps.", image: "/images/clinica-entrada.webp", imageAlt: "Entrada da clínica da Dra. Sara Michelon nos Ingleses", seo: {title: "Contato e Localização | Dra. Sara Michelon — Ingleses, Florianópolis", description: "Localização, rotas no Waze e Uber, telefone e WhatsApp da clínica odontológica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/contato", index: true}},
+  contato: {contentType: "page", slug: "contato", eyebrow: "Contato e localização", title: "Clínica Odontológica nos Ingleses, Florianópolis", description: "Atendimento com hora marcada no complexo Ingleses Saúde & Office. Conecte-se com nossa equipe via WhatsApp, telefone ou trace sua rota direta via Waze, Uber ou Google Maps.", image: "/images/clinica-entrada.webp", imageAlt: "Entrada da clínica da Dra. Sara Michelon nos Ingleses", seo: {title: "Contato e Localização | Dra. Sara Michelon — Ingleses", description: "Localização, rotas no Waze e Uber, telefone e WhatsApp da clínica odontológica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/contato", index: true}},
   "politica-de-privacidade": {contentType: "page", slug: "politica-de-privacidade", eyebrow: "Privacidade", title: "Política de Privacidade", description: "Esta política explica como dados enviados voluntariamente e dados técnicos do site são tratados.", seo: {title: "Política de Privacidade | Dra. Sara Michelon", description: "Política de privacidade do site da Dra. Sara Michelon.", canonical: "/politica-de-privacidade", index: false}, sections: [{_key: "privacy", _type: "richText", heading: "Tratamento responsável de dados", body: ["O site só deve coletar dados necessários para responder a solicitações, operar com segurança e, quando houver consentimento, medir o uso das páginas.", "Dados de contato não são vendidos. Solicitações sobre acesso, correção ou exclusão devem ser encaminhadas pelo canal oficial publicado no site.", "Ferramentas analíticas permanecem desativadas até que a pessoa visitante registre sua escolha no aviso de privacidade."]}]},
   "politica-de-cookies": {contentType: "page", slug: "politica-de-cookies", eyebrow: "Privacidade", title: "Política de Cookies", description: "Esta política descreve o uso de armazenamento essencial e, mediante consentimento, de medição de audiência.", seo: {title: "Política de Cookies | Dra. Sara Michelon", description: "Política de cookies e preferências de medição do site da Dra. Sara Michelon.", canonical: "/politica-de-cookies", index: false}, sections: [{_key: "cookies", _type: "richText", heading: "Preferências sob controle da pessoa visitante", body: ["O armazenamento estritamente necessário mantém escolhas de privacidade e funções básicas do site.", "Medição de audiência só é carregada depois de consentimento explícito e pode ser recusada sem impedir o acesso ao conteúdo.", "A preferência pode ser alterada apagando os dados locais do navegador e fazendo uma nova escolha."]}]},
   "odontopediatria-dentista-nos-ingleses-norte-da-ilha": {contentType: "page", slug: "odontopediatria-dentista-nos-ingleses-norte-da-ilha", eyebrow: "Conteúdo histórico", title: "Odontopediatria", description: "Informações gerais sobre cuidado odontológico infantil e a importância de avaliação individual em cada fase do desenvolvimento.", seo: {title: "Odontopediatria | Dra. Sara Michelon", description: "Informações gerais sobre acompanhamento odontológico infantil e prevenção em diferentes fases do desenvolvimento.", canonical: "/odontopediatria-dentista-nos-ingleses-norte-da-ilha", index: false}},
