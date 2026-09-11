@@ -20,11 +20,51 @@ export function ContentSectionRenderer({sections}: {sections: ContentSection[]})
       return <Section key={section._key}><Container><div className="max-w-2xl"><Eyebrow>Etapas</Eyebrow><Heading>{section.heading}</Heading></div><ol className="mt-14 grid gap-px bg-[var(--color-border)] md:grid-cols-2 lg:grid-cols-4">{section.items.map((item, index) => <li key={item.title} className="bg-white p-7"><span className="text-xs tracking-[0.2em] text-[var(--color-mauve)]">0{index + 1}</span><h3 className="mt-8 font-title text-2xl text-[var(--color-primary)]">{item.title}</h3><p className="mt-4 leading-7 text-[var(--color-muted)]">{item.text}</p></li>)}</ol></Container></Section>;
     }
     if (section._type === "cardGrid") {
-      return <Section key={section._key}><Container><Heading>{section.heading}</Heading><div className="mt-12 grid gap-6 md:grid-cols-2">{section.items.map((item) => {
-        const content = <><h3 className="font-title text-2xl text-[var(--color-primary)]">{item.title}</h3><p className="mt-4 leading-7 text-[var(--color-muted)]">{item.text}</p>{item.href && <span className="mt-7 inline-block text-sm font-semibold text-[var(--color-primary)]">Conhecer <span aria-hidden="true">→</span></span>}</>;
-        const className = "block border border-[var(--color-border)] p-7 transition-colors hover:border-[var(--color-primary)]";
-        return item.href ? <Link key={item.title} href={item.href} className={className}>{content}</Link> : <article key={item.title} className={className}>{content}</article>;
-      })}</div></Container></Section>;
+      const count = section.items.length;
+      const gridLayout =
+        count === 1
+          ? "max-w-xl"
+          : count === 2
+          ? "grid-cols-1 md:grid-cols-2"
+          : count === 3
+          ? "grid-cols-1 md:grid-cols-3"
+          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+
+      return (
+        <Section key={section._key}>
+          <Container>
+            <Heading>{section.heading}</Heading>
+            <div className={`mt-12 grid gap-6 ${gridLayout}`}>
+              {section.items.map((item) => {
+                const content = (
+                  <div className="flex h-full flex-col justify-between">
+                    <div>
+                      <h3 className="font-title text-2xl text-[var(--color-primary)]">{item.title}</h3>
+                      <p className="mt-4 leading-7 text-[var(--color-muted)]">{item.text}</p>
+                    </div>
+                    {item.href && (
+                      <span className="mt-7 inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-primary)]">
+                        Conhecer <span aria-hidden="true">→</span>
+                      </span>
+                    )}
+                  </div>
+                );
+                const className =
+                  "block h-full border border-[var(--color-border)] bg-white p-7 transition-colors hover:border-[var(--color-primary)]";
+                return item.href ? (
+                  <Link key={item.title} href={item.href} className={className}>
+                    {content}
+                  </Link>
+                ) : (
+                  <article key={item.title} className={className}>
+                    {content}
+                  </article>
+                );
+              })}
+            </div>
+          </Container>
+        </Section>
+      );
     }
     if (section._type === "comparison") {
       return <Section key={section._key} className="bg-[var(--color-surface)]"><Container><Eyebrow>Comparação clínica</Eyebrow><Heading>{section.heading}</Heading><div className="mt-12 grid gap-6 md:grid-cols-2">{section.columns.map((column) => <article key={column.title} className="border-t-2 border-[var(--color-primary)] bg-white p-7 sm:p-9"><h3 className="font-title text-2xl text-[var(--color-primary)]">{column.title}</h3><ul className="mt-6 grid gap-3 text-[var(--color-muted)]">{column.items.map((item) => <li key={item} className="flex gap-3"><span aria-hidden="true" className="text-[var(--color-mauve)]">—</span>{item}</li>)}</ul></article>)}</div><p className="mt-7 max-w-3xl text-sm leading-6 text-[var(--color-muted)]">A comparação orienta a conversa, mas não substitui o diagnóstico. A indicação depende das condições e dos objetivos de cada caso.</p></Container></Section>;

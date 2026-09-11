@@ -32,8 +32,8 @@ const JOURNEY_STEPS: JourneyStep[] = [
     subtitle: "Complexo Ingleses Saúde & Office · 2º Andar",
     narrative:
       "Sua experiência começa com discrição e praticidade. O complexo comercial oferece vagas rotativas de estacionamento no local e elevadores diretos ao segundo andar, proporcionando comodidade e acessibilidade total para todos os pacientes.",
-    image: "/images/clinica-entrada.webp",
-    imageAlt: "Entrada privativa da clínica Dra. Sara Michelon na Sala 218",
+    image: "/images/real/clinica/clinic-reception-rear.webp",
+    imageAlt: "Recepção e acesso privativo da clínica Dra. Sara Michelon na Sala 218",
     pillTag: "Acesso & Comodidade",
     features: [
       {label: "Torre Comercial", detail: "2º Andar, salas privativas 217 e 218"},
@@ -50,8 +50,8 @@ const JOURNEY_STEPS: JourneyStep[] = [
     subtitle: "Um espaço pensado para desacelerar e relaxar",
     narrative:
       "Antes da sua consulta, seja recebido em um ambiente tranquilo, com climatização suave, iluminação indireta e poltronas ergonômicas. Uma recepção humanizada com café especial, chás e água fresca para você se sentir em casa.",
-    image: "/images/clinica-recepcao.webp",
-    imageAlt: "Recepção e lounge de boas-vindas acolhedor da clínica",
+    image: "/images/real/clinica/clinic-coffee-lounge.webp",
+    imageAlt: "Cantinho do café e lounge acolhedor da clínica da Dra. Sara",
     pillTag: "Conforto & Bem-Estar",
     features: [
       {label: "Espaço do Café", detail: "Café gourmet, chás selecionados e água fresca"},
@@ -68,8 +68,8 @@ const JOURNEY_STEPS: JourneyStep[] = [
     subtitle: "Tecnologia cirúrgica e biossegurança estrita",
     narrative:
       "O espaço onde a saúde e a função do sorriso são conduzidas com excelência. Equipado com cadeira odontológica anatômica de padrão internacional, iluminação cirúrgica LED sem sombras e rigorosos protocolos contínuos de assepsia e autoclave.",
-    image: "/images/clinica-consultorio.webp",
-    imageAlt: "Consultório odontológico moderno e esterilizado da clínica",
+    image: "/images/real/clinica/clinic-operatory-main.webp",
+    imageAlt: "Consultório odontológico moderno com cadeira ergonômica da clínica da Dra. Sara Michelon",
     pillTag: "Ergonomia & Biossegurança",
     features: [
       {label: "Cadeira Ergonômica", detail: "Múltiplos ajustes anatômicos para máximo relaxamento"},
@@ -86,8 +86,8 @@ const JOURNEY_STEPS: JourneyStep[] = [
     subtitle: "Diagnóstico e simulação do sorriso na tela grande",
     narrative:
       "Aqui o diagnóstico e a estética se unem com precisão científica. Fotografias de alta resolução e exames tomográficos são analisados pela Dra. Sara Michelon junto com o paciente, garantindo clareza total sobre o plano de cuidado antes do início.",
-    image: "/images/dr-sara-planejamento.webp",
-    imageAlt: "Dra. Sara Michelon diante do planejamento digital do sorriso",
+    image: "/images/real/tecnologia/planning-digital-scan.webp",
+    imageAlt: "Dra. Sara Michelon durante o planejamento digital do sorriso",
     pillTag: "Previsibilidade & Sorriso",
     features: [
       {label: "Mock-up Digital 3D", detail: "Simulação do formato dos dentes antes da intervenção"},

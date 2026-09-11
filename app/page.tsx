@@ -18,7 +18,7 @@ export default async function HomePage() {
     name: settings.legalName,
     url: settings.siteUrl,
     telephone: settings.phone,
-    image: `${settings.siteUrl}/images/dr-sara-hero.webp`,
+    image: `${settings.siteUrl}/images/real/sara/sara-home-hero-17.webp`,
     address: {
       "@type": "PostalAddress",
       streetAddress: settings.streetAddress ?? "Rodovia Armando Calil Bulos, 6201, salas 217 e 218",
@@ -29,24 +29,24 @@ export default async function HomePage() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: settings.geo?.latitude ?? -27.4373,
-      longitude: settings.geo?.longitude ?? -48.3998,
+      latitude: -27.4373,
+      longitude: -48.3998,
     },
-    hasMap: "https://maps.google.com/maps?q=-27.4373,-48.3998",
+    priceRange: "$$",
     areaServed: ["Ingleses", "Norte da Ilha", "Florianópolis"],
   };
 
   return (
     <>
-      <SEOJsonLd data={localBusiness} />
-      <section className="overflow-hidden bg-[var(--color-pink)]">
-        <Container className="grid items-center gap-8 py-8 lg:grid-cols-[1.08fr_0.92fr] lg:py-10">
-          <div className="max-w-3xl py-4 sm:py-6">
+      <SEOJsonLd data={[localBusiness]} />
+      <section className="border-b border-[var(--color-border)] bg-[var(--color-pink)] pb-12 pt-7">
+        <Container className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+          <div>
             <Eyebrow>{home.eyebrow}</Eyebrow>
-            <Heading as="h1">{home.title}</Heading>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--color-muted)]">{home.description}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contato" location="home_hero">Agendar uma avaliação</ButtonLink>
+            <Heading as="h1" className="max-w-xl">{home.title}</Heading>
+            <p className="mt-8 max-w-xl text-xl leading-9 text-[var(--color-muted)]">{home.description}</p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <ButtonLink href="/contato" event="appointment_cta_click" location="home_hero">Agende uma avaliação</ButtonLink>
               <ButtonLink href="#tratamentos" variant="secondary" event="treatment_view" location="home_hero">Conheça os tratamentos</ButtonLink>
             </div>
             <div className="mt-12 flex items-center gap-5 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-muted)]">
@@ -56,7 +56,7 @@ export default async function HomePage() {
           </div>
           <div className="relative lg:pl-8">
             <div className="absolute -left-5 top-10 hidden h-[72%] w-px bg-[var(--color-border)] lg:block" />
-            <ImageFrame src={home.image ?? "/images/dr-sara-hero.webp"} alt={home.imageAlt ?? "Dra. Sara Michelon em retrato profissional"} fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="aspect-[471/630] max-h-[760px] min-h-[520px]" />
+            <ImageFrame src={home.image ?? "/images/real/sara/sara-home-hero-17.webp"} alt={home.imageAlt ?? "Dra. Sara Michelon em retrato profissional no consultório"} fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="aspect-[471/630] max-h-[760px] min-h-[520px]" />
             <div className="absolute bottom-0 left-0 bg-white px-5 py-4 text-xs uppercase tracking-[0.16em] text-[var(--color-mauve)] lg:left-8">Dra. Sara Michelon</div>
           </div>
         </Container>
@@ -78,8 +78,8 @@ export default async function HomePage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <ImageFrame
-              src="/images/dr-sara-planejamento.webp"
-              alt="Dra. Sara Michelon diante de um planejamento odontológico digital"
+              src="/images/real/tecnologia/planning-digital-scan.webp"
+              alt="Dra. Sara Michelon durante planejamento odontológico digital"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="min-h-[520px]"
@@ -110,7 +110,7 @@ export default async function HomePage() {
 
       <Section>
         <Container className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <ImageFrame src="/images/dr-sara-autoridade.webp" alt="Retrato profissional da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[600px]" />
+          <ImageFrame src="/images/real/sara/sara-autoridade-2025.webp" alt="Dra. Sara Michelon em retrato profissional de autoridade" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[600px]" />
           <div className="lg:px-10"><Eyebrow>Dra. Sara Michelon</Eyebrow><Heading>Uma visão integrada de odontologia e estética</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">A atuação parte da avaliação completa para conectar saúde, função e estética de forma individual.</p><div className="mt-9"><ButtonLink href="/dra-sara-michelon" variant="secondary" event="appointment_cta_click" location="home_authority">Conheça a Dra. Sara</ButtonLink></div></div>
         </Container>
       </Section>
@@ -120,7 +120,7 @@ export default async function HomePage() {
       </Section>
 
       <Section>
-        <Container><div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-9"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/clinica-consultorio.webp" alt="Consultório da clínica da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[540px]" /></div></Container>
+        <Container><div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-9"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-operatory-main.webp" alt="Consultório odontológico da clínica da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[540px]" /></div></Container>
       </Section>
 
       <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
