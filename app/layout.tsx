@@ -27,8 +27,8 @@ export const viewport: Viewport = {themeColor: "#3F2738", colorScheme: "light"};
 export default async function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
   const settings = await getSiteSettings();
   return (
-    <html lang="pt-BR" className={`${tenor.variable} ${manrope.variable}`}>
-      <body><TrackingProvider ids={settings.trackingIds} /><SiteShell>{children}</SiteShell></body>
+    <html lang="pt-BR" className={`${tenor.variable} ${manrope.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning><TrackingProvider ids={settings.trackingIds} /><SiteShell>{children}</SiteShell></body>
     </html>
   );
 }
