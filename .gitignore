@@ -7,3 +7,10 @@ out
 *.tsbuildinfo
 .pnpm-store
 .DS_Store
+
+# Heavy raw media in Docs
+*.mp4
+*.MP4
+*.mov
+*.MOV
+
