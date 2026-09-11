@@ -10,6 +10,34 @@ export async function generateMetadata(): Promise<Metadata> {
   return {title: page.seo.title, description: page.seo.description, alternates: {canonical: page.seo.canonical ?? "/clinica"}};
 }
 
+function WazeMiniLogo({ className = "h-4 w-4 shrink-0" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Waze">
+      <path d="M13.314 1.59c-.225.003-.45.013-.675.03-2.165.155-4.295.924-6.069 2.327-2.194 1.732-3.296 4.325-3.496 7.05h.002c-.093 1.22-.23 2.15-.469 2.63-.238.479-.42.638-1.24.639C.27 14.259-.4 15.612.266 16.482c1.248 1.657 2.902 2.705 4.72 3.364a2.198 2.198 0 00-.033.367 2.198 2.198 0 002.2 2.197 2.198 2.198 0 002.128-1.668c1.307.12 2.607.14 3.824.1.364-.012.73-.045 1.094-.092a2.198 2.198 0 002.127 1.66 2.198 2.198 0 002.2-2.197 2.198 2.198 0 00-.151-.797 12.155 12.155 0 002.303-1.549c2.094-1.807 3.511-4.399 3.302-7.404-.112-1.723-.761-3.298-1.748-4.608-2.143-2.86-5.53-4.309-8.918-4.265zm.366 1.54c.312.008.623.027.933.063 2.48.288 4.842 1.496 6.4 3.577v.001c.829 1.1 1.355 2.386 1.446 3.792v.003c.173 2.477-.965 4.583-2.777 6.147a10.66 10.66 0 01-2.375 1.535 2.198 2.198 0 00-.98-.234 2.198 2.198 0 00-1.934 1.158 9.894 9.894 0 01-1.338.146 27.323 27.323 0 01-3.971-.148 2.198 2.198 0 00-1.932-1.156 2.198 2.198 0 00-1.347.463c-1.626-.553-3.078-1.422-4.155-2.762 1.052-.096 1.916-.6 2.319-1.408.443-.889.53-1.947.625-3.198v-.002c.175-2.391 1.11-4.536 2.92-5.964h.002c1.77-1.402 3.978-2.061 6.164-2.012zm-3.157 4.638c-.688 0-1.252.579-1.252 1.298 0 .72.564 1.297 1.252 1.297.689 0 1.252-.577 1.252-1.297 0-.711-.563-1.298-1.252-1.298zm5.514 0c-.688 0-1.25.579-1.25 1.298-.008.72.554 1.297 1.25 1.297.688 0 1.252-.577 1.252-1.297 0-.711-.564-1.298-1.252-1.298zM9.641 11.78a.72.72 0 00-.588.32.692.692 0 00-.11.54c.345 1.783 2.175 3.129 4.264 3.129h.125c1.056-.032 2.026-.343 2.816-.922.767-.556 1.29-1.316 1.477-2.137a.746.746 0 00-.094-.547.69.69 0 00-.445-.32.714.714 0 00-.867.539c-.22.93-1.299 1.9-2.934 1.94-1.572.046-2.738-.986-2.926-1.956a.72.72 0 00-.718-.586Z" />
+    </svg>
+  );
+}
+
+function UberMiniLogo({ className = "h-3.5 w-auto shrink-0" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Uber">
+      <path d="M0 7.97v4.958c0 1.867 1.302 3.101 3 3.101.826 0 1.562-.316 2.094-.87v.736H6.27V7.97H5.082v4.888c0 1.257-.85 2.106-1.947 2.106-1.11 0-1.946-.827-1.946-2.106V7.971H0zm7.44 0v7.925h1.13v-.725c.521.532 1.257.86 2.06.86a3.006 3.006 0 0 0 3.034-3.01 3.01 3.01 0 0 0-3.033-3.024 2.86 2.86 0 0 0-2.049.861V7.971H7.439zm9.869 2.038c-1.687 0-2.965 1.37-2.965 3 0 1.72 1.334 3.01 3.066 3.01 1.053 0 1.913-.463 2.49-1.233l-.826-.611c-.43.577-.996.847-1.664.847-.973 0-1.753-.7-1.912-1.64h4.697v-.373c0-1.72-1.222-3-2.886-3zm6.295.068c-.634 0-1.098.294-1.381.758v-.713h-1.131v5.774h1.142V12.61c0-.894.544-1.47 1.291-1.47H24v-1.065h-.396zm-6.319.928c.85 0 1.564.588 1.756 1.47H15.52c.203-.882.916-1.47 1.765-1.47zm-6.732.012c1.086 0 1.98.883 1.98 2.004a1.993 1.993 0 0 1-1.98 2.001A1.989 1.989 0 0 1 8.56 13.02a1.99 1.99 0 0 1 1.992-2.004z" />
+    </svg>
+  );
+}
+
+function GoogleMapsMiniLogo({ className = "h-4 w-auto shrink-0" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 256 367" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Google Maps">
+      <path fill="#34A853" d="M70.585 271.865a371 371 0 0 1 28.911 42.642c7.374 13.982 10.448 23.463 15.837 40.31c3.305 9.308 6.292 12.086 12.714 12.086c6.998 0 10.173-4.726 12.626-12.035c5.094-15.91 9.091-28.052 15.397-39.525c12.374-22.15 27.75-41.833 42.858-60.75c4.09-5.354 30.534-36.545 42.439-61.156c0 0 14.632-27.035 14.632-64.792c0-35.318-14.43-59.813-14.43-59.813l-41.545 11.126l-25.23 66.451l-6.242 9.163l-1.248 1.66l-1.66 2.078l-2.914 3.319l-4.164 4.163l-22.467 18.304l-56.17 32.432z" />
+      <path fill="#FBBC04" d="M12.612 188.892c13.709 31.313 40.145 58.839 58.031 82.995l95.001-112.534s-13.384 17.504-37.662 17.504c-27.043 0-48.89-21.595-48.89-48.825c0-18.673 11.234-31.501 11.234-31.501l-64.489 17.28z" />
+      <path fill="#4285F4" d="M166.705 5.787c31.552 10.173 58.558 31.53 74.893 63.023l-75.925 90.478s11.234-13.06 11.234-31.617c0-27.864-23.463-48.68-48.81-48.68c-23.969 0-37.735 17.475-37.735 17.475v-57z" />
+      <path fill="#1A73E8" d="M30.015 45.765C48.86 23.218 82.02 0 127.736 0c22.18 0 38.89 5.823 38.89 5.823L90.29 96.516H36.205z" />
+      <path fill="#EA4335" d="M12.612 188.892S0 164.194 0 128.414c0-33.817 13.146-63.377 30.015-82.649l60.318 50.759z" />
+    </svg>
+  );
+}
+
 export default async function ClinicaPage() {
   const page = await getContentEntry("clinica");
 
@@ -41,7 +69,7 @@ export default async function ClinicaPage() {
       <Section className="py-8 sm:py-10">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
           <ImageFrame
-            src={page.image ?? "/images/clinica-consultorio.webp"}
+            src={page.image ?? "/images/real/clinica/clinic-operatory-main.webp"}
             alt={page.imageAlt ?? "Consultório da clínica da Dra. Sara Michelon"}
             fill
             priority
@@ -159,10 +187,14 @@ export default async function ClinicaPage() {
           <div className="mt-10">
             <Gallery
               images={[
-                {src: "/images/clinica-consultorio.webp", alt: "Consultório odontológico da clínica"},
-                {src: "/images/clinica-consultorio-2.webp", alt: "Outro ambiente clínico da Dra. Sara Michelon"},
-                {src: "/images/clinica-recepcao.webp", alt: "Recepção da clínica"},
-                {src: "/images/clinica-entrada.webp", alt: "Entrada da clínica nos Ingleses"},
+                {src: "/images/real/clinica/clinic-operatory-main.webp", alt: "Consultório odontológico principal com cadeira ergonômica"},
+                {src: "/images/real/clinica/clinic-reception-rear.webp", alt: "Recepção e lounge de acolhimento"},
+                {src: "/images/real/clinica/clinic-office.webp", alt: "Escritório clínico para avaliação e diagnóstico"},
+                {src: "/images/real/clinica/clinic-coffee-lounge.webp", alt: "Cantinho do café e sala de espera humanizada"},
+                {src: "/images/real/clinica/clinic-sterilization.webp", alt: "Central de esterilização e biossegurança hospitalar"},
+                {src: "/images/real/clinica/clinic-counter.webp", alt: "Balcão de recepção e atendimento da clínica"},
+                {src: "/images/real/clinica/clinic-reception-side.webp", alt: "Ambiente de recepção amplo e acolhedor"},
+                {src: "/images/real/clinica/clinic-biosecurity.webp", alt: "Protocolos rigorosos de biossegurança e assepsia"},
               ]}
             />
           </div>
@@ -221,9 +253,7 @@ export default async function ClinicaPage() {
                     data-track-location="clinica_waze"
                     className="inline-flex items-center gap-2 rounded-xl border border-[#33ccff]/40 bg-white px-4 py-2.5 text-xs font-bold text-[#0088b8] shadow-sm transition-all hover:bg-[#33ccff]/10 hover:shadow"
                   >
-                    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.1 11.6c-.1-1.3-.6-2.5-1.4-3.5-1.3-1.6-3.2-2.6-5.4-2.6-2.6 0-4.8 1.4-5.9 3.5-.6 1.1-.9 2.4-.8 3.7 0 .4.1.8.2 1.2l-1.9 1.9c-.3.3-.4.8-.2 1.2.2.4.6.6 1 .6h.6c.4 1.1 1.2 2 2.2 2.6.9.5 1.9.8 3 .8 1.4 0 2.7-.4 3.8-1.2l1.6.9c.2.1.4.2.6.2.3 0 .5-.1.7-.3.4-.4.4-1 .1-1.4l-1.1-1.6c.9-1.2 1.5-2.8 1.5-4.4 0-.4 0-.7-.1-1.1zm-8.8 1.9c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm5.5 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z" />
-                    </svg>
+                    <WazeMiniLogo className="h-4 w-4 shrink-0" />
                     <span>Waze</span>
                   </a>
                   <a
@@ -234,9 +264,7 @@ export default async function ClinicaPage() {
                     data-track-location="clinica_uber"
                     className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-neutral-800 hover:shadow"
                   >
-                    <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6.59l3.71 3.71-1.42 1.42L11 15.41V7z" />
-                    </svg>
+                    <UberMiniLogo className="h-3.5 w-auto shrink-0" />
                     <span>Uber (Destino Pronto)</span>
                   </a>
                   <a
@@ -247,9 +275,7 @@ export default async function ClinicaPage() {
                     data-track-location="clinica_google_maps"
                     className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-white px-4 py-2.5 text-xs font-bold text-emerald-800 shadow-sm transition-all hover:bg-emerald-50 hover:shadow"
                   >
-                    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                    </svg>
+                    <GoogleMapsMiniLogo className="h-4 w-auto shrink-0" />
                     <span>Google Maps</span>
                   </a>
                 </div>

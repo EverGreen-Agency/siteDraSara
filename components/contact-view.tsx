@@ -10,6 +10,60 @@ interface ContactViewProps {
   page: InstitutionalPage;
 }
 
+function WazeLogo({ className = "h-7 w-7" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Waze">
+      <path d="M13.314 1.59c-.225.003-.45.013-.675.03-2.165.155-4.295.924-6.069 2.327-2.194 1.732-3.296 4.325-3.496 7.05h.002c-.093 1.22-.23 2.15-.469 2.63-.238.479-.42.638-1.24.639C.27 14.259-.4 15.612.266 16.482c1.248 1.657 2.902 2.705 4.72 3.364a2.198 2.198 0 00-.033.367 2.198 2.198 0 002.2 2.197 2.198 2.198 0 002.128-1.668c1.307.12 2.607.14 3.824.1.364-.012.73-.045 1.094-.092a2.198 2.198 0 002.127 1.66 2.198 2.198 0 002.2-2.197 2.198 2.198 0 00-.151-.797 12.155 12.155 0 002.303-1.549c2.094-1.807 3.511-4.399 3.302-7.404-.112-1.723-.761-3.298-1.748-4.608-2.143-2.86-5.53-4.309-8.918-4.265zm.366 1.54c.312.008.623.027.933.063 2.48.288 4.842 1.496 6.4 3.577v.001c.829 1.1 1.355 2.386 1.446 3.792v.003c.173 2.477-.965 4.583-2.777 6.147a10.66 10.66 0 01-2.375 1.535 2.198 2.198 0 00-.98-.234 2.198 2.198 0 00-1.934 1.158 9.894 9.894 0 01-1.338.146 27.323 27.323 0 01-3.971-.148 2.198 2.198 0 00-1.932-1.156 2.198 2.198 0 00-1.347.463c-1.626-.553-3.078-1.422-4.155-2.762 1.052-.096 1.916-.6 2.319-1.408.443-.889.53-1.947.625-3.198v-.002c.175-2.391 1.11-4.536 2.92-5.964h.002c1.77-1.402 3.978-2.061 6.164-2.012zm-3.157 4.638c-.688 0-1.252.579-1.252 1.298 0 .72.564 1.297 1.252 1.297.689 0 1.252-.577 1.252-1.297 0-.711-.563-1.298-1.252-1.298zm5.514 0c-.688 0-1.25.579-1.25 1.298-.008.72.554 1.297 1.25 1.297.688 0 1.252-.577 1.252-1.297 0-.711-.564-1.298-1.252-1.298zM9.641 11.78a.72.72 0 00-.588.32.692.692 0 00-.11.54c.345 1.783 2.175 3.129 4.264 3.129h.125c1.056-.032 2.026-.343 2.816-.922.767-.556 1.29-1.316 1.477-2.137a.746.746 0 00-.094-.547.69.69 0 00-.445-.32.714.714 0 00-.867.539c-.22.93-1.299 1.9-2.934 1.94-1.572.046-2.738-.986-2.926-1.956a.72.72 0 00-.718-.586Z" />
+    </svg>
+  );
+}
+
+function UberLogo({ className = "h-5 w-auto" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Uber">
+      <path d="M0 7.97v4.958c0 1.867 1.302 3.101 3 3.101.826 0 1.562-.316 2.094-.87v.736H6.27V7.97H5.082v4.888c0 1.257-.85 2.106-1.947 2.106-1.11 0-1.946-.827-1.946-2.106V7.971H0zm7.44 0v7.925h1.13v-.725c.521.532 1.257.86 2.06.86a3.006 3.006 0 0 0 3.034-3.01 3.01 3.01 0 0 0-3.033-3.024 2.86 2.86 0 0 0-2.049.861V7.971H7.439zm9.869 2.038c-1.687 0-2.965 1.37-2.965 3 0 1.72 1.334 3.01 3.066 3.01 1.053 0 1.913-.463 2.49-1.233l-.826-.611c-.43.577-.996.847-1.664.847-.973 0-1.753-.7-1.912-1.64h4.697v-.373c0-1.72-1.222-3-2.886-3zm6.295.068c-.634 0-1.098.294-1.381.758v-.713h-1.131v5.774h1.142V12.61c0-.894.544-1.47 1.291-1.47H24v-1.065h-.396zm-6.319.928c.85 0 1.564.588 1.756 1.47H15.52c.203-.882.916-1.47 1.765-1.47zm-6.732.012c1.086 0 1.98.883 1.98 2.004a1.993 1.993 0 0 1-1.98 2.001A1.989 1.989 0 0 1 8.56 13.02a1.99 1.99 0 0 1 1.992-2.004z" />
+    </svg>
+  );
+}
+
+function GoogleMapsLogo({ className = "h-7 w-auto" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 256 367" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Google Maps">
+      <path fill="#34A853" d="M70.585 271.865a371 371 0 0 1 28.911 42.642c7.374 13.982 10.448 23.463 15.837 40.31c3.305 9.308 6.292 12.086 12.714 12.086c6.998 0 10.173-4.726 12.626-12.035c5.094-15.91 9.091-28.052 15.397-39.525c12.374-22.15 27.75-41.833 42.858-60.75c4.09-5.354 30.534-36.545 42.439-61.156c0 0 14.632-27.035 14.632-64.792c0-35.318-14.43-59.813-14.43-59.813l-41.545 11.126l-25.23 66.451l-6.242 9.163l-1.248 1.66l-1.66 2.078l-2.914 3.319l-4.164 4.163l-22.467 18.304l-56.17 32.432z" />
+      <path fill="#FBBC04" d="M12.612 188.892c13.709 31.313 40.145 58.839 58.031 82.995l95.001-112.534s-13.384 17.504-37.662 17.504c-27.043 0-48.89-21.595-48.89-48.825c0-18.673 11.234-31.501 11.234-31.501l-64.489 17.28z" />
+      <path fill="#4285F4" d="M166.705 5.787c31.552 10.173 58.558 31.53 74.893 63.023l-75.925 90.478s11.234-13.06 11.234-31.617c0-27.864-23.463-48.68-48.81-48.68c-23.969 0-37.735 17.475-37.735 17.475v-57z" />
+      <path fill="#1A73E8" d="M30.015 45.765C48.86 23.218 82.02 0 127.736 0c22.18 0 38.89 5.823 38.89 5.823L90.29 96.516H36.205z" />
+      <path fill="#EA4335" d="M12.612 188.892S0 164.194 0 128.414c0-33.817 13.146-63.377 30.015-82.649l60.318 50.759z" />
+    </svg>
+  );
+}
+
+function AppleMapsLogo({ className = "h-7 w-7" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Apple Maps">
+      {/* Base Squircle do App iOS */}
+      <rect width="64" height="64" rx="14" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+      {/* Área verde de parque */}
+      <path d="M28 64c8-14 20-24 36-28v14c-12 4-22 14-26 24h-10z" fill="#86EFAC" />
+      {/* Estrada branca e rodovia expressa amarela Apple Maps */}
+      <path d="M0 24c16-2 30-10 40-24h10c-8 18-24 30-50 34v-10z" fill="#FFFFFF" />
+      <path d="M0 38c18-2 32-12 44-38h8C38 32 20 48 0 50v-12z" fill="#FBBF24" opacity="0.85" />
+      {/* Badge circular da localização com seta de navegação Apple */}
+      <circle cx="34" cy="24" r="10" fill="#FFFFFF" />
+      <circle cx="34" cy="24" r="8" fill="#007AFF" />
+      <path d="M34 19l4.5 9-4.5-2.5-4.5 2.5L34 19z" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function AppleLogo({ className = "h-3.5 w-3.5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Apple">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.54c.67-.82 1.13-1.96.99-3.11-1 .04-2.22.68-2.92 1.5-.62.72-1.16 1.88-1.01 3 .12.01 2.26.43 2.94-1.39z" />
+    </svg>
+  );
+}
+
 export function ContactView({settings}: ContactViewProps) {
   const [copied, setCopied] = useState(false);
 
@@ -47,27 +101,42 @@ export function ContactView({settings}: ContactViewProps) {
   return (
     <div className="contact-experience">
       {/* 1. Hero & Introdução */}
-      <Section className="bg-[var(--color-pink)] pb-6 pt-5">
-        <Container>
+      {/* 1. Hero & Introdução com Background Responsivo */}
+      <Section className="relative overflow-hidden bg-[var(--color-pink)] py-8 sm:py-10 lg:py-14">
+        {/* Background com Art Direction (Mobile e Desktop) */}
+        <picture className="pointer-events-none absolute inset-0 block h-full w-full">
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/real/contato/hero-contato-mobile.webp"
+            type="image/webp"
+          />
+          <img
+            src="/images/real/contato/hero-contato-desktop.webp"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
+            fetchPriority="high"
+          />
+        </picture>
+
+        {/* Overlay sutil que protege a área de leitura à esquerda e deixa a foto visível à direita */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-white/70 backdrop-blur-[0.5px] md:w-[70%] md:bg-gradient-to-r md:from-white/95 md:via-white/85 md:to-transparent lg:w-[60%]"
+        />
+
+        <Container className="relative z-10">
           <Breadcrumbs items={[{label: "Início", href: "/"}, {label: "Contato e Localização"}]} />
-          <div className="mt-4 grid items-end gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/15 bg-white/80 px-3.5 py-1 text-xs font-semibold tracking-wide text-[var(--color-primary)] shadow-sm backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-                Atendimento com Hora Marcada · Ingleses Saúde & Office
-              </div>
-              <Heading as="h1" className="mt-4">
-                Contato, Localização & Rotas
-              </Heading>
+          <div className="mt-4 max-w-xl lg:max-w-2xl">
+            <div className="inline-flex items-center rounded-full border border-[var(--color-primary)]/15 bg-white/95 px-3.5 py-1 text-xs font-medium tracking-wide text-[var(--color-primary)] shadow-xs">
+              Atendimento com Hora Marcada · Ingleses Saúde & Office
             </div>
-            <div>
-              <p className="text-lg leading-8 text-[var(--color-muted)]">
-                Localizada no Norte da Ilha de Florianópolis, no complexo empresarial <strong>Ingleses Saúde & Office</strong>. Uma clínica moderna e acolhedora, com estacionamento privativo e acesso descomplicado.
-              </p>
-            </div>
+            <Heading as="h1" className="mt-4">
+              Contato, Localização & Rotas
+            </Heading>
+            <p className="mt-5 text-base sm:text-lg leading-8 text-[var(--color-primary)]/85">
+              Localizada no Norte da Ilha de Florianópolis, no complexo empresarial <strong className="font-semibold text-[var(--color-primary)]">Ingleses Saúde & Office</strong>. Uma clínica moderna e acolhedora, com estacionamento privativo e acesso descomplicado.
+            </p>
           </div>
         </Container>
       </Section>
@@ -211,10 +280,7 @@ export function ContactView({settings}: ContactViewProps) {
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#33ccff]/15 text-[#0099cc] transition-transform duration-300 group-hover:scale-110">
-                    {/* Waze Icon */}
-                    <svg className="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.1 11.6c-.1-1.3-.6-2.5-1.4-3.5-1.3-1.6-3.2-2.6-5.4-2.6-2.6 0-4.8 1.4-5.9 3.5-.6 1.1-.9 2.4-.8 3.7 0 .4.1.8.2 1.2l-1.9 1.9c-.3.3-.4.8-.2 1.2.2.4.6.6 1 .6h.6c.4 1.1 1.2 2 2.2 2.6.9.5 1.9.8 3 .8 1.4 0 2.7-.4 3.8-1.2l1.6.9c.2.1.4.2.6.2.3 0 .5-.1.7-.3.4-.4.4-1 .1-1.4l-1.1-1.6c.9-1.2 1.5-2.8 1.5-4.4 0-.4 0-.7-.1-1.1zm-8.8 1.9c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm5.5 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z" />
-                    </svg>
+                    <WazeLogo className="h-7 w-7" />
                   </div>
                   <span className="rounded-full bg-[#33ccff]/10 px-2.5 py-0.5 text-xs font-semibold text-[#0088b8]">
                     GPS Ativo
@@ -244,10 +310,7 @@ export function ContactView({settings}: ContactViewProps) {
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white transition-transform duration-300 group-hover:scale-110">
-                    {/* Uber Icon */}
-                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6.59l3.71 3.71-1.42 1.42L11 15.41V7z" />
-                    </svg>
+                    <UberLogo className="h-5 w-auto max-w-[34px]" />
                   </div>
                   <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-semibold text-white">
                     Sem Digitar
@@ -277,10 +340,7 @@ export function ContactView({settings}: ContactViewProps) {
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-transform duration-300 group-hover:scale-110">
-                    {/* Google Maps Icon */}
-                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                    </svg>
+                    <GoogleMapsLogo className="h-7 w-auto" />
                   </div>
                   <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
                     Rotas & Horários
@@ -309,15 +369,12 @@ export function ContactView({settings}: ContactViewProps) {
               <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-[var(--color-primary)]/10 blur-xl transition-all group-hover:bg-[var(--color-primary)]/20" />
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-surface)] text-[var(--color-primary)] transition-transform duration-300 group-hover:scale-110">
-                    {/* Compass Icon */}
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01" />
-                    </svg>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+                    <AppleMapsLogo className="h-8 w-8" />
                   </div>
-                  <span className="rounded-full bg-[var(--color-surface-strong)] px-2.5 py-0.5 text-xs font-semibold text-[var(--color-primary)]">
-                    iOS / CarPlay
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-surface-strong)] px-2.5 py-0.5 text-xs font-semibold text-[var(--color-primary)]">
+                    <AppleLogo className="h-3 w-3" />
+                    <span>iOS / CarPlay</span>
                   </span>
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-[var(--color-ink)]">Apple Maps</h3>
