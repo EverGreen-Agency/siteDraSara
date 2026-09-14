@@ -23,14 +23,28 @@ export async function POST(request: Request) {
   if (body._type === "siteSettings") {
     revalidateTag("site-settings", "max");
     revalidatePath("/", "layout");
-  } else if (["treatment", "page", "landingPage", "article"].includes(body._type ?? "") && validSlug) {
+  } else if (body._type === "article" && validSlug) {
     revalidateTag(`content:${validSlug}`, "max");
-    if (body._type === "article") revalidateTag("articles", "max");
+    revalidateTag("articles", "max");
+    revalidatePath(`/conteudos/${validSlug}`);
+    revalidatePath("/conteudos");
+    revalidatePath(`/${validSlug}`);
+    revalidatePath("/");
+    revalidatePath("/sitemap.xml");
+  } else if (["treatment", "page", "landingPage"].includes(body._type ?? "") && validSlug) {
+    revalidateTag(`content:${validSlug}`, "max");
     revalidatePath(`/${validSlug}`);
     revalidatePath("/");
     revalidatePath("/sitemap.xml");
   } else if (body._type === "professional") {
     revalidateTag("professionals", "max");
+    if (validSlug) {
+      revalidateTag(`professional:${validSlug}`, "max");
+      revalidatePath(`/equipe/${validSlug}`);
+      if (validSlug === "dra-sara-michelon") {
+        revalidatePath("/dra-sara-michelon");
+      }
+    }
     revalidatePath("/equipe");
     revalidatePath("/");
   } else {

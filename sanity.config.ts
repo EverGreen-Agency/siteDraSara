@@ -8,6 +8,7 @@ import {schemaTypes} from "@/sanity/schemaTypes";
 export default defineConfig({
   name: "default",
   title: "Dra. Sara Michelon",
+  basePath: "/studio",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "missing-project-id",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   plugins: [structureTool(), visionTool()],

@@ -31,7 +31,14 @@ export type SiteSettings = {
   geo: {latitude: number; longitude: number} | null;
   socialLinks: string[];
   siteUrl: string;
-  trackingIds: {ga4: string | null; gtm: string | null; googleAds: string | null};
+  trackingIds: {
+    ga4: string | null;
+    gtm: string | null;
+    googleAds: string | null;
+    googleAdsConversionLabel: string | null;
+    metaPixel: string | null;
+    clarity: string | null;
+  };
 };
 
 export type NavigationItem = {

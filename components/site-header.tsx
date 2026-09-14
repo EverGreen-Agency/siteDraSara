@@ -135,169 +135,148 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className="site-header sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-white/95 backdrop-blur-md transition-shadow"
-    >
-      <Container className="relative flex h-20 items-center justify-between gap-6">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          aria-label={`${settings.clinicName} — página inicial`}
-          className={`${focusClass} shrink-0 transition-opacity hover:opacity-85`}
-        >
-          <Image
-            src="/images/logo-dra-sara.webp"
-            alt={settings.clinicName}
-            width={142}
-            height={80}
-            priority
-            className="h-12 w-auto object-contain sm:h-14"
-          />
-        </Link>
+    <>
+      <header
+        ref={headerRef}
+        className="site-header sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-white/95 backdrop-blur-md transition-shadow"
+      >
+        <Container className="relative flex h-20 items-center justify-between gap-6">
+          {/* Brand Logo */}
+          <Link
+            href="/"
+            aria-label={`${settings.clinicName} — página inicial`}
+            className={`${focusClass} shrink-0 transition-opacity hover:opacity-85`}
+          >
+            <Image
+              src="/images/logo-dra-sara.webp"
+              alt={settings.clinicName}
+              width={142}
+              height={80}
+              priority
+              className="h-12 w-auto object-contain sm:h-14"
+            />
+          </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav aria-label="Navegação principal" className="hidden xl:block">
-          <ul className="flex items-center gap-1 lg:gap-2">
-            {fallbackNavigation.map((item: NavigationItem) => {
-              const hasGroups = Boolean(item.groups && item.groups.length > 0);
-              const isOpen = openDropdown === item.label;
+          {/* Desktop Navigation Links */}
+          <nav aria-label="Navegação principal" className="hidden xl:block">
+            <ul className="flex items-center gap-1 lg:gap-2">
+              {fallbackNavigation.map((item: NavigationItem) => {
+                const hasGroups = Boolean(item.groups && item.groups.length > 0);
+                const isOpen = openDropdown === item.label;
 
-              if (hasGroups) {
+                if (hasGroups) {
+                  return (
+                    <li key={item.href}>
+                      <button
+                        type="button"
+                        onClick={() => toggleDropdown(item.label)}
+                        aria-expanded={isOpen}
+                        aria-haspopup="true"
+                        className={`${focusClass} flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                          isOpen
+                            ? "bg-[var(--color-pink)] text-[var(--color-primary)] font-semibold"
+                            : "text-[var(--color-primary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]"
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDownIcon
+                          className={`h-4 w-4 transition-transform duration-200 ${
+                            isOpen
+                              ? "rotate-180 text-[var(--color-primary)]"
+                              : "text-[var(--color-muted)]"
+                          }`}
+                        />
+                      </button>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={item.href}>
-                    <button
-                      type="button"
-                      onClick={() => toggleDropdown(item.label)}
-                      aria-expanded={isOpen}
-                      aria-haspopup="true"
-                      className={`${focusClass} flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                        isOpen
-                          ? "bg-[var(--color-pink)] text-[var(--color-primary)] font-semibold"
-                          : "text-[var(--color-primary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]"
-                      }`}
+                    <Link
+                      href={item.href}
+                      className={`${focusClass} block rounded-full px-4 py-2 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
                     >
-                      <span>{item.label}</span>
-                      <ChevronDownIcon
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          isOpen
-                            ? "rotate-180 text-[var(--color-primary)]"
-                            : "text-[var(--color-muted)]"
-                        }`}
-                      />
-                    </button>
+                      {item.label}
+                    </Link>
                   </li>
                 );
-              }
+              })}
+            </ul>
+          </nav>
 
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`${focusClass} block rounded-full px-4 py-2 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+          {/* Action Button (Desktop CTA) */}
+          <div className="hidden sm:block">
+            <ButtonLink href="/contato" location="header">
+              Agendar avaliação
+            </ButtonLink>
+          </div>
 
-        {/* Action Button (Desktop CTA) */}
-        <div className="hidden sm:block">
-          <ButtonLink href="/contato" location="header">
-            Agendar avaliação
-          </ButtonLink>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <div className="flex items-center gap-3 xl:hidden">
-          <button
-            type="button"
-            onClick={() => setIsDrawerOpen(true)}
-            aria-label="Abrir menu de navegação"
-            aria-expanded={isDrawerOpen}
-            className={`${focusClass} flex h-11 items-center gap-2 rounded-lg border border-[var(--color-border)] px-3.5 text-sm font-semibold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] active:scale-95`}
-          >
-            <MenuIcon className="h-5 w-5" />
-            <span className="text-xs uppercase tracking-wider">Menu</span>
-          </button>
-        </div>
-
-        {/* Desktop Mega-Menu Dropdown Panel (Positioned centered relative to the Container) */}
-        <div
-          className={`absolute left-0 right-0 top-full mt-2 hidden transition-all duration-200 ease-out xl:block ${
-            activeItem
-              ? "pointer-events-auto visible translate-y-0 opacity-100"
-              : "pointer-events-none invisible -translate-y-2 opacity-0"
-          }`}
-        >
-          {activeItem && (
-            <div
-              className={`mx-auto rounded-2xl border border-[var(--color-border)]/80 bg-white p-8 shadow-[0_24px_60px_-15px_rgba(63,39,56,0.18)] ${
-                activeItem.groups && activeItem.groups.length > 1
-                  ? "max-w-[1140px]"
-                  : "max-w-[780px]"
-              }`}
+          {/* Mobile Hamburger Button */}
+          <div className="flex items-center gap-3 xl:hidden">
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              aria-label="Abrir menu de navegação"
+              aria-expanded={isDrawerOpen}
+              className={`${focusClass} flex h-11 items-center gap-2 rounded-lg border border-[var(--color-border)] px-3.5 text-sm font-semibold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] active:scale-95`}
             >
+              <MenuIcon className="h-5 w-5" />
+              <span className="text-xs uppercase tracking-wider">Menu</span>
+            </button>
+          </div>
+
+          {/* Desktop Mega-Menu Dropdown Panel (Positioned centered relative to the Container) */}
+          <div
+            className={`absolute left-0 right-0 top-full mt-2 hidden transition-all duration-200 ease-out xl:block ${
+              activeItem
+                ? "pointer-events-auto visible translate-y-0 opacity-100"
+                : "pointer-events-none invisible -translate-y-2 opacity-0"
+            }`}
+          >
+            {activeItem && (
               <div
-                className={`grid gap-8 ${
+                className={`mx-auto rounded-2xl border border-[var(--color-border)]/80 bg-white p-8 shadow-[0_24px_60px_-15px_rgba(63,39,56,0.18)] ${
                   activeItem.groups && activeItem.groups.length > 1
-                    ? "grid-cols-[1.15fr_repeat(4,minmax(0,1fr))]"
-                    : "grid-cols-[1.15fr_1.85fr]"
+                    ? "max-w-[1140px]"
+                    : "max-w-[780px]"
                 }`}
               >
-                {/* Overview Left Column */}
-                <div className="border-r border-[var(--color-border)]/50 pr-6">
-                  <p className="font-title text-2xl text-[var(--color-primary)]">
-                    {activeItem.label}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
-                    {activeItem.label === "Odontologia"
-                      ? "Tratamentos integrados conduzidos com planejamento individualizado nos Ingleses, Florianópolis."
-                      : "Procedimentos e avaliação facial integrados com foco em naturalidade e harmonia."}
-                  </p>
-                  <Link
-                    href={activeItem.href}
-                    onClick={() => setOpenDropdown(null)}
-                    className={`${focusClass} mt-6 inline-flex items-center gap-2 rounded-lg bg-[var(--color-surface)] px-4 py-2.5 text-xs font-semibold tracking-wide text-[var(--color-primary)] transition-all hover:bg-[var(--color-surface-strong)] hover:text-[var(--color-mauve)]`}
-                  >
-                    <span>Ver visão geral</span>
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
+                <div
+                  className={`grid gap-8 ${
+                    activeItem.groups && activeItem.groups.length > 1
+                      ? "grid-cols-[1.15fr_repeat(4,minmax(0,1fr))]"
+                      : "grid-cols-[1.15fr_1.85fr]"
+                  }`}
+                >
+                  {/* Overview Left Column */}
+                  <div className="border-r border-[var(--color-border)]/50 pr-6">
+                    <p className="font-title text-2xl text-[var(--color-primary)]">
+                      {activeItem.label}
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
+                      {activeItem.label === "Odontologia"
+                        ? "Tratamentos integrados conduzidos com planejamento individualizado nos Ingleses, Florianópolis."
+                        : "Procedimentos e avaliação facial integrados com foco em naturalidade e harmonia."}
+                    </p>
+                    <Link
+                      href={activeItem.href}
+                      onClick={() => setOpenDropdown(null)}
+                      className={`${focusClass} mt-6 inline-flex items-center gap-2 rounded-lg bg-[var(--color-surface)] px-4 py-2.5 text-xs font-semibold tracking-wide text-[var(--color-primary)] transition-all hover:bg-[var(--color-surface-strong)] hover:text-[var(--color-mauve)]`}
+                    >
+                      <span>Ver visão geral</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
 
-                {/* Groups Columns */}
-                {activeItem.groups && activeItem.groups.length > 1 ? (
-                  activeItem.groups.map((group) => (
-                    <div key={group.label}>
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-mauve)]">
-                        {group.label}
-                      </p>
-                      <ul className="mt-4 grid gap-2.5">
-                        {group.items.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              onClick={() => setOpenDropdown(null)}
-                              className={`${focusClass} block text-sm leading-snug text-[var(--color-ink)]/85 transition-colors hover:text-[var(--color-mauve)]`}
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))
-                ) : (
-                  <div>
-                    {activeItem.groups?.map((group) => (
+                  {/* Groups Columns */}
+                  {activeItem.groups && activeItem.groups.length > 1 ? (
+                    activeItem.groups.map((group) => (
                       <div key={group.label}>
                         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-mauve)]">
                           {group.label}
                         </p>
-                        <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
+                        <ul className="mt-4 grid gap-2.5">
                           {group.items.map((child) => (
                             <li key={child.href}>
                               <Link
@@ -311,23 +290,46 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                           ))}
                         </ul>
                       </div>
-                    ))}
-                  </div>
-                )}
+                    ))
+                  ) : (
+                    <div>
+                      {activeItem.groups?.map((group) => (
+                        <div key={group.label}>
+                          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-mauve)]">
+                            {group.label}
+                          </p>
+                          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
+                            {group.items.map((child) => (
+                              <li key={child.href}>
+                                <Link
+                                  href={child.href}
+                                  onClick={() => setOpenDropdown(null)}
+                                  className={`${focusClass} block text-sm leading-snug text-[var(--color-ink)]/85 transition-colors hover:text-[var(--color-mauve)]`}
+                                >
+                                  {child.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </Container>
+            )}
+          </div>
+        </Container>
+      </header>
 
       {/* Mobile Lateral Drawer Backdrop */}
       <div
         onClick={() => setIsDrawerOpen(false)}
         aria-hidden="true"
-        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-xs transition-opacity duration-300 xl:hidden ${
+        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-xs transition-all duration-300 xl:hidden ${
           isDrawerOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+            ? "pointer-events-auto opacity-100 visible"
+            : "pointer-events-none opacity-0 invisible"
         }`}
       />
 
@@ -336,8 +338,11 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
         role="dialog"
         aria-label="Menu principal"
         aria-modal="true"
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden ${
-          isDrawerOpen ? "translate-x-0" : "translate-x-full"
+        aria-hidden={!isDrawerOpen}
+        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden ${
+          isDrawerOpen
+            ? "translate-x-0 opacity-100 visible pointer-events-auto"
+            : "translate-x-full opacity-0 invisible pointer-events-none"
         }`}
       >
         {/* Drawer Header */}
@@ -455,6 +460,6 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
           </p>
         </div>
       </aside>
-    </header>
+    </>
   );
 }

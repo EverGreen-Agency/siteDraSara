@@ -12,7 +12,7 @@ const professionalProjection = `{
   "role": coalesce(specialties[0]->name, "Equipe clínica"),
   "image": portrait->asset.asset->url,
   summary,
-  "bio": bio[].children[].text,
+  "bio": bio[]{ "text": pt::text(@) }.text,
   "profileHref": select(slug.current == "dra-sara-michelon" => "/dra-sara-michelon", defined(slug.current) => "/equipe/" + slug.current),
   ${seoProjection},
   "relatedTreatments": relatedTreatments[]->{title, "href": "/" + slug.current, "description": shortDescription}
@@ -32,7 +32,7 @@ const sectionsProjection = `contentSections[]{
     _type
   ),
   heading,
-  "body": content[].children[].text,
+  "body": content[]{ "text": pt::text(@) }.text,
   "image": image->asset.asset->url,
   "imageAlt": image->alt,
   imagePosition,
@@ -59,7 +59,7 @@ export const entryQuery = `*[
     ${seoProjection}, "sections": ${sectionsProjection},
     "faq": faq[]->{question, "answer": pt::text(answer)},
     "relatedTreatments": relatedTreatments[]->{title, "href": "/" + slug.current, "description": shortDescription},
-    "aftercare": select(length(aftercare) > 0 => {"body": aftercare[].children[].text, "href": "/manutencao-odontologica", "label": "Conhecer a manutenção odontológica"}),
+    "aftercare": select(length(aftercare) > 0 => {"body": aftercare[]{ "text": pt::text(@) }.text, "href": "/manutencao-odontologica", "label": "Conhecer a manutenção odontológica"}),
     "contentStatus": coalesce(contentStatus, "final"),
     "source": coalesce(contentSource, "docx-clinical")
   },

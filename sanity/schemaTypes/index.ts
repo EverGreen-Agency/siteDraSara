@@ -242,8 +242,33 @@ const siteSettings = defineType({
     defineField({name: "socialLinks", title: "Redes sociais", type: "array", of: [{type: "url"}]}),
     defineField({name: "footerLinks", title: "Links do rodapé", type: "array", of: [defineArrayMember({type: "object", fields: [defineField({name: "label", title: "Rótulo", type: "string"}), defineField({name: "href", title: "Destino", type: "string"})]})]}),
     defineField({name: "defaultSeo", title: "SEO padrão", type: "seo"}),
-    defineField({name: "trackingIds", title: "IDs de tracking", type: "object", fields: [defineField({name: "ga4", title: "GA4", type: "string"}), defineField({name: "gtm", title: "GTM", type: "string"}), defineField({name: "googleAds", title: "Google Ads", type: "string"})]}),
+    defineField({
+      name: "trackingIds",
+      title: "IDs de tracking",
+      type: "object",
+      fields: [
+        defineField({name: "ga4", title: "GA4 Measurement ID (G-XXXX)", type: "string"}),
+        defineField({name: "gtm", title: "GTM Container ID (GTM-XXXX)", type: "string"}),
+        defineField({name: "googleAds", title: "Google Ads Tag ID (AW-XXXX)", type: "string"}),
+        defineField({name: "googleAdsConversionLabel", title: "Google Ads Conversion Label (ex: AbCdEfGhIjK)", type: "string"}),
+        defineField({name: "metaPixel", title: "Meta Pixel ID (Facebook)", type: "string"}),
+        defineField({name: "clarity", title: "Microsoft Clarity Project ID", type: "string"}),
+      ],
+    }),
   ],
 });
 
-export const schemaTypes = [seo, richTextSection, imageSection, imageTextSection, stepsSection, cardGridSection, comparisonSection, clinicalCaseSection, quoteSection, ctaSection, relatedTreatmentsSection, localBlockSection, treatment, specialty, professional, article, category, reusableFaq, page, landingPage, siteSettings, mediaAsset];
+const testimonial = defineType({
+  name: "testimonial",
+  title: "Depoimento",
+  type: "document",
+  fields: [
+    defineField({name: "personName", title: "Nome do paciente", type: "string", validation: (rule) => rule.required()}),
+    defineField({name: "text", title: "Depoimento", type: "text", rows: 4, validation: (rule) => rule.required()}),
+    defineField({name: "source", title: "Origem", type: "string", options: {list: ["Google Avaliações", "WhatsApp", "Relato Clínico", "Outro"]}, initialValue: "Google Avaliações"}),
+    defineField({name: "authorization", title: "Autorização de uso confirmada", type: "boolean", initialValue: false, validation: (rule) => rule.required().custom((value) => value === true || "Confirme a autorização antes de publicar")}),
+    defineField({name: "date", title: "Data", type: "date"}),
+  ],
+});
+
+export const schemaTypes = [seo, richTextSection, imageSection, imageTextSection, stepsSection, cardGridSection, comparisonSection, clinicalCaseSection, quoteSection, ctaSection, relatedTreatmentsSection, localBlockSection, treatment, specialty, professional, article, category, reusableFaq, page, landingPage, siteSettings, mediaAsset, testimonial];

@@ -1,4 +1,4 @@
-import {readFile} from "node:fs/promises";
+import {readdir, readFile} from "node:fs/promises";
 import path from "node:path";
 import {createClient} from "next-sanity";
 import {fallbackArticles, fallbackLandingPages, fallbackPages, fallbackProfessionals, fallbackSiteSettings, fallbackTreatments} from "../lib/content/fallback.ts";
@@ -33,6 +33,7 @@ const media = [
   ["sara-estetica-orofacial.webp", "Dra. Sara Michelon em avaliação facial"],
   ["team-main.webp", "Equipe da clínica da Dra. Sara Michelon"],
   ["planning-digital-scan.webp", "Planejamento odontológico digital e escaneamento"],
+  ["clinic-consultorio-1.webp", "Consultório 1 da clínica da Dra. Sara Michelon"],
   ["clinic-operatory-main.webp", "Consultório odontológico da clínica da Dra. Sara Michelon"],
   ["clinic-reception-rear.webp", "Recepção da clínica da Dra. Sara Michelon nos Ingleses"],
   ["clinic-coffee-lounge.webp", "Cantinho do café e lounge acolhedor da clínica"],
@@ -64,6 +65,30 @@ function mapSection(section: ContentSection) {
   return {...section, _type: "localBlockSection"};
 }
 
+async function findImageBuffer(filename: string): Promise<Buffer> {
+  const imagesRoot = path.join(process.cwd(), "public", "images");
+
+  async function search(dir: string): Promise<string | null> {
+    const entries = await readdir(dir, {withFileTypes: true});
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        const found = await search(fullPath);
+        if (found) return found;
+      } else if (entry.name === filename) {
+        return fullPath;
+      }
+    }
+    return null;
+  }
+
+  const filePath = await search(imagesRoot);
+  if (!filePath) {
+    throw new Error(`Imagem não encontrada no acervo: ${filename}`);
+  }
+  return readFile(filePath);
+}
+
 async function replace(document: Record<string, unknown>) {
   await client.createOrReplace(document as never);
   process.stdout.write(`✓ ${String(document._id)}\n`);
@@ -71,7 +96,7 @@ async function replace(document: Record<string, unknown>) {
 
 async function main() {
   for (const [filename, alt] of media) {
-    const buffer = await readFile(path.join(process.cwd(), "public", "images", filename));
+    const buffer = await findImageBuffer(filename);
     const asset = await client.assets.upload("image", buffer, {filename});
     await replace({_id: id("media", filename), _type: "mediaAsset", title: filename, alt, sourceType: "Própria", usageNotes: "Arquivo aprovado no acervo auditado da Fase 3.", asset: {_type: "image", asset: ref(asset._id)}});
   }

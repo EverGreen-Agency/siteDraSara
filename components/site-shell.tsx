@@ -50,12 +50,24 @@ async function Footer() {
             </p>
             <div className="mt-2 flex flex-col gap-0.5 text-xs text-white/75 sm:text-sm">
               {settings.whatsapp && (
-                <a href={`https://wa.me/55${settings.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white hover:underline">
+                <a
+                  href={`https://wa.me/55${settings.whatsapp.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track-event="whatsapp_click"
+                  data-track-location="footer"
+                  className="transition-colors hover:text-white hover:underline"
+                >
                   WhatsApp: {settings.whatsapp}
                 </a>
               )}
               {settings.phone && (
-                <a href={`tel:+55${settings.phone.replace(/\D/g, "")}`} className="transition-colors hover:text-white hover:underline">
+                <a
+                  href={`tel:+55${settings.phone.replace(/\D/g, "")}`}
+                  data-track-event="phone_click"
+                  data-track-location="footer"
+                  className="transition-colors hover:text-white hover:underline"
+                >
                   Telefone: {settings.phone}
                 </a>
               )}
@@ -82,5 +94,11 @@ async function Footer() {
 }
 
 export async function SiteShell({children}: {children: ReactNode}) {
-  return <><Header /><main>{children}</main><Footer /></>;
+  return (
+    <>
+      <Header />
+      <main className="min-h-screen overflow-x-clip">{children}</main>
+      <Footer />
+    </>
+  );
 }

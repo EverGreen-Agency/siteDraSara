@@ -39,25 +39,40 @@ export default async function HomePage() {
   return (
     <>
       <SEOJsonLd data={[localBusiness]} />
-      <section className="border-b border-[var(--color-border)] bg-[var(--color-pink)] pb-12 pt-7">
-        <Container className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-          <div>
-            <Eyebrow>{home.eyebrow}</Eyebrow>
-            <Heading as="h1" className="max-w-xl">{home.title}</Heading>
-            <p className="mt-8 max-w-xl text-xl leading-9 text-[var(--color-muted)]">{home.description}</p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="/contato" event="appointment_cta_click" location="home_hero">Agende uma avaliação</ButtonLink>
-              <ButtonLink href="#tratamentos" variant="secondary" event="treatment_view" location="home_hero">Conheça os tratamentos</ButtonLink>
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-pink)]">
+        {/* Banner de Background Responsivo da Hero */}
+        <picture className="absolute inset-0 block h-full w-full pointer-events-none">
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/home/hero-mobile.webp"
+            type="image/webp"
+            width={941}
+            height={1672}
+          />
+          <img
+            src="/images/home/hero-desktop.webp"
+            alt="Dra. Sara Michelon - Odontologia e Estética em Florianópolis"
+            loading="eager"
+            fetchPriority="high"
+            className="h-full w-full object-cover object-top md:object-right"
+          />
+        </picture>
+
+        <Container className="relative z-10">
+          <div className="flex flex-col justify-end pt-[46vw] pb-5 sm:pt-[36vw] sm:pb-6 md:justify-center md:py-7 lg:py-8">
+            <div className="max-w-xl md:max-w-lg lg:max-w-[52%]">
+              <Eyebrow>{home.eyebrow}</Eyebrow>
+              <Heading as="h1">{home.title}</Heading>
+              <p className="mt-4 text-lg sm:text-xl leading-8 sm:leading-9 text-[var(--color-ink)]/85">{home.description}</p>
+              <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:gap-4">
+                <ButtonLink href="/contato" event="appointment_cta_click" location="home_hero">Agende uma avaliação</ButtonLink>
+                <ButtonLink href="#tratamentos" variant="secondary" event="treatment_view" location="home_hero">Conheça os tratamentos</ButtonLink>
+              </div>
+              <div className="mt-6 flex items-center gap-4 border-t border-[var(--color-border)] pt-3 text-sm text-[var(--color-ink)]/70 sm:mt-7 sm:gap-5 sm:pt-3.5">
+                <span className="font-title text-2xl text-[var(--color-primary)]">01</span>
+                <span>Ingleses · Norte da Ilha · Florianópolis</span>
+              </div>
             </div>
-            <div className="mt-12 flex items-center gap-5 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-muted)]">
-              <span className="font-title text-2xl text-[var(--color-primary)]">01</span>
-              <span>Ingleses · Norte da Ilha · Florianópolis</span>
-            </div>
-          </div>
-          <div className="relative lg:pl-8">
-            <div className="absolute -left-5 top-10 hidden h-[72%] w-px bg-[var(--color-border)] lg:block" />
-            <ImageFrame src={home.image ?? "/images/real/sara/sara-home-hero-17.webp"} alt={home.imageAlt ?? "Dra. Sara Michelon em retrato profissional no consultório"} fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="aspect-[471/630] max-h-[760px] min-h-[520px]" />
-            <div className="absolute bottom-0 left-0 bg-white px-5 py-4 text-xs uppercase tracking-[0.16em] text-[var(--color-mauve)] lg:left-8">Dra. Sara Michelon</div>
           </div>
         </Container>
       </section>
@@ -90,12 +105,54 @@ export default async function HomePage() {
               <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
                 A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O diagnóstico estabelece prioridades, limites e sequência — a indicação é construída com base no caso real, não em uma lista pré-definida de procedimentos.
               </p>
-              <ol className="mt-9 grid grid-cols-2 gap-x-6 gap-y-5 text-sm font-semibold text-[var(--color-primary)] sm:grid-cols-3">
-                {["Avaliação", "Diagnóstico", "Indicação", "Tratamento", "Acompanhamento"].map((item, index) => (
-                  <li key={item} className="border-t border-[var(--color-border)] pt-3">
-                    <span className="mr-2 text-[var(--color-mauve)]">0{index + 1}</span>{item}
-                  </li>
-                ))}
+              {/* Linha do Tempo Contínua (Timeline Unificada) */}
+              <ol className="relative mt-10 grid grid-cols-2 gap-y-7 sm:grid-cols-5 sm:gap-0">
+                {[
+                  {step: "01", title: "Avaliação"},
+                  {step: "02", title: "Diagnóstico"},
+                  {step: "03", title: "Indicação"},
+                  {step: "04", title: "Tratamento"},
+                  {step: "05", title: "Acompanhamento"},
+                ].map((item, index) => {
+                  const isLast = index === 4;
+                  return (
+                    <li
+                      key={item.title}
+                      className={`group relative flex flex-col pr-3 ${
+                        isLast ? "col-span-2 sm:col-span-1" : ""
+                      }`}
+                    >
+                      {/* Linha contínua conectando até o próximo nó (apenas desktop) */}
+                      {!isLast && (
+                        <div
+                          className="hidden sm:block absolute left-[6px] right-0 top-[6px] h-[1.5px] bg-[var(--color-border)] transition-colors group-hover:bg-[var(--color-mauve)]/40"
+                          aria-hidden="true"
+                        />
+                      )}
+
+                      {/* Nó da etapa */}
+                      <div className="relative flex items-center">
+                        <span
+                          className={`relative z-10 h-3 w-3 rounded-full ring-4 ring-[var(--color-surface)] transition-all duration-200 group-hover:scale-125 ${
+                            isLast
+                              ? "bg-[var(--color-mauve)]"
+                              : "border-2 border-[var(--color-mauve)] bg-[var(--color-surface)]"
+                          }`}
+                        />
+                      </div>
+
+                      {/* Conteúdo textual */}
+                      <div className="mt-3.5">
+                        <span className="font-title text-xs font-semibold tracking-wider text-[var(--color-mauve)]">
+                          {item.step}
+                        </span>
+                        <span className="mt-1 block text-sm font-bold tracking-tight text-[var(--color-primary)]">
+                          {item.title}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
               </ol>
             </div>
           </div>
