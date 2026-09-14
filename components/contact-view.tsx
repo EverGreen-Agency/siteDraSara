@@ -102,44 +102,56 @@ export function ContactView({settings}: ContactViewProps) {
     <div className="contact-experience">
       {/* 1. Hero & Introdução */}
       {/* 1. Hero & Introdução com Background Responsivo */}
-      <Section className="relative overflow-hidden bg-[var(--color-pink)] py-8 sm:py-10 lg:py-14">
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-pink)]">
         {/* Background com Art Direction (Mobile e Desktop) */}
         <picture className="pointer-events-none absolute inset-0 block h-full w-full">
           <source
             media="(max-width: 767px)"
             srcSet="/images/real/contato/hero-contato-mobile.webp"
             type="image/webp"
+            width={941}
+            height={1672}
           />
           <img
             src="/images/real/contato/hero-contato-desktop.webp"
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover object-center"
+            alt="Recepção e atendimento da clínica Dra. Sara Michelon nos Ingleses"
+            width={1672}
+            height={941}
+            className="h-full w-full object-cover object-top md:object-[85%_center] lg:object-center"
+            loading="eager"
             fetchPriority="high"
           />
         </picture>
 
-        {/* Overlay sutil que protege a área de leitura à esquerda e deixa a foto visível à direita */}
+        {/* Scrim suave no mobile a partir da metade inferior para garantir leitura impecável sem tocar no balcão superior */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-white/70 backdrop-blur-[0.5px] md:w-[70%] md:bg-gradient-to-r md:from-white/95 md:via-white/85 md:to-transparent lg:w-[60%]"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--color-pink)] via-[var(--color-pink)]/80 via-50% to-transparent to-85% md:hidden"
+        />
+
+        {/* Scrim overlay suave no desktop apenas na área de leitura à esquerda */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none hidden md:block absolute inset-0 w-[58%] lg:w-[52%] bg-gradient-to-r from-[var(--color-pink)]/95 via-[var(--color-pink)]/60 to-transparent"
         />
 
         <Container className="relative z-10">
-          <Breadcrumbs items={[{label: "Início", href: "/"}, {label: "Contato e Localização"}]} />
-          <div className="mt-4 max-w-xl lg:max-w-2xl">
-            <div className="inline-flex items-center rounded-full border border-[var(--color-primary)]/15 bg-white/95 px-3.5 py-1 text-xs font-medium tracking-wide text-[var(--color-primary)] shadow-xs">
-              Atendimento com Hora Marcada · Ingleses Saúde & Office
+          <div className="flex flex-col justify-end min-h-[540px] pt-[72vw] pb-8 sm:min-h-[580px] sm:pt-[54vw] sm:pb-10 md:min-h-[480px] md:pt-14 md:pb-12 lg:min-h-[560px] lg:justify-center lg:py-16">
+            <div className="max-w-xl md:max-w-[460px] lg:max-w-[500px] xl:max-w-[540px]">
+              <Breadcrumbs items={[{label: "Início", href: "/"}, {label: "Contato e Localização"}]} className="mb-2.5 sm:mb-3.5" />
+              <div className="inline-flex items-center rounded-full border border-[var(--color-primary)]/15 bg-white/95 px-3 py-1 text-xs font-medium tracking-wide text-[var(--color-primary)] shadow-xs">
+                Atendimento com Hora Marcada · Ingleses Saúde & Office
+              </div>
+              <h1 className="mt-3 font-title text-balance text-2xl sm:text-3xl lg:text-4xl leading-[1.12] tracking-[-0.02em] text-[var(--color-primary)]">
+                Contato, Localização & Rotas
+              </h1>
+              <p className="mt-2.5 sm:mt-3 text-sm sm:text-base leading-6 sm:leading-7 text-[var(--color-ink)]/85">
+                Localizada no Norte da Ilha de Florianópolis, no complexo empresarial <strong className="font-semibold text-[var(--color-primary)]">Ingleses Saúde & Office</strong>. Uma clínica moderna e acolhedora, com estacionamento privativo e acesso descomplicado.
+              </p>
             </div>
-            <Heading as="h1" className="mt-4">
-              Contato, Localização & Rotas
-            </Heading>
-            <p className="mt-5 text-base sm:text-lg leading-8 text-[var(--color-primary)]/85">
-              Localizada no Norte da Ilha de Florianópolis, no complexo empresarial <strong className="font-semibold text-[var(--color-primary)]">Ingleses Saúde & Office</strong>. Uma clínica moderna e acolhedora, com estacionamento privativo e acesso descomplicado.
-            </p>
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* 2. Canais Diretos de Atendimento (Cards em Grid) */}
       <Section className="py-8 sm:py-10">

@@ -49,28 +49,75 @@ export default async function ClinicaPage() {
 
   return (
     <>
-      {/* 1. Hero Institucional */}
-      <Section className="bg-[var(--color-pink)] pb-6 pt-5">
-        <Container>
-          <Breadcrumbs items={[{label: "Início", href: "/"}, {label: "A clínica"}]} />
-          <div className="mt-4 grid items-end gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
-              <Eyebrow>{page.eyebrow}</Eyebrow>
-              <Heading as="h1">{page.title}</Heading>
+      {/* 1. Hero Institucional com Art Direction */}
+      <section className="relative overflow-hidden bg-[var(--color-pink)]">
+        <picture className="absolute inset-0 block h-full w-full pointer-events-none">
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/real/clinica/hero-clinica-mobile.webp"
+            width={941}
+            height={1672}
+          />
+          <img
+            src="/images/real/clinica/hero-clinica-desktop.webp"
+            alt="Dra. Sara Michelon no consultório da clínica odontológica nos Ingleses"
+            width={1672}
+            height={941}
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover object-top md:object-right lg:object-center"
+          />
+        </picture>
+
+        {/* Scrim overlay suave para contraste e legibilidade impecáveis */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[var(--color-pink)] via-[var(--color-pink)]/80 via-50% to-transparent to-85% md:hidden"
+        />
+        <div
+          aria-hidden="true"
+          className="hidden md:block absolute inset-0 pointer-events-none bg-gradient-to-r from-[var(--color-pink)]/90 via-[var(--color-pink)]/50 to-transparent lg:from-[var(--color-pink)]/85 lg:via-[var(--color-pink)]/30 lg:w-[62%]"
+        />
+
+        <Container className="relative z-10">
+          <div className="flex flex-col justify-end min-h-[560px] pt-[72vw] pb-8 sm:min-h-[600px] sm:pt-[54vw] sm:pb-10 md:min-h-[500px] md:pt-14 md:pb-12 lg:min-h-[580px] lg:justify-center lg:py-16">
+            <div className="max-w-xl md:max-w-lg lg:max-w-[54%]">
+              <Breadcrumbs
+                hideCurrentOnMobile
+                className="mb-3 sm:mb-6"
+                items={[
+                  {label: "Início", href: "/"},
+                  {label: "A clínica"},
+                ]}
+              />
+              <p className="mb-2 sm:mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-mauve)]">
+                {page.eyebrow}
+              </p>
+              <h1 className="font-title text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] tracking-[-0.02em] text-[var(--color-primary)]">
+                {page.title}
+              </h1>
+              <p className="mt-3 sm:mt-5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
+                {page.description}
+              </p>
+              <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="#tour-virtual" variant="primary">
+                  Conhecer a clínica ↓
+                </ButtonLink>
+                <ButtonLink href="/contato" variant="secondary">
+                  Agendar uma avaliação
+                </ButtonLink>
+              </div>
             </div>
-            <p className="text-lg leading-8 text-[var(--color-muted)]">
-              {page.description}
-            </p>
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* 2. Destaque de Estrutura */}
       <Section className="py-8 sm:py-10">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
           <ImageFrame
-            src={page.image ?? "/images/real/clinica/clinic-operatory-main.webp"}
-            alt={page.imageAlt ?? "Consultório da clínica da Dra. Sara Michelon"}
+            src={page.image ?? "/images/real/clinica/clinic-consultorio-1.webp"}
+            alt={page.imageAlt ?? "Consultório 1 com cadeira odontológica e mesa de atendimento"}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
