@@ -11,7 +11,7 @@ const manrope = Manrope({subsets: ["latin"], variable: "--font-manrope", display
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
   return {
-    metadataBase: new URL(settings.siteUrl),
+    metadataBase: new URL(settings.siteUrl || "https://odontoestetica.net"),
     title: {default: "Dra. Sara Michelon | Odontologia e Estética", template: "%s"},
     description: "Odontologia e estética nos Ingleses, Florianópolis, com planejamento individual.",
     applicationName: settings.clinicName,

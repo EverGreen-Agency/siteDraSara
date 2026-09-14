@@ -65,13 +65,34 @@ export async function getArticles(): Promise<Article[]> {
   }
 }
 
+function sanitizeSiteUrl(url?: string | null): string {
+  const trimmed = url?.trim();
+  if (!trimmed) {
+    if (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0) {
+      const envUrl = process.env.NEXT_PUBLIC_SITE_URL.trim();
+      return envUrl.startsWith("http") ? envUrl : `https://${envUrl}`;
+    }
+    if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+      return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+    }
+    if (process.env.VERCEL_URL) {
+      return `https://${process.env.VERCEL_URL}`;
+    }
+    return "https://odontoestetica.net";
+  }
+  return trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (!sanityClient) return fallbackSiteSettings;
+  if (!sanityClient) {
+    return {...fallbackSiteSettings, siteUrl: sanitizeSiteUrl(fallbackSiteSettings.siteUrl)};
+  }
   try {
     const remote = await sanityClient.fetch<Partial<SiteSettings> | null>(settingsQuery, {}, {next: {revalidate: 3600, tags: ["site-settings"]}});
-    return {...fallbackSiteSettings, ...remote, trackingIds: {...fallbackSiteSettings.trackingIds, ...remote?.trackingIds}};
+    const merged = {...fallbackSiteSettings, ...remote, trackingIds: {...fallbackSiteSettings.trackingIds, ...remote?.trackingIds}};
+    return {...merged, siteUrl: sanitizeSiteUrl(merged.siteUrl)};
   } catch {
-    return fallbackSiteSettings;
+    return {...fallbackSiteSettings, siteUrl: sanitizeSiteUrl(fallbackSiteSettings.siteUrl)};
   }
 }
 

@@ -12,7 +12,9 @@ export const fallbackSiteSettings: SiteSettings = {
   openingHours: ["Segunda a Sexta: 08:30 às 19:00"],
   geo: { latitude: -27.4373, longitude: -48.3998 },
   socialLinks: [],
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://odontoestetica.net",
+  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0)
+    ? process.env.NEXT_PUBLIC_SITE_URL.trim()
+    : "https://odontoestetica.net",
   trackingIds: {
     ga4: process.env.NEXT_PUBLIC_GA4_ID ?? null,
     gtm: process.env.NEXT_PUBLIC_GTM_ID ?? null,
