@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {ContactView} from "@/components/contact-view";
 import {ContentSectionRenderer} from "@/components/content-section-renderer";
-import {ArticleCard, Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, FAQ, Heading, ImageFrame, ProcedureCarousel, ProfessionalBlock, SEOJsonLd, Section, TreatmentCard} from "@/components/design-system";
+import {ArticleCard, Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, FAQ, Heading, ImageFrame, ProcedureCarousel, ProfessionalBlock, SEOJsonLd, Section, TreatmentCard, TreatmentOverviewCard} from "@/components/design-system";
 import type {Article, InstitutionalPage, LandingPage, Treatment} from "@/lib/content/types";
 import {getArticles, getContentEntry, getSiteSettings, getStaticSlugs} from "@/lib/sanity/repository";
 
@@ -142,6 +142,54 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
   );
 }
 
+interface InstitutionalHeroBanner {
+  desktop: string;
+  mobile: string;
+  alt: string;
+  desktopWidth?: number;
+  desktopHeight?: number;
+  mobileWidth?: number;
+  mobileHeight?: number;
+  ctaPrimary?: {label: string; href: string};
+  ctaSecondary?: {label: string; href: string};
+}
+
+const institutionalHeroBanners: Record<string, InstitutionalHeroBanner> = {
+  "conteudos": {
+    desktop: "/images/real/conteudos/hero-conteudos-desktop.webp",
+    mobile: "/images/real/conteudos/hero-conteudos-mobile.webp",
+    alt: "Dra. Sara Michelon na recepção da clínica compartilhando orientações e artigos sobre odontologia e estética",
+    desktopWidth: 1672,
+    desktopHeight: 941,
+    mobileWidth: 941,
+    mobileHeight: 1672,
+    ctaPrimary: {label: "Ver publicações ↓", href: "#publicacoes"},
+    ctaSecondary: {label: "Agendar uma avaliação", href: "/contato"},
+  },
+  "estetica-orofacial": {
+    desktop: "/images/real/estetica/hero-estetica-desktop.webp",
+    mobile: "/images/real/estetica/hero-estetica-mobile.webp",
+    alt: "Dra. Sara Michelon em atendimento e planejamento individual de estética orofacial",
+    desktopWidth: 2048,
+    desktopHeight: 768,
+    mobileWidth: 941,
+    mobileHeight: 1672,
+    ctaPrimary: {label: "Ver procedimentos ↓", href: "#tratamentos"},
+    ctaSecondary: {label: "Agendar uma avaliação", href: "/contato"},
+  },
+  "odontologia": {
+    desktop: "/images/real/odontologia/hero-odontologia-desktop.webp",
+    mobile: "/images/real/odontologia/hero-odontologia-mobile.webp",
+    alt: "Dra. Sara Michelon no consultório apresentando planejamento odontológico com modelo e alinhador",
+    desktopWidth: 1672,
+    desktopHeight: 941,
+    mobileWidth: 941,
+    mobileHeight: 1672,
+    ctaPrimary: {label: "Ver tratamentos ↓", href: "#tratamentos"},
+    ctaSecondary: {label: "Agendar uma avaliação", href: "/contato"},
+  },
+};
+
 async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
   const settings = await getSiteSettings();
   const isContact = page.slug === "contato";
@@ -196,14 +244,164 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
 
   const articles = page.slug === "conteudos" ? await getArticles() : [];
   const isLegacy = page.slug.startsWith("odontopediatria");
+  const heroBanner = institutionalHeroBanners[page.slug];
+
   return (
     <>
       <SEOJsonLd data={breadcrumbJsonLd(settings.siteUrl, [{name: "Início", path: "/"}, {name: page.title, path: `/${page.slug}`}])} />
-      <Section className="bg-[var(--color-pink)]"><Container><Breadcrumbs items={[{label: "Início", href: "/"}, {label: page.eyebrow}]} /><div className="grid items-end gap-10 lg:grid-cols-[1fr_0.75fr]"><div><Eyebrow>{page.eyebrow}</Eyebrow><Heading as="h1">{page.title}</Heading></div><p className="text-lg leading-8 text-[var(--color-muted)]">{page.description}</p></div></Container></Section>
-      {page.image && <Section><Container className="grid items-center gap-12 lg:grid-cols-2"><ImageFrame src={page.image} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[520px]" /><div className="lg:px-10"><Eyebrow>Planejamento individual</Eyebrow><Heading>Avaliação, diagnóstico e indicação</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">A avaliação organiza necessidades, esclarece alternativas e ajuda a definir uma sequência de cuidado individual.</p><div className="mt-9"><ButtonLink href="/contato">Agendar uma avaliação</ButtonLink></div></div></Container></Section>}
-      {page.linkGroups?.map((group) => <Section key={group.title} className="border-t border-[var(--color-border)]"><Container><Heading>{group.title}</Heading><div className="mt-12 grid gap-x-10 md:grid-cols-2 lg:grid-cols-3">{group.items.map((item, index) => <TreatmentCard key={item.href} index={String(index + 1).padStart(2, "0")} title={item.title} description={item.description} href={item.href} />)}</div></Container></Section>)}
+      {heroBanner ? (
+        <section className="relative overflow-hidden bg-[var(--color-pink)]">
+          <picture className="absolute inset-0 block h-full w-full pointer-events-none">
+            <source
+              media="(max-width: 767px)"
+              srcSet={heroBanner.mobile}
+              width={heroBanner.mobileWidth ?? 941}
+              height={heroBanner.mobileHeight ?? 1672}
+            />
+            <img
+              src={heroBanner.desktop}
+              alt={heroBanner.alt}
+              width={heroBanner.desktopWidth ?? 1672}
+              height={heroBanner.desktopHeight ?? 941}
+              fetchPriority="high"
+              decoding="async"
+              className="h-full w-full object-cover object-top md:object-right lg:object-center"
+            />
+          </picture>
+
+          {/* Scrim overlay suave para contraste e legibilidade impecáveis */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[var(--color-pink)] via-[var(--color-pink)]/80 via-50% to-transparent to-85% md:hidden"
+          />
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute inset-0 pointer-events-none bg-gradient-to-r from-[var(--color-pink)]/90 via-[var(--color-pink)]/50 to-transparent lg:from-[var(--color-pink)]/85 lg:via-[var(--color-pink)]/30 lg:w-[62%]"
+          />
+
+          <Container className="relative z-10">
+            <div className="flex flex-col justify-end min-h-[560px] pt-[72vw] pb-8 sm:min-h-[600px] sm:pt-[54vw] sm:pb-10 md:min-h-[500px] md:pt-14 md:pb-12 lg:min-h-[580px] lg:justify-center lg:py-16">
+              <div className="max-w-xl md:max-w-lg lg:max-w-[54%]">
+                <Breadcrumbs
+                  hideCurrentOnMobile
+                  className="mb-3 sm:mb-6"
+                  items={[
+                    {label: "Início", href: "/"},
+                    {label: page.eyebrow},
+                  ]}
+                />
+                <p className="mb-2 sm:mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-mauve)]">
+                  {page.eyebrow}
+                </p>
+                <h1 className="font-title text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] tracking-[-0.02em] text-[var(--color-primary)]">
+                  {page.title}
+                </h1>
+                <p className="mt-3 sm:mt-5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
+                  {page.description}
+                </p>
+                {(heroBanner.ctaPrimary || heroBanner.ctaSecondary) && (
+                  <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row">
+                    {heroBanner.ctaPrimary && (
+                      <ButtonLink href={heroBanner.ctaPrimary.href} variant="primary">
+                        {heroBanner.ctaPrimary.label}
+                      </ButtonLink>
+                    )}
+                    {heroBanner.ctaSecondary && (
+                      <ButtonLink href={heroBanner.ctaSecondary.href} variant="secondary">
+                        {heroBanner.ctaSecondary.label}
+                      </ButtonLink>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Container>
+        </section>
+      ) : (
+        <Section className="bg-[var(--color-pink)]">
+          <Container>
+            <Breadcrumbs items={[{label: "Início", href: "/"}, {label: page.eyebrow}]} />
+            <div className="grid items-end gap-10 lg:grid-cols-[1fr_0.75fr]">
+              <div>
+                <Eyebrow>{page.eyebrow}</Eyebrow>
+                <Heading as="h1">{page.title}</Heading>
+              </div>
+              <p className="text-lg leading-8 text-[var(--color-muted)]">{page.description}</p>
+            </div>
+          </Container>
+        </Section>
+      )}
+      {page.image && page.slug !== "conteudos" && (
+        <Section className="py-8 sm:py-10">
+          <Container className="grid items-center gap-12 lg:grid-cols-2">
+            <ImageFrame
+              src={page.image}
+              alt={page.imageAlt ?? page.title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="min-h-[520px]"
+            />
+            <div className="lg:px-10">
+              <Eyebrow>Planejamento individual</Eyebrow>
+              <Heading as="h2">Avaliação, diagnóstico e indicação</Heading>
+              <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+                A avaliação organiza necessidades, esclarece alternativas e ajuda a definir uma sequência de cuidado individual.
+              </p>
+              <div className="mt-9">
+                <ButtonLink href="/contato">Agendar uma avaliação</ButtonLink>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
+      {page.linkGroups?.map((group, groupIndex) => (
+        <Section
+          key={group.title}
+          id={groupIndex === 0 ? "tratamentos" : undefined}
+          className="border-t border-[var(--color-border)]"
+        >
+          <Container>
+            <Heading as="h2">{group.title}</Heading>
+            <div className="mt-10 sm:mt-12 grid gap-x-8 gap-y-12 sm:gap-x-10 sm:gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {group.items.map((item, index) => (
+                <TreatmentOverviewCard
+                  key={item.href}
+                  index={String(index + 1).padStart(2, "0")}
+                  title={item.title}
+                  description={item.description}
+                  href={item.href}
+                  priority={groupIndex === 0 && index < 3}
+                />
+              ))}
+            </div>
+          </Container>
+        </Section>
+      ))}
       {page.sections && <ContentSectionRenderer sections={page.sections} />}
-      {articles.length > 0 && <Section><Container><div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]"><div><Eyebrow>Publicações</Eyebrow><Heading>Orientações disponíveis</Heading></div><div>{articles.map((article) => <ArticleCard key={article.slug} category={article.categories[0] ?? "Conteúdo"} title={article.title} description={article.excerpt} href={article.path} meta={`Por ${article.author.name}`} />)}</div></div></Container></Section>}
+      {articles.length > 0 && (
+        <Section id="publicacoes">
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+              <div>
+                <Eyebrow>Publicações</Eyebrow>
+                <Heading as="h2">Orientações disponíveis</Heading>
+              </div>
+              <div>
+                {articles.map((article) => (
+                  <ArticleCard
+                    key={article.slug}
+                    category={article.categories[0] ?? "Conteúdo"}
+                    title={article.title}
+                    description={article.excerpt}
+                    href={article.path}
+                    meta={`Por ${article.author.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
       {!isLegacy && !isContact && <CTASection />}
     </>
   );

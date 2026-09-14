@@ -2,6 +2,7 @@ import Image, {type ImageProps} from "next/image";
 import Link from "next/link";
 import type {ReactNode} from "react";
 import type {Professional} from "@/lib/content/types";
+import {getTreatmentBanner, getTreatmentThumbnailPosition} from "@/lib/treatment-banners";
 
 function classes(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -108,6 +109,88 @@ export function TreatmentCard({index, title, description, href}: {index: string;
 
   const className = "group block border-t border-[var(--color-border)] py-8 transition-colors hover:border-[var(--color-primary)]";
   return href ? <Link href={href} className={className}>{content}</Link> : <article className={className}>{content}</article>;
+}
+
+export interface TreatmentOverviewCardProps {
+  index: string;
+  title: string;
+  description: string;
+  href: string;
+  slug?: string;
+  priority?: boolean;
+}
+
+export function TreatmentOverviewCard({
+  index,
+  title,
+  description,
+  href,
+  slug: explicitSlug,
+  priority = false,
+}: TreatmentOverviewCardProps) {
+  const slug = explicitSlug ?? href.replace(/^\//, "");
+  const banner = getTreatmentBanner(slug);
+  const position = getTreatmentThumbnailPosition(slug);
+
+  return (
+    <article className="group relative flex flex-col border-t border-[var(--color-border)] pt-6 pb-8 transition-colors hover:border-[var(--color-primary)]/40">
+      {/* 1. Thumbnail com Aspect Ratio 4:3 */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--color-pink)]">
+        {banner ? (
+          <Image
+            src={banner.desktop}
+            alt={banner.alt}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            loading={priority ? "eager" : "lazy"}
+            priority={priority}
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025] motion-reduce:transform-none"
+            style={{objectPosition: position}}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-[var(--color-surface-strong)]" aria-hidden="true">
+            <span className="font-title text-3xl text-[var(--color-mauve)]/30">{index}</span>
+          </div>
+        )}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[var(--color-primary)]/0 transition-colors duration-300 group-hover:bg-[var(--color-primary)]/[0.03]"
+        />
+      </div>
+
+      {/* 2. Conteúdo Editorial */}
+      <div className="mt-5 flex flex-1 flex-col">
+        <span className="text-xs font-semibold tracking-[0.2em] text-[var(--color-mauve)]">
+          {index}
+        </span>
+
+        <h3 className="mt-3 font-title text-xl sm:text-2xl text-[var(--color-primary)]">
+          <Link
+            href={href}
+            className="before:absolute before:inset-0 before:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2"
+          >
+            {title}
+          </Link>
+        </h3>
+
+        <p className="mt-3 flex-1 text-sm sm:text-base leading-6 sm:leading-7 text-[var(--color-muted)]">
+          {description}
+        </p>
+
+        <div className="mt-6 pt-2">
+          <span
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-primary)]"
+            aria-hidden="true"
+          >
+            <span>Conhecer tratamento</span>
+            <span className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none">
+              →
+            </span>
+          </span>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export function ProfessionalCard({name, role, image, profileHref}: {name: string; role: string; image?: string; profileHref?: string}) {

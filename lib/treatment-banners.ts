@@ -304,3 +304,46 @@ export type TreatmentBannerSlug = keyof typeof treatmentBanners;
 export function getTreatmentBanner(slug: string): TreatmentBannerInfo | null {
   return (treatmentBanners as Record<string, TreatmentBannerInfo>)[slug] ?? null;
 }
+
+/**
+ * Ajustes de enquadramento 4:3 para destacar o modelo e o procedimento clínico em cards de visão geral.
+ * Como os banners 16:9 originais concentram o sujeito/procedimento à direita e o espaço negativo
+ * de leitura à esquerda, o enquadramento deslocado para a direita (~80%-85%) centraliza o modelo na thumbnail.
+ */
+export const treatmentThumbnailPosition: Record<string, string> = {
+  // Tratamentos com foco no modelo, tela 3D e paciente bem à direita
+  "implantes-dentarios": "85% center",
+  "proteses-dentarias": "85% center",
+  "reabilitacao-oral": "85% center",
+  "enxerto-osseo-dentario": "85% center",
+  "manutencao-odontologica": "85% center",
+  "tratamento-de-canal": "85% center",
+  "extracao-de-siso": "85% center",
+  "bruxismo": "85% center",
+  
+  // Tratamentos com foco intermediário à direita
+  "limpeza-dental": "80% center",
+  "periodontia": "80% 40%",
+  "cirurgia-gengival": "80% 40%",
+  "facetas-de-resina": "80% center",
+  "lentes-de-contato-dental": "80% center",
+  "clareamento-dental": "80% center",
+  "ortodontia": "80% center",
+  "protese-protocolo": "75% center",
+  "invisalign": "75% center",
+  "inlays-onlays": "75% center",
+  "fechamento-de-diastemas": "70% center",
+
+  // Estética Orofacial
+  "harmonizacao-facial": "75% center",
+  "preenchimento-facial": "75% center",
+  "preenchimento-labial": "75% center",
+  "botox": "75% center",
+  "bioestimuladores-de-colageno": "75% 40%",
+  "perfiloplastia": "75% center",
+  "bichectomia": "75% center",
+};
+
+export function getTreatmentThumbnailPosition(slug: string): string {
+  return treatmentThumbnailPosition[slug] ?? "80% center";
+}
