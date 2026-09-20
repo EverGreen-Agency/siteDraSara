@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, Heading, ImageFrame, ProfessionalCard, Section} from "@/components/design-system";
-import {getContentEntry, getProfessionals} from "@/lib/sanity/repository";
+import {getContentEntry, getProfessionals, getSupportStaff} from "@/lib/sanity/repository";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContentEntry("equipe");
@@ -10,7 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function EquipePage() {
-  const [page, professionals] = await Promise.all([getContentEntry("equipe"), getProfessionals()]);
+  const [page, professionals, supportStaff] = await Promise.all([
+    getContentEntry("equipe"),
+    getProfessionals(),
+    getSupportStaff(),
+  ]);
   if (!page || page.contentType !== "page") notFound();
 
   return (
@@ -108,6 +112,61 @@ export default async function EquipePage() {
           </div>
         </Container>
       </Section>
+
+      {/* 4. Equipe de Atendimento e Suporte Clínico */}
+      {supportStaff.length > 0 && (
+        <Section className="border-t border-[var(--color-border)]">
+          <Container>
+            <div className="max-w-2xl">
+              <Eyebrow>Suporte Clínico & Recepção</Eyebrow>
+              <Heading as="h2">Cuidado, acolhimento e biossegurança</Heading>
+              <p className="mt-6 leading-7 text-[var(--color-muted)]">
+                A atenção com o paciente começa no primeiro contato e se estende a cada etapa do atendimento na clínica.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-8 md:grid-cols-2 max-w-4xl">
+              {supportStaff.map((member) => (
+                <div
+                  key={member.name}
+                  className="flex flex-col sm:flex-row items-start gap-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:border-[var(--color-gold)]"
+                >
+                  {member.image ? (
+                    <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-xl border border-[var(--color-border)]">
+                      <img
+                        src={member.image}
+                        alt={`Foto de ${member.name}`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-[var(--color-surface-strong)] font-serif text-3xl text-[var(--color-muted)]">
+                      {member.name.charAt(0)}
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h3 className="font-title text-xl text-[var(--color-primary)]">{member.name}</h3>
+                    <p className="mt-1 text-sm font-medium text-[var(--color-mauve)]">{member.role}</p>
+                    {member.registrations && member.registrations.length > 0 && (
+                      <div className="mt-2 space-y-1">
+                        {member.registrations.map((reg) => (
+                          <p key={reg} className="font-mono text-xs text-[var(--color-muted)]">
+                            {reg}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    {member.description && (
+                      <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
+                        {member.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
 
       <CTASection heading="Vamos avaliar o seu caso como um conjunto" />
     </>

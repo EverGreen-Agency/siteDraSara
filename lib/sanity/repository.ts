@@ -1,6 +1,6 @@
 import {createClient} from "next-sanity";
-import {fallbackArticles, fallbackLandingPages, fallbackPages, fallbackProfessionals, fallbackSiteSettings, fallbackSitemapPaths, fallbackTreatments} from "@/lib/content/fallback";
-import type {Article, InstitutionalPage, LandingPage, Professional, SiteSettings, Treatment} from "@/lib/content/types";
+import {fallbackArticles, fallbackLandingPages, fallbackPages, fallbackProfessionals, fallbackSiteSettings, fallbackSitemapPaths, fallbackSupportStaff, fallbackTreatments} from "@/lib/content/fallback";
+import type {Article, InstitutionalPage, LandingPage, Professional, SiteSettings, SupportStaff, Treatment} from "@/lib/content/types";
 import {articlesQuery, entryQuery, professionalQuery, professionalsQuery, settingsQuery, sitemapQuery} from "@/lib/sanity/queries";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -35,6 +35,10 @@ export async function getProfessionals(): Promise<Professional[]> {
   } catch {
     return [];
   }
+}
+
+export async function getSupportStaff(): Promise<SupportStaff[]> {
+  return fallbackSupportStaff;
 }
 
 export async function getProfessional(slug: string): Promise<Professional | null> {

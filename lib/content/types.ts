@@ -6,10 +6,22 @@ export type Seo = {
   ogImage?: string;
 };
 
+export type SupportStaff = {
+  name: string;
+  role: string;
+  registrations?: string[];
+  image?: string;
+  description?: string;
+};
+
 export type Professional = {
   name: string;
   slug: string;
   role: string;
+  cro?: string;
+  graduation?: string;
+  graduationYear?: number;
+  qualifications?: string[];
   image?: string;
   summary?: string;
   profileHref?: string;
@@ -25,6 +37,7 @@ export type SiteSettings = {
   region: string;
   phone: string | null;
   whatsapp: string | null;
+  commercialPhone?: string | null;
   email: string | null;
   streetAddress: string | null;
   openingHours: string[];

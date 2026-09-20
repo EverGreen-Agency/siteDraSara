@@ -193,13 +193,49 @@ export function TreatmentOverviewCard({
   );
 }
 
-export function ProfessionalCard({name, role, image, profileHref}: {name: string; role: string; image?: string; profileHref?: string}) {
+export function ProfessionalCard({
+  name,
+  role,
+  image,
+  profileHref,
+  cro,
+  graduation,
+}: {
+  name: string;
+  role: string;
+  image?: string;
+  profileHref?: string;
+  cro?: string;
+  graduation?: string;
+}) {
   const content = (
     <>
-      {image ? <ImageFrame src={image} alt={`Retrato profissional de ${name}`} fill sizes="(max-width: 768px) 100vw, 25vw" className="aspect-[4/5]" /> : <div className="aspect-[4/5] bg-[var(--color-surface-strong)]" aria-hidden="true" />}
+      {image ? (
+        <ImageFrame
+          src={image}
+          alt={`Retrato profissional de ${name}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 25vw"
+          className="aspect-[4/5]"
+        />
+      ) : (
+        <div className="aspect-[4/5] bg-[var(--color-surface-strong)] flex items-center justify-center text-[var(--color-muted)] font-serif text-3xl" aria-hidden="true">
+          {name.charAt(0)}
+        </div>
+      )}
       <h3 className="mt-5 font-title text-2xl text-[var(--color-primary)]">{name}</h3>
-      <p className="mt-1 text-sm leading-6 text-[var(--color-muted)]">{role}</p>
-      {profileHref && <span className="mt-4 inline-block text-sm font-semibold text-[var(--color-primary)]">Conhecer perfil <span aria-hidden="true">→</span></span>}
+      <p className="mt-1 text-sm font-medium leading-6 text-[var(--color-mauve)]">{role}</p>
+      {(cro || graduation) && (
+        <div className="mt-2 space-y-0.5 text-xs text-[var(--color-muted)]">
+          {cro && <p className="font-mono tracking-wide">{cro}</p>}
+          {graduation && <p>{graduation}</p>}
+        </div>
+      )}
+      {profileHref && (
+        <span className="mt-4 inline-block text-sm font-semibold text-[var(--color-primary)]">
+          Conhecer perfil <span aria-hidden="true">→</span>
+        </span>
+      )}
     </>
   );
   return profileHref ? <Link href={profileHref} className="group block">{content}</Link> : <article>{content}</article>;
@@ -228,6 +264,11 @@ export function ProfessionalBlock({professional}: {professional: Professional}) 
           <Eyebrow>Profissional responsável</Eyebrow>
           <Heading>{professional.name}</Heading>
           <p className="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-mauve)]">{professional.role}</p>
+          {(professional.cro || professional.graduation) && (
+            <p className="mt-2 text-xs text-[var(--color-muted)]">
+              {[professional.cro, professional.graduation].filter(Boolean).join(" • ")}
+            </p>
+          )}
           {professional.summary && <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-muted)]">{professional.summary}</p>}
           {professional.profileHref && <div className="mt-8"><ButtonLink href={professional.profileHref} variant="secondary" event="professional_profile_click" location="treatment_professional">Conhecer perfil</ButtonLink></div>}
         </div>
@@ -321,7 +362,7 @@ export function CTASection({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                   </svg>
                 </h4>
-                <p className="mt-0.5 text-xs leading-5 text-white/70 transition-colors group-hover:text-white/90">Salas 217-218 no Ingleses Office com estacionamento.</p>
+                <p className="mt-0.5 text-xs leading-5 text-white/70 transition-colors group-hover:text-white/90">Sala 218 no Ingleses Office com estacionamento.</p>
               </div>
             </Link>
           </div>

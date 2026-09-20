@@ -1,15 +1,16 @@
-import type { Article, ContentSection, InstitutionalPage, LandingPage, NavigationItem, Professional, SiteSettings, Treatment, TreatmentVariant } from "@/lib/content/types";
+import type { Article, ContentSection, InstitutionalPage, LandingPage, NavigationItem, Professional, SiteSettings, SupportStaff, Treatment, TreatmentVariant } from "@/lib/content/types";
 
 export const fallbackSiteSettings: SiteSettings = {
   clinicName: "Dra. Sara Michelon",
   legalName: "Dra. Sara Michelon — Odontologia e Estética",
   locality: "Ingleses, Florianópolis — SC",
   region: "Norte da Ilha",
-  phone: "(48) 4104-2945",
+  phone: "(48) 98506-3001",
   whatsapp: "(48) 98506-3001",
+  commercialPhone: "(48) 99181-6291",
   email: "contato@odontoestetica.net",
-  streetAddress: "Rodovia Armando Calil Bulos, 6201, salas 217 e 218 — Ingleses Saúde & Office, Ingleses",
-  openingHours: ["Segunda a Sexta: 08:30 às 19:00"],
+  streetAddress: "SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001",
+  openingHours: ["Segunda a Sexta: 09:00 às 12:00 e 14:00 às 19:00"],
   geo: { latitude: -27.4373, longitude: -48.3998 },
   socialLinks: [],
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0)
@@ -29,14 +30,119 @@ export const fallbackProfessionals: Professional[] = [
   {
     name: "Dra. Sara Michelon",
     slug: "dra-sara-michelon",
-    role: "Odontologia e Estética Orofacial",
+    role: "Odontologia Estética e Estética Orofacial",
+    cro: "CRO-SC 10632",
+    graduation: "Graduada em 2003",
+    graduationYear: 2003,
+    qualifications: [
+      "Especialista em Dentística Restauradora (Odontologia Estética) desde 2005",
+      "Especialista em Endodontia desde 2007",
+      "Especialista em Ortodontia desde 2012",
+      "Harmonização Facial desde 2015",
+    ],
     image: "/images/real/sara/sara-card-profile-33.webp",
-    summary: "Atuação orientada por avaliação individual, planejamento e integração entre saúde, função e estética.",
+    summary: "A experiência em diferentes áreas da Odontologia permite avaliar cada caso de forma mais ampla, considerando saúde, função, sorriso e face antes de definir qualquer tratamento.",
     profileHref: "/dra-sara-michelon",
+    bio: [
+      "Com mais de 20 anos de experiência clínica, a Dra. Sara Michelon (CRO-SC 10632) graduou-se em 2003 e construiu uma formação sólida e multidisciplinar: especialista em Dentística Restauradora (Odontologia Estética) desde 2005, especialista em Endodontia desde 2007, especialista em Ortodontia desde 2012 e atuando em Harmonização Facial desde 2015.",
+      "Sua abordagem clínica integra saúde bucal, função mastigatória, estética do sorriso e harmonia facial em um planejamento individual e conservador.",
+    ],
   },
-  { name: "Dra. Camila Cecchin", slug: "dra-camila-cecchin", role: "Implantodontia e Periodontia", image: "/images/dra-camila.webp", summary: "Atuação integrada ao planejamento de implantes, enxertos e saúde dos tecidos de suporte.", profileHref: "/equipe/dra-camila-cecchin", bio: ["Na equipe, sua atuação conecta saúde periodontal, disponibilidade óssea e planejamento protético para organizar as etapas da reabilitação."], seo: { title: "Dra. Camila Cecchin | Implantodontia e Periodontia", description: "Conheça a atuação clínica da Dra. Camila Cecchin em implantodontia e periodontia na equipe da Dra. Sara Michelon.", canonical: "/equipe/dra-camila-cecchin", index: true } },
-  { name: "Dra. Maria Clara Paranhos Hoelscher", slug: "dra-maria-clara", role: "Endodontia", image: "/images/dra-maria-clara.webp", summary: "Atuação em diagnóstico e tratamento endodôntico, integrada à preservação e reabilitação dos dentes.", profileHref: "/equipe/dra-maria-clara", bio: ["Na equipe, sua atuação em endodontia participa do diagnóstico da dor e da preservação de dentes dentro do planejamento reabilitador."], seo: { title: "Dra. Maria Clara | Endodontia em Florianópolis", description: "Conheça a atuação clínica da Dra. Maria Clara em endodontia na equipe da Dra. Sara Michelon.", canonical: "/equipe/dra-maria-clara", index: true } },
-  { name: "Dr. Ericson Pessanha", slug: "dr-ericson-pessanha", role: "Periodontia e Cirurgia Oral", image: "/images/dr-ericson.webp", summary: "Atuação em periodontia e cirurgia oral, com avaliação dos tecidos de suporte e das indicações cirúrgicas.", profileHref: "/equipe/dr-ericson-pessanha", bio: ["Na equipe, sua atuação conecta saúde dos tecidos de suporte e avaliação cirúrgica às demais etapas do planejamento odontológico."], seo: { title: "Dr. Ericson Pessanha | Periodontia e Cirurgia Oral", description: "Conheça a atuação clínica do Dr. Ericson Pessanha em periodontia e cirurgia oral na equipe da Dra. Sara Michelon.", canonical: "/equipe/dr-ericson-pessanha", index: true } },
+  {
+    name: "Dr. Ericson Pessanha",
+    slug: "dr-ericson-pessanha",
+    role: "Periodontia e Cirurgia Oral",
+    cro: "CRO-SC 10329",
+    graduation: "Graduado em 2004",
+    graduationYear: 2004,
+    qualifications: [
+      "Especialista em Periodontia",
+      "Aperfeiçoamento em Cirurgia Oral Menor",
+    ],
+    image: "/images/dr-ericson.webp",
+    summary: "Graduado em 2004 com mais de 20 anos de experiência, é especialista em Periodontia com aperfeiçoamento em Cirurgia Oral Menor.",
+    profileHref: "/equipe/dr-ericson-pessanha",
+    bio: [
+      "Com mais de 20 anos de experiência clínica, o Dr. Ericson Pessanha (CRO-SC 10329) graduou-se em 2004 e especializou-se em Periodontia, além de aperfeiçoamento em Cirurgia Oral Menor.",
+      "Na equipe da Dra. Sara Michelon, sua atuação conecta a saúde dos tecidos periodontais e os procedimentos cirúrgicos ao planejamento global do tratamento odontológico.",
+    ],
+    seo: {
+      title: "Dr. Ericson Pessanha | Periodontia e Cirurgia Oral",
+      description: "Conheça a atuação clínica do Dr. Ericson Pessanha em periodontia e cirurgia oral na equipe da Dra. Sara Michelon.",
+      canonical: "/equipe/dr-ericson-pessanha",
+      index: true,
+    },
+  },
+  {
+    name: "Dra. Camila Cecchin",
+    slug: "dra-camila-cecchin",
+    role: "Implantodontia e Periodontia",
+    cro: "CRO-SC 13398",
+    graduation: "Graduada em 2013",
+    graduationYear: 2013,
+    qualifications: [
+      "Especialista em Implantodontia",
+      "Cirurgia Plástica Periodontal e Periimplantar",
+      "Capacitação em Laserterapia",
+    ],
+    image: "/images/dra-camila.webp",
+    summary: "Graduada em 2013, é especialista em Implantodontia com atuação em Cirurgia Plástica Periodontal e Periimplantar e Laserterapia.",
+    profileHref: "/equipe/dra-camila-cecchin",
+    bio: [
+      "Graduada em 2013, a Dra. Camila Cecchin (CRO-SC 13398) é especialista em Implantodontia e atua com Cirurgia Plástica Periodontal e Periimplantar, além de contar com capacitação em Laserterapia.",
+      "Na equipe, sua atuação conecta saúde periodontal, disponibilidade óssea e planejamento protético para organizar as etapas da reabilitação oral sobre implantes.",
+    ],
+    seo: {
+      title: "Dra. Camila Cecchin | Implantodontia e Periodontia",
+      description: "Conheça a atuação clínica da Dra. Camila Cecchin em implantodontia e periodontia na equipe da Dra. Sara Michelon.",
+      canonical: "/equipe/dra-camila-cecchin",
+      index: true,
+    },
+  },
+  {
+    name: "Dra. Maria Clara Paranhos Hoelscher",
+    slug: "dra-maria-clara",
+    role: "Endodontia",
+    cro: "CRO-SC 17801",
+    graduation: "Graduação pela UFSM-RS",
+    qualifications: [
+      "Especialista em Endodontia",
+    ],
+    image: "/images/dra-maria-clara.webp",
+    summary: "Graduada pela UFSM-RS e especialista em Endodontia, com atuação em diagnóstico e tratamento endodôntico integrado.",
+    profileHref: "/equipe/dra-maria-clara",
+    bio: [
+      "Com graduação pela Universidade Federal de Santa Maria (UFSM-RS), a Dra. Maria Clara (CRO-SC 17801) é especialista em Endodontia.",
+      "Na equipe, sua atuação conecta o diagnóstico da dor à preservação e desinfecção dos canais radiculares dentro do planejamento reabilitador conservador.",
+    ],
+    seo: {
+      title: "Dra. Maria Clara | Endodontia em Florianópolis",
+      description: "Conheça a atuação clínica da Dra. Maria Clara em endodontia na equipe da Dra. Sara Michelon.",
+      canonical: "/equipe/dra-maria-clara",
+      index: true,
+    },
+  },
+];
+
+export const fallbackSupportStaff: SupportStaff[] = [
+  {
+    name: "Thaise Fleischmann",
+    role: "Recepção e Atendimento ao Paciente",
+    registrations: [
+      "CRO/SC-ASB: 04692 (Auxiliar de Saúde Bucal)",
+      "COREN-SC: 002.098.032 (Técnica em Enfermagem)",
+    ],
+    image: "/images/real/equipe/thaise-recepcao.webp",
+    description: "Responsável pelo acolhimento inicial, organização dos atendimentos e suporte ao paciente com formação técnica em enfermagem e saúde bucal.",
+  },
+  {
+    name: "Cassiane",
+    role: "Auxiliar de Saúde Bucal (ASB)",
+    registrations: [
+      "CRO-SC: 06457 (Auxiliar de Saúde Bucal)",
+    ],
+    description: "Atuação no suporte direto aos procedimentos clínicos e cirúrgicos, rigor em protocolos de biossegurança e organização do consultório.",
+  },
 ];
 
 const professionalBySlug = Object.fromEntries(fallbackProfessionals.map((professional) => [professional.slug, professional]));
@@ -56,7 +162,7 @@ export const fallbackNavigation: NavigationItem[] = [
   {
     label: "Estética Orofacial",
     href: "/estetica-orofacial",
-    groups: [{ label: "Planejamento facial", items: [{ label: "Harmonização facial", href: "/harmonizacao-facial" }, { label: "Preenchimento facial", href: "/preenchimento-facial" }, { label: "Preenchimento labial", href: "/preenchimento-labial" }, { label: "Botox e linhas de expressão", href: "/botox" }, { label: "Bioestimuladores de colágeno", href: "/bioestimuladores-de-colageno" }, { label: "Perfiloplastia", href: "/perfiloplastia" }, { label: "Bichectomia", href: "/bichectomia" }] }],
+    groups: [{ label: "Planejamento facial", items: [{ label: "Harmonização facial", href: "/harmonizacao-facial" }, { label: "Preenchimento facial", href: "/preenchimento-facial" }, { label: "Preenchimento labial", href: "/preenchimento-labial" }, { label: "Botox e linhas de expressão", href: "/botox" }, { label: "Bioestimuladores de colágeno", href: "/bioestimuladores-de-colageno" }, { label: "Perfiloplastia", href: "/perfiloplastia" }] }],
   },
   { label: "A clínica", href: "/clinica" },
   { label: "Equipe", href: "/equipe" },
@@ -362,21 +468,26 @@ const treatmentSeeds: TreatmentSeed[] = [
     faq: [{ question: "Todo diastema precisa ser fechado?", answer: "Não. A decisão considera saúde, função, estabilidade e objetivos individuais." }, { question: "Resina ou aparelho?", answer: "A causa do espaço, a posição dos dentes e as proporções orientam a escolha." }],
     related: [{ title: "Facetas de resina", href: "/facetas-de-resina" }, { title: "Ortodontia", href: "/ortodontia" }, { title: "Lentes de contato dental", href: "/lentes-de-contato-dental" }],
   },
-  {
-    slug: "bichectomia", title: "Bichectomia: indicação, limites e recuperação", specialty: "Cirurgia Oral", variant: "editorial", lead: "dr-ericson-pessanha", contentStatus: "partial", source: "matrix-supported",
-    description: "A bichectomia exige avaliação anatômica, indicação criteriosa e discussão clara de limites, riscos e caráter permanente.",
-    seoTitle: "Bichectomia em Florianópolis | Indicação e Recuperação", seoDescription: "Bichectomia em Florianópolis: avaliação de indicação, anatomia, limites, riscos e recuperação antes da decisão cirúrgica.",
-    focusHeading: "Uma cirurgia não indicada apenas pela aparência", overview: "Volume facial, anatomia, envelhecimento esperado, saúde e objetivo precisam ser analisados. A retirada de tecido é permanente e a decisão exige avaliação clínica e consentimento informado.",
-    topics: [{ title: "Indicação", text: "A queixa precisa ser relacionada à anatomia e às alternativas possíveis." }, { title: "Limites e riscos", text: "Estruturas próximas e possíveis efeitos de longo prazo devem ser discutidos." }, { title: "Recuperação", text: "Cuidados, sinais de alerta e retornos são definidos pela equipe cirúrgica." }],
-    faq: [{ question: "O resultado é permanente?", answer: "A remoção do tecido é permanente, embora o rosto continue mudando com o tempo." }, { question: "Toda face arredondada tem indicação?", answer: "Não. Formato facial isolado não define indicação; anatomia, riscos e expectativas precisam ser avaliados." }],
-    related: [{ title: "Harmonização facial", href: "/harmonizacao-facial" }, { title: "Perfiloplastia", href: "/perfiloplastia" }, { title: "Avaliação estética facial", href: "/avaliacao-estetica-facial" }],
-  },
 ];
 
 export const fallbackTreatments = Object.fromEntries(treatmentSeeds.map((seed) => [seed.slug, createTreatment(seed)])) as Record<string, Treatment>;
 
 export const fallbackPages: Record<string, InstitutionalPage> = {
-  home: { contentType: "page", slug: "home", eyebrow: "Odontologia e Estética · Florianópolis", title: "Dentista nos Ingleses: odontologia e estética com planejamento individual", description: "Clínica odontológica nos Ingleses, Norte da Ilha de Florianópolis, com cuidado integrado e tratamentos definidos a partir de uma avaliação completa.", image: "/images/real/sara/sara-home-hero-17.webp", imageAlt: "Dra. Sara Michelon em retrato profissional no consultório", seo: { title: "Dentista nos Ingleses, Florianópolis | Dra. Sara Michelon", description: "Odontologia e estética nos Ingleses, Florianópolis. Conheça a clínica, equipe e tratamentos da Dra. Sara Michelon e agende sua avaliação.", canonical: "/", index: true } },
+  home: {
+    contentType: "page",
+    slug: "home",
+    eyebrow: "Odontologia Estética – Ingleses - Florianópolis",
+    title: "Dentista nos Ingleses: Odontologia Estética e planejamento individual",
+    description: "Clínica odontológica nos Ingleses, Norte da Ilha de Florianópolis, com mais de 20 anos de experiência em Odontologia. Do cuidado com a saúde bucal à estética do sorriso e da face, cada tratamento é definido a partir de uma avaliação cuidadosa, considerando suas necessidades e prioridades.",
+    image: "/images/real/sara/sara-home-hero-17.webp",
+    imageAlt: "Dra. Sara Michelon em consultório odontológico",
+    seo: {
+      title: "Dentista nos Ingleses: Odontologia Estética | Dra. Sara Michelon",
+      description: "Clínica odontológica nos Ingleses, Florianópolis, com mais de 20 anos de experiência em Odontologia. Conheça a clínica da Dra. Sara Michelon e agende sua avaliação.",
+      canonical: "/",
+      index: true,
+    },
+  },
   clinica: {
     contentType: "page", slug: "clinica", eyebrow: "A clínica", title: "Uma clínica organizada para avaliar, planejar e acompanhar", description: "Ambientes nos Ingleses, Norte da Ilha, conectados a uma experiência de atendimento clara e individual.", image: "/images/real/clinica/clinic-consultorio-1.webp", imageAlt: "Consultório 1 com cadeira odontológica e mesa de atendimento", seo: { title: "Clínica Odontológica nos Ingleses | Dra. Sara Michelon", description: "Conheça os ambientes da clínica odontológica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/clinica", index: true },
     sections: [
@@ -406,11 +517,56 @@ export const fallbackPages: Record<string, InstitutionalPage> = {
   },
   "estetica-orofacial": {
     contentType: "page", slug: "estetica-orofacial", eyebrow: "Estética Orofacial", title: "Estética Orofacial com planejamento individual em Florianópolis", description: "Naturalidade e análise facial antes da escolha do procedimento.", image: "/images/real/sara/sara-estetica-orofacial.webp", imageAlt: "Dra. Sara Michelon em avaliação facial", seo: { title: "Estética Orofacial em Florianópolis | Dra. Sara Michelon", description: "Estética orofacial em Florianópolis com análise de proporções, movimento, pele e contornos antes da indicação.", canonical: "/estetica-orofacial", index: true },
-    linkGroups: [{ title: "Planejamento da face", items: [{ title: "Harmonização facial", href: "/harmonizacao-facial", description: "A face analisada como um conjunto." }, { title: "Preenchimento facial", href: "/preenchimento-facial", description: "Suporte, volume e contorno conforme anatomia." }, { title: "Preenchimento labial", href: "/preenchimento-labial", description: "Contorno, proporção e relação com o perfil." }, { title: "Botox e linhas de expressão", href: "/botox", description: "Movimentação muscular e avaliação individual." }, { title: "Bioestimuladores de colágeno", href: "/bioestimuladores-de-colageno", description: "Planejamento progressivo para características da pele." }, { title: "Perfiloplastia", href: "/perfiloplastia", description: "Relação entre nariz, lábios e mento." }, { title: "Bichectomia", href: "/bichectomia", description: "Indicação cirúrgica, limites e recuperação." }] }],
+    linkGroups: [{ title: "Planejamento da face", items: [{ title: "Harmonização facial", href: "/harmonizacao-facial", description: "A face analisada como um conjunto." }, { title: "Preenchimento facial", href: "/preenchimento-facial", description: "Suporte, volume e contorno conforme anatomia." }, { title: "Preenchimento labial", href: "/preenchimento-labial", description: "Contorno, proporção e relação com o perfil." }, { title: "Botox e linhas de expressão", href: "/botox", description: "Movimentação muscular e avaliação individual." }, { title: "Bioestimuladores de colágeno", href: "/bioestimuladores-de-colageno", description: "Planejamento progressivo para características da pele." }, { title: "Perfiloplastia", href: "/perfiloplastia", description: "Relação entre nariz, lábios e mento." }] }],
   },
   "dra-sara-michelon": {
-    contentType: "page", slug: "dra-sara-michelon", eyebrow: "Dra. Sara Michelon", title: "Dra. Sara Michelon", description: "Odontologia e estética conduzidas com avaliação individual, planejamento e acompanhamento.", image: "/images/real/sara/sara-profile-2026.webp", imageAlt: "Retrato da Dra. Sara Michelon", seo: { title: "Dra. Sara Michelon | Odontologia e Estética em Florianópolis", description: "Conheça a abordagem clínica da Dra. Sara Michelon em odontologia e estética nos Ingleses, Florianópolis.", canonical: "/dra-sara-michelon", index: true },
-    sections: [{ _key: "sara-approach", _type: "richText", heading: "Uma visão integrada do caso", body: ["A atuação parte da avaliação para relacionar saúde, função e estética. O planejamento organiza prioridades e permite discutir alternativas antes da indicação."] }, { _key: "sara-areas", _type: "cardGrid", heading: "Áreas conectadas pela mesma abordagem", items: [{ title: "Odontologia", text: "Prevenção, estética do sorriso e reabilitação organizadas por necessidade.", href: "/odontologia" }, { title: "Estética Orofacial", text: "Análise facial, naturalidade e indicação individual.", href: "/estetica-orofacial" }] }],
+    contentType: "page",
+    slug: "dra-sara-michelon",
+    eyebrow: "Dra. Sara Michelon · CRO-SC 10632",
+    title: "Dra. Sara Michelon",
+    description: "Odontologia Estética e Estética Orofacial conduzidas com mais de 20 anos de experiência clínica e formação multidisciplinar.",
+    image: "/images/real/sara/sara-profile-2026.webp",
+    imageAlt: "Retrato da Dra. Sara Michelon",
+    seo: {
+      title: "Dra. Sara Michelon | Odontologia Estética em Florianópolis",
+      description: "Conheça a formação, currículo e abordagem clínica da Dra. Sara Michelon (CRO-SC 10632) nos Ingleses, Florianópolis.",
+      canonical: "/dra-sara-michelon",
+      index: true,
+    },
+    sections: [
+      {
+        _key: "sara-approach",
+        _type: "richText",
+        heading: "Uma visão integrada da Odontologia e da Estética Facial",
+        body: [
+          "A experiência em diferentes áreas da Odontologia permite avaliar cada caso de forma mais ampla, considerando saúde, função, sorriso e face antes de definir qualquer tratamento.",
+          "Com graduação concluída em 2003, a Dra. Sara Michelon consolidou sua prática em mais de duas décadas de atuação: especialista em Dentística Restauradora (Odontologia Estética) desde 2005, especialista em Endodontia desde 2007, especialista em Ortodontia desde 2012 e atuando em Harmonização Facial desde 2015.",
+          "Esse percurso acadêmico e clínico permite que cada plano de tratamento seja estruturado com clareza, prioridades bem definidas e respeito às características biológicas e anatômicas de cada paciente.",
+        ],
+      },
+      {
+        _key: "sara-credentials",
+        _type: "cardGrid",
+        heading: "Formação Acadêmica & Especialidades",
+        items: [
+          { title: "Graduação em Odontologia", text: "Concluída em 2003 · Mais de 20 anos de experiência clínica continuada." },
+          { title: "Dentística Restauradora", text: "Especialista desde 2005 · Foco em Odontologia Estética e preservação dental." },
+          { title: "Endodontia", text: "Especialista desde 2007 · Diagnóstico e tratamento de canais radiculares." },
+          { title: "Ortodontia", text: "Especialista desde 2012 · Alinhadores transparentes e ortodontia corretiva." },
+          { title: "Harmonização Facial", text: "Atuação desde 2015 · Proporções faciais, contorno e naturalidade." },
+          { title: "Registro Profissional", text: "CRO-SC 10632 · Atuação ética e responsável em Florianópolis." },
+        ],
+      },
+      {
+        _key: "sara-areas",
+        _type: "cardGrid",
+        heading: "Áreas conectadas pela mesma abordagem",
+        items: [
+          { title: "Odontologia", text: "Prevenção, estética do sorriso e reabilitação organizadas por necessidade.", href: "/odontologia" },
+          { title: "Estética Orofacial", text: "Análise facial, naturalidade e indicação individual.", href: "/estetica-orofacial" },
+        ],
+      },
+    ],
   },
   conteudos: { contentType: "page", slug: "conteudos", eyebrow: "Conteúdos e orientações", title: "Conteúdos sobre odontologia, prevenção e estética", description: "Respostas clínicas úteis escritas ou revisadas pela equipe e conectadas aos tratamentos relacionados.", image: "/images/real/clinica/clinic-operatory-main.webp", imageAlt: "Consultório da clínica da Dra. Sara Michelon", seo: { title: "Conteúdos sobre Odontologia e Estética | Dra. Sara Michelon", description: "Conteúdos sobre odontologia, prevenção e estética, com autoria e revisão clínica identificadas.", canonical: "/conteudos", index: true } },
   contato: { contentType: "page", slug: "contato", eyebrow: "Contato e localização", title: "Clínica Odontológica nos Ingleses, Florianópolis", description: "Atendimento com hora marcada no complexo Ingleses Saúde & Office. Conecte-se com nossa equipe via WhatsApp, telefone ou trace sua rota direta via Waze, Uber ou Google Maps.", image: "/images/real/clinica/clinic-reception-rear.webp", imageAlt: "Recepção da clínica da Dra. Sara Michelon nos Ingleses", seo: { title: "Contato e Localização | Dra. Sara Michelon — Ingleses", description: "Localização, rotas no Waze e Uber, telefone e WhatsApp da clínica odontológica da Dra. Sara Michelon nos Ingleses, Florianópolis.", canonical: "/contato", index: true } },
