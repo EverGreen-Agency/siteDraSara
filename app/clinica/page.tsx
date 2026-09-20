@@ -43,9 +43,11 @@ export default async function ClinicaPage() {
 
   if (!page || page.contentType !== "page") notFound();
 
-  const wazeUrl = "https://waze.com/ul?ll=-27.4373,-48.3998&navigate=yes";
-  const uberUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=-27.4373&dropoff[longitude]=-48.3998&dropoff[nickname]=Dra.%20Sara%20Michelon%20(Ingleses%20Sa%C3%BAde%20%26%20Office)&dropoff[formatted_address]=${encodeURIComponent("Rodovia Armando Calil Bulos, 6201, Salas 217-218, Ingleses, Florianópolis - SC")}`;
-  const googleMapsUrl = "https://www.google.com/maps/dir/?api=1&destination=-27.4373,-48.3998";
+  const officialAddress = "Centro de Odontologia Estética Drª Sara Michelon, SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001";
+  const encodedAddress = encodeURIComponent(officialAddress);
+  const wazeUrl = `https://waze.com/ul?q=${encodedAddress}&navigate=yes`;
+  const uberUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=${encodeURIComponent("Centro de Odontologia Estética Drª Sara Michelon")}&dropoff[formatted_address]=${encodeURIComponent("SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001")}`;
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
 
   return (
     <>
@@ -156,7 +158,7 @@ export default async function ClinicaPage() {
               Estrutura, Tecnologia e Biossegurança a Serviço do Seu Cuidado
             </Heading>
             <p className="mt-4 text-base leading-7 text-white/75 sm:text-lg">
-              Nosso espaço foi desenhado para unir rigor técnico e tranquilidade. Cada detalhe das salas 217 e 218 reflete o compromisso com a sua saúde e bem-estar.
+              Nosso espaço foi desenhado para unir rigor técnico e tranquilidade. Cada detalhe da sala 218 reflete o compromisso com a sua saúde e bem-estar.
             </p>
           </div>
 
@@ -228,7 +230,7 @@ export default async function ClinicaPage() {
             <Eyebrow>Galeria real</Eyebrow>
             <Heading>Conheça alguns ambientes da clínica</Heading>
             <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
-              Fotografias reais das salas 217 e 218 no complexo comercial Ingleses Saúde & Office.
+              Fotografias reais da sala 218 no complexo comercial Ingleses Saúde & Office.
             </p>
           </div>
           <div className="mt-10">
@@ -268,8 +270,8 @@ export default async function ClinicaPage() {
                     </svg>
                   </div>
                   <div className="text-xs sm:text-sm">
-                    <p className="font-bold text-[var(--color-ink)]">Salas 217 e 218 · Torre Comercial (2º Andar)</p>
-                    <p className="text-[var(--color-muted)]">Rodovia Armando Calil Bulos, 6201 — Ingleses, Florianópolis — SC</p>
+                    <p className="font-bold text-[var(--color-ink)]">Centro de Odontologia Estética Drª Sara Michelon</p>
+                    <p className="text-[var(--color-muted)]">SC-403, 6201 - 218 - Ingleses Norte, Florianópolis — SC, 88058-001</p>
                   </div>
                 </div>
 
@@ -332,7 +334,7 @@ export default async function ClinicaPage() {
             {/* Mapa Interativo Integrado */}
             <div className="overflow-hidden rounded-3xl border border-[var(--color-border)] bg-white shadow-xl">
               <div className="flex items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-xs font-semibold text-[var(--color-ink)]">
-                <span>Ingleses Saúde & Office — Salas 217 e 218</span>
+                <span>Centro de Odontologia Estética Drª Sara Michelon — Sala 218</span>
                 <a
                   href={googleMapsUrl}
                   target="_blank"
@@ -347,8 +349,8 @@ export default async function ClinicaPage() {
               </div>
               <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] min-h-[320px]">
                 <iframe
-                  title="Localização da Clínica Dra. Sara Michelon nos Ingleses"
-                  src="https://maps.google.com/maps?q=-27.4373,-48.3998&hl=pt-BR&z=16&output=embed"
+                  title="Localização do Centro de Odontologia Estética Drª Sara Michelon"
+                  src={`https://maps.google.com/maps?q=${encodedAddress}&hl=pt-BR&z=16&output=embed`}
                   width="100%"
                   height="100%"
                   style={{border: 0}}

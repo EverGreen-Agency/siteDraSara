@@ -36,7 +36,7 @@ const JOURNEY_STEPS: JourneyStep[] = [
     imageAlt: "Recepção e acesso privativo da clínica Dra. Sara Michelon na Sala 218",
     pillTag: "Acesso & Comodidade",
     features: [
-      {label: "Torre Comercial", detail: "2º Andar, salas privativas 217 e 218"},
+      {label: "Torre Comercial", detail: "2º Andar, sala privativa 218"},
       {label: "Acesso Controlado", detail: "Porta privativa para segurança e silêncio"},
       {label: "Hora Marcada", detail: "Atendimento pontual sem salas de espera cheias"},
     ],

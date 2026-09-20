@@ -58,10 +58,10 @@ async function Footer() {
                   data-track-location="footer"
                   className="transition-colors hover:text-white hover:underline"
                 >
-                  WhatsApp: {settings.whatsapp}
+                  Recepção / WhatsApp: {settings.whatsapp}
                 </a>
               )}
-              {settings.phone && (
+              {settings.phone && settings.phone !== settings.whatsapp && (
                 <a
                   href={`tel:+55${settings.phone.replace(/\D/g, "")}`}
                   data-track-event="phone_click"
@@ -69,6 +69,18 @@ async function Footer() {
                   className="transition-colors hover:text-white hover:underline"
                 >
                   Telefone: {settings.phone}
+                </a>
+              )}
+              {settings.commercialPhone && (
+                <a
+                  href={`https://wa.me/55${settings.commercialPhone.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track-event="commercial_click"
+                  data-track-location="footer"
+                  className="mt-0.5 text-[11px] text-white/50 transition-colors hover:text-white/80 hover:underline"
+                >
+                  Comercial (suporte): {settings.commercialPhone}
                 </a>
               )}
             </div>
