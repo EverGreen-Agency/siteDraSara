@@ -92,7 +92,6 @@ const requiredSlugs = [
   "tratamento-de-canal",
   "extracao-de-siso",
   "bruxismo",
-  "bichectomia",
   "harmonizacao-facial",
   "preenchimento-facial",
   "preenchimento-labial",

@@ -39,12 +39,6 @@ export const defaultStrategicProcedures: ProcedureItem[] = [
     href: "/invisalign",
   },
   {
-    title: "Bichectomia",
-    description:
-      "A bichectomia é indicada para casos específicos em que o volume das bochechas interfere no contorno facial. O procedimento contribui para um desenho mais definido do rosto, sempre com critério e avaliação individual.",
-    href: "/bichectomia",
-  },
-  {
     title: "Implantes Dentários",
     description:
       "Planejamento cirúrgico e protético guiado para reabilitação funcional e estética com reposição segura de dentes e preservação da estrutura óssea.",

@@ -36,7 +36,7 @@ function breadcrumbJsonLd(siteUrl: string, items: {name: string; path: string}[]
 
 async function TreatmentPage({treatment}: {treatment: Treatment}) {
   const settings = await getSiteSettings();
-  const isFacialCare = treatment.specialty === "Estética Orofacial" || treatment.slug === "bichectomia";
+  const isFacialCare = treatment.specialty === "Estética Orofacial";
   const hubHref = isFacialCare ? "/estetica-orofacial" : "/odontologia";
   const hubLabel = isFacialCare ? "Estética Orofacial" : "Odontologia";
   const banner = getTreatmentBanner(treatment.slug);
@@ -204,7 +204,7 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
       image: `${settings.siteUrl}/images/clinica-entrada.webp`,
       address: {
         "@type": "PostalAddress",
-        streetAddress: settings.streetAddress ?? "Rodovia Armando Calil Bulos, 6201, salas 217 e 218",
+        streetAddress: settings.streetAddress ?? "SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001",
         addressLocality: "Florianópolis",
         addressRegion: "SC",
         postalCode: "88058-001",
@@ -219,11 +219,17 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
         {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "08:30",
+          opens: "09:00",
+          closes: "12:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "14:00",
           closes: "19:00",
         },
       ],
-      hasMap: "https://maps.google.com/maps?q=-27.4373,-48.3998",
+      hasMap: `https://maps.google.com/maps?q=${encodeURIComponent("Centro de Odontologia Estética Drª Sara Michelon, SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001")}`,
     };
 
     return (

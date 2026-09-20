@@ -220,17 +220,6 @@ export const treatmentBanners = {
     mobileHeight: 1672,
     heroAlignment: "left",
   },
-  "bichectomia": {
-    label: "Bichectomia",
-    desktop: "/images/treatments/bichectomia/hero-desktop.webp",
-    mobile: "/images/treatments/bichectomia/hero-mobile.webp",
-    alt: "Consulta de avaliação facial para contorno e redução das bolsas de Bichat",
-    width: 1672,
-    height: 941,
-    mobileWidth: 941,
-    mobileHeight: 1672,
-    heroAlignment: "left",
-  },
   "harmonizacao-facial": {
     label: "Harmonização Facial",
     desktop: "/images/treatments/harmonizacao-facial/hero-desktop.webp",
@@ -341,7 +330,6 @@ export const treatmentThumbnailPosition: Record<string, string> = {
   "botox": "75% center",
   "bioestimuladores-de-colageno": "75% 40%",
   "perfiloplastia": "75% center",
-  "bichectomia": "75% center",
 };
 
 export function getTreatmentThumbnailPosition(slug: string): string {

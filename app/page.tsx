@@ -21,7 +21,7 @@ export default async function HomePage() {
     image: `${settings.siteUrl}/images/real/sara/sara-home-hero-17.webp`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: settings.streetAddress ?? "Rodovia Armando Calil Bulos, 6201, salas 217 e 218",
+      streetAddress: settings.streetAddress ?? "SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001",
       addressLocality: "Florianópolis",
       addressRegion: "SC",
       postalCode: "88058-001",
@@ -34,6 +34,20 @@ export default async function HomePage() {
     },
     priceRange: "$$",
     areaServed: ["Ingleses", "Norte da Ilha", "Florianópolis"],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "12:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "14:00",
+        closes: "19:00",
+      },
+    ],
   };
 
   return (
@@ -51,7 +65,7 @@ export default async function HomePage() {
           />
           <img
             src="/images/home/hero-desktop.webp"
-            alt="Dra. Sara Michelon - Odontologia e Estética em Florianópolis"
+            alt="Dra. Sara Michelon - Odontologia Estética em Florianópolis"
             loading="eager"
             fetchPriority="high"
             className="h-full w-full object-cover object-top md:object-right"
@@ -103,7 +117,7 @@ export default async function HomePage() {
               <Eyebrow>Método de planejamento</Eyebrow>
               <Heading>Planejamento antes da escolha do procedimento</Heading>
               <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
-                A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O diagnóstico estabelece prioridades, limites e sequência — a indicação é construída com base no caso real, não em uma lista pré-definida de procedimentos.
+                A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O diagnóstico estabelece prioridades, limites e a sequência do tratamento. A indicação é construída a partir das necessidades de cada paciente, e não de uma lista pré-definida de procedimentos.
               </p>
               {/* Linha do Tempo Contínua (Timeline Unificada) */}
               <ol className="relative mt-10 grid grid-cols-2 gap-y-7 sm:grid-cols-5 sm:gap-0">
@@ -168,7 +182,16 @@ export default async function HomePage() {
       <Section>
         <Container className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <ImageFrame src="/images/real/sara/sara-autoridade-2025.webp" alt="Dra. Sara Michelon em retrato profissional de autoridade" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[600px]" />
-          <div className="lg:px-10"><Eyebrow>Dra. Sara Michelon</Eyebrow><Heading>Uma visão integrada de odontologia e estética</Heading><p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">A atuação parte da avaliação completa para conectar saúde, função e estética de forma individual.</p><div className="mt-9"><ButtonLink href="/dra-sara-michelon" variant="secondary" event="appointment_cta_click" location="home_authority">Conheça a Dra. Sara</ButtonLink></div></div>
+          <div className="lg:px-10">
+            <Eyebrow>Dra. Sara Michelon</Eyebrow>
+            <Heading>Uma visão integrada da Odontologia e da Estética Facial</Heading>
+            <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+              A experiência em diferentes áreas da Odontologia permite avaliar cada caso de forma mais ampla, considerando saúde, função, sorriso e face antes de definir qualquer tratamento.
+            </p>
+            <div className="mt-9">
+              <ButtonLink href="/dra-sara-michelon" variant="secondary" event="appointment_cta_click" location="home_authority">Conheça a Dra. Sara</ButtonLink>
+            </div>
+          </div>
         </Container>
       </Section>
 
