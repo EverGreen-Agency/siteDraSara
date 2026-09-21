@@ -47,10 +47,10 @@ export function ButtonLink({href, children, variant = "primary", event = "appoin
   );
 }
 
-export function ImageFrame({className, alt, ...props}: ImageProps & {className?: string}) {
+export function ImageFrame({className, imageClassName, alt, ...props}: ImageProps & {className?: string; imageClassName?: string}) {
   return (
     <div className={classes("relative overflow-hidden bg-[var(--color-surface)]", className)}>
-      <Image {...props} alt={alt} className="object-cover" />
+      <Image {...props} alt={alt} className={classes("object-cover", imageClassName)} />
     </div>
   );
 }

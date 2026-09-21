@@ -90,7 +90,8 @@ export default async function EquipePage() {
             alt={page.imageAlt ?? "Equipe da clínica da Dra. Sara Michelon"}
             fill
             sizes="100vw"
-            className="min-h-[320px] sm:min-h-[380px] lg:min-h-[440px]"
+            className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[16/10] max-h-[640px] rounded-2xl border border-[var(--color-border)] shadow-sm"
+            imageClassName="object-top"
           />
         </Container>
       </Section>

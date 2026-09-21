@@ -141,6 +141,7 @@ export const fallbackSupportStaff: SupportStaff[] = [
     registrations: [
       "CRO-SC: 06457 (Auxiliar de Saúde Bucal)",
     ],
+    image: "/images/real/equipe/cassiane-asb.webp",
     description: "Atuação no suporte direto aos procedimentos clínicos e cirúrgicos, rigor em protocolos de biossegurança e organização do consultório.",
   },
 ];
