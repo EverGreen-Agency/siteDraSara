@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
-import {Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, Gallery, Heading, ImageFrame, Section} from "@/components/design-system";
+import {Breadcrumbs, ButtonLink, Container, CTASection, Eyebrow, Heading, ImageFrame, Section} from "@/components/design-system";
 import {VirtualTour} from "@/components/virtual-tour";
 import {getContentEntry} from "@/lib/sanity/repository";
 
@@ -223,32 +223,6 @@ export default async function ClinicaPage() {
         </Container>
       </Section>
 
-      {/* 4. Galeria de Ambientes */}
-      <Section className="py-4 sm:py-6">
-        <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>Galeria real</Eyebrow>
-            <Heading>Conheça alguns ambientes da clínica</Heading>
-            <p className="mt-2.5 text-sm leading-6 text-[var(--color-muted)]">
-              Fotografias reais da sala 218 no complexo comercial Ingleses Saúde & Office.
-            </p>
-          </div>
-          <div className="mt-6">
-            <Gallery
-              images={[
-                {src: "/images/real/clinica/clinic-operatory-main.webp", alt: "Consultório odontológico principal com cadeira ergonômica"},
-                {src: "/images/real/clinica/clinic-reception-rear.webp", alt: "Recepção e lounge de acolhimento"},
-                {src: "/images/real/clinica/clinic-office.webp", alt: "Escritório clínico para avaliação e diagnóstico"},
-                {src: "/images/real/clinica/clinic-coffee-lounge.webp", alt: "Cantinho do café e sala de espera humanizada"},
-                {src: "/images/real/clinica/clinic-sterilization.webp", alt: "Central de esterilização e biossegurança hospitalar"},
-                {src: "/images/real/clinica/clinic-counter.webp", alt: "Balcão de recepção e atendimento da clínica"},
-                {src: "/images/real/clinica/clinic-reception-side.webp", alt: "Ambiente de recepção amplo e acolhedor"},
-                {src: "/images/real/clinica/clinic-biosecurity.webp", alt: "Protocolos rigorosos de biossegurança e assepsia"},
-              ]}
-            />
-          </div>
-        </Container>
-      </Section>
 
       {/* 5. LOCALIZAÇÃO, MAPA & HUB DE MOBILIDADE NA PÁGINA DA CLÍNICA */}
       <Section className="border-t border-[var(--color-border)] bg-[var(--color-surface-strong)] py-8 sm:py-10">

@@ -1,9 +1,15 @@
 "use client";
 
-import {useState, useRef} from "react";
+import {useState, useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {Container, Heading, Section} from "@/components/design-system";
+
+export interface JourneyImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
 
 export interface JourneyStep {
   id: string;
@@ -13,9 +19,8 @@ export interface JourneyStep {
   roomName: string;
   subtitle: string;
   narrative: string;
-  image: string;
-  imageAlt: string;
   pillTag: string;
+  images: JourneyImage[];
   features: {
     label: string;
     detail: string;
@@ -26,360 +31,434 @@ const JOURNEY_STEPS: JourneyStep[] = [
   {
     id: "chegada",
     stepNumber: "01",
-    timelineLabel: "A Chegada",
-    phaseBadge: "PASSO 01 DE 04 · CHEGADA & ACESSO",
-    roomName: "Acesso Reservado na Sala 218",
-    subtitle: "Complexo Ingleses Saúde & Office · 2º Andar",
+    timelineLabel: "01 · Chegada & Recepção",
+    phaseBadge: "PASSO 01 DE 05 · ACESSO & RECEPÇÃO",
+    roomName: "Acesso Reservado & Recepção Exclusiva",
+    subtitle: "Complexo Ingleses Saúde & Office · 2º Andar, Sala 218",
     narrative:
-      "Sua experiência começa com discrição e praticidade. O complexo comercial oferece vagas rotativas de estacionamento no local e elevadores diretos ao segundo andar, proporcionando comodidade e acessibilidade total para todos os pacientes.",
-    image: "/images/real/clinica/clinic-reception-rear.webp",
-    imageAlt: "Recepção e acesso privativo da clínica Dra. Sara Michelon na Sala 218",
-    pillTag: "Acesso & Comodidade",
+      "Sua experiência começa com discrição, segurança e comodidade. Localizada no Norte da Ilha com estacionamento rotativo no complexo e elevadores diretos ao segundo andar, a recepção da clínica foi planejada para receber cada paciente com pontualidade e tranquilidade, sem salas de espera superlotadas.",
+    pillTag: "Acesso & Pontualidade",
+    images: [
+      {
+        src: "/images/real/clinica/clinic-reception-rear.webp",
+        alt: "Recepção e acesso privativo da clínica Dra. Sara Michelon na Sala 218",
+        caption: "Acesso privativo e confortável no 2º andar da torre comercial",
+      },
+      {
+        src: "/images/real/clinica/clinic-counter.webp",
+        alt: "Balcão de recepção e atendimento com equipe dedicada",
+        caption: "Balcão de acolhimento e suporte administrativo",
+      },
+      {
+        src: "/images/real/clinica/clinic-reception-side.webp",
+        alt: "Ambiente de recepção amplo, moderno e organizado",
+        caption: "Ambiente reservado com atendimento por hora marcada",
+      },
+    ],
     features: [
-      {label: "Torre Comercial", detail: "2º Andar, sala privativa 218"},
-      {label: "Acesso Controlado", detail: "Porta privativa para segurança e silêncio"},
-      {label: "Hora Marcada", detail: "Atendimento pontual sem salas de espera cheias"},
+      {label: "Torre Comercial", detail: "2º Andar, sala privativa 218 com acessibilidade total"},
+      {label: "Acesso Controlado", detail: "Ambiente reservado com isolamento acústico e privacidade"},
+      {label: "Hora Marcada", detail: "Atendimento pontual com agenda organizada sem espera prolongada"},
     ],
   },
   {
     id: "acolhimento",
     stepNumber: "02",
-    timelineLabel: "O Acolhimento",
-    phaseBadge: "PASSO 02 DE 04 · LOUNGE & BOAS-VINDAS",
-    roomName: "Lounge Sereno & Café de Boas-Vindas",
-    subtitle: "Um espaço pensado para desacelerar e relaxar",
+    timelineLabel: "02 · Lounge & Boas-Vindas",
+    phaseBadge: "PASSO 02 DE 05 · LOUNGE & DESACELERAÇÃO",
+    roomName: "Lounge Sereno & Cantinho do Café",
+    subtitle: "Um espaço pensado para desacelerar antes da consulta",
     narrative:
-      "Antes da sua consulta, seja recebido em um ambiente tranquilo, com climatização suave, iluminação indireta e poltronas ergonômicas. Uma recepção humanizada com café especial, chás e água fresca para você se sentir em casa.",
-    image: "/images/real/clinica/clinic-coffee-lounge.webp",
-    imageAlt: "Cantinho do café e lounge acolhedor da clínica da Dra. Sara",
-    pillTag: "Conforto & Bem-Estar",
+      "A odontologia contemporânea começa pelo bem-estar emocional. Antes de iniciar qualquer conversa clínica, o paciente é recebido em um ambiente com iluminação indireta, climatização agradável e poltronas confortáveis, acompanhado de café gourmet, chás selecionados e água fresca.",
+    pillTag: "Conforto & Acolhimento",
+    images: [
+      {
+        src: "/images/real/clinica/clinic-coffee-lounge.webp",
+        alt: "Cantinho do café e lounge acolhedor da clínica da Dra. Sara Michelon",
+        caption: "Lounge de espera humanizado com café especial, chás e climatização suave",
+      },
+    ],
     features: [
-      {label: "Espaço do Café", detail: "Café gourmet, chás selecionados e água fresca"},
-      {label: "Climatização Agradável", detail: "Ambiente sereno com música suave e conforto térmico"},
-      {label: "Recepção Individual", detail: "Equipe dedicada para orientar seu atendimento"},
+      {label: "Cantinho do Café", detail: "Café especial, chás selecionados e água fresca à disposição"},
+      {label: "Conforto Térmico & Acústico", detail: "Ambiente suave para desacelerar com tranquilidade"},
+      {label: "Acolhimento Humanizado", detail: "Equipe preparada para orientar com atenção e cuidado"},
     ],
   },
   {
-    id: "cuidado",
+    id: "consultorios",
     stepNumber: "03",
-    timelineLabel: "O Cuidado Clínico",
-    phaseBadge: "PASSO 03 DE 04 · O ATENDIMENTO",
-    roomName: "Consultório Odontológico Integrado",
-    subtitle: "Tecnologia cirúrgica e biossegurança estrita",
+    timelineLabel: "03 · Consultórios Clínicos",
+    phaseBadge: "PASSO 03 DE 05 · CUIDADO & ATENDIMENTO",
+    roomName: "Consultórios Integrados de Alta Performance",
+    subtitle: "Ergonomia internacional, precisão técnica e conforto anatômico",
     narrative:
-      "O espaço onde a saúde e a função do sorriso são conduzidas com excelência. Equipado com cadeira odontológica anatômica de padrão internacional, iluminação cirúrgica LED sem sombras e rigorosos protocolos contínuos de assepsia e autoclave.",
-    image: "/images/real/clinica/clinic-operatory-main.webp",
-    imageAlt: "Consultório odontológico moderno com cadeira ergonômica da clínica da Dra. Sara Michelon",
-    pillTag: "Ergonomia & Biossegurança",
+      "O espaço onde a saúde, a estética e a função mastigatória são conduzidas com excelência. Os consultórios contam com cadeiras odontológicas anatômicas com múltiplos ajustes, iluminação cirúrgica LED precisa sem sombras e estrutura completa para procedimentos estéticos, restauradores e cirúrgicos com máximo relaxamento.",
+    pillTag: "Ergonomia & Alta Tecnologia",
+    images: [
+      {
+        src: "/images/real/clinica/clinic-operatory-main.webp",
+        alt: "Consultório odontológico principal com cadeira anatômica ergonômica",
+        caption: "Consultório principal com cadeira ergonômica e iluminação cirúrgica LED",
+      },
+      {
+        src: "/images/real/clinica/clinic-consultorio-1.webp",
+        alt: "Consultório clínico com mesa de diagnóstico e cadeira odontológica integrada",
+        caption: "Consultório integrado para avaliação clínica e procedimentos especializados",
+      },
+    ],
     features: [
-      {label: "Cadeira Ergonômica", detail: "Múltiplos ajustes anatômicos para máximo relaxamento"},
-      {label: "Biossegurança Hospitalar", detail: "Ciclos rigorosos de autoclave e esterilização"},
-      {label: "Iluminação Focada LED", detail: "Luz de alta fidelidade sem sombras para precisão"},
+      {label: "Cadeiras Ergonômicas", detail: "Estofamento anatômico para relaxamento contínuo durante o procedimento"},
+      {label: "Iluminação Cirúrgica LED", detail: "Foco sem calor e de alta fidelidade cromática para máxima precisão"},
+      {label: "Ambientes Climatizados", detail: "Salas privativas com filtragem de ar e isolamento acústico"},
     ],
   },
   {
     id: "planejamento",
     stepNumber: "04",
-    timelineLabel: "A Previsibilidade",
-    phaseBadge: "PASSO 04 DE 04 · O PLANEJAMENTO",
-    roomName: "Estúdio de Planejamento Digital 3D",
-    subtitle: "Diagnóstico e simulação do sorriso na tela grande",
+    timelineLabel: "04 · Diagnóstico & 3D",
+    phaseBadge: "PASSO 04 DE 05 · DIAGNÓSTICO DIGITAL & 3D",
+    roomName: "Diagnóstico Digital & Estúdio de Planejamento",
+    subtitle: "Previsibilidade visual e decisão compartilhada antes de qualquer intervenção",
     narrative:
-      "Aqui o diagnóstico e a estética se unem com precisão científica. Fotografias de alta resolução e exames tomográficos são analisados pela Dra. Sara Michelon junto com o paciente, garantindo clareza total sobre o plano de cuidado antes do início.",
-    image: "/images/real/tecnologia/planning-digital-scan.webp",
-    imageAlt: "Dra. Sara Michelon durante o planejamento digital do sorriso",
-    pillTag: "Previsibilidade & Sorriso",
+      "Aqui o diagnóstico e a estética se unem com rigor científico. Fotografias de alta resolução, escaneamento intraoral tridimensional e tomografias computadorizadas são analisados pela Dra. Sara Michelon em telas dedicadas, permitindo ao paciente visualizar seu caso, compreender os caminhos terapêuticos e participar ativamente das decisões.",
+    pillTag: "Previsibilidade & Transparência",
+    images: [
+      {
+        src: "/images/real/tecnologia/planning-digital-scan.webp",
+        alt: "Dra. Sara Michelon durante planejamento odontológico e escaneamento digital 3D",
+        caption: "Planejamento digital do sorriso conduzido pela Dra. Sara Michelon",
+      },
+      {
+        src: "/images/real/clinica/clinic-office.webp",
+        alt: "Escritório clínico para apresentação de casos, diagnóstico e alinhamento",
+        caption: "Escritório clínico privativo para alinhamento detalhado do plano de tratamento",
+      },
+    ],
     features: [
-      {label: "Mock-up Digital 3D", detail: "Simulação do formato dos dentes antes da intervenção"},
-      {label: "Análise da Dra. Sara", detail: "Duas décadas de prática clínica e olhar estético apurado"},
-      {label: "Decisão Transparente", detail: "O paciente compreende cada etapa e participa da escolha"},
+      {label: "Escaneamento Intraoral 3D", detail: "Captura anatômica digital de altíssima fidelidade sem moldagens desconfortáveis"},
+      {label: "Planejamento Visual Transparente", detail: "O paciente compreende cada etapa antes de qualquer procedimento definitivo"},
+      {label: "Olhar Multidisciplinar", detail: "Mais de 20 anos de experiência clínica integrando estética e reabilitação oral"},
+    ],
+  },
+  {
+    id: "biosseguranca",
+    stepNumber: "05",
+    timelineLabel: "05 · Biossegurança",
+    phaseBadge: "PASSO 05 DE 05 · BIOSSEGURANÇA HOSPITALAR",
+    roomName: "Central de Esterilização & Assepsia Rigorosa",
+    subtitle: "Protocolos sanitários e de desinfecção em nível hospitalar",
+    narrative:
+      "A segurança biológica do paciente e da equipe é prioritária e inegociável. Nossa central dedicada de esterilização adota ciclos contínuos de autoclave com monitoramento químico e biológico, barreiras físicas de proteção, materiais descartáveis e rastreabilidade sanitária completa de todo o instrumental cirúrgico.",
+    pillTag: "Rastreabilidade & Proteção",
+    images: [
+      {
+        src: "/images/real/clinica/clinic-sterilization.webp",
+        alt: "Central de esterilização com autoclave monitorada e fluxo sanitário controlado",
+        caption: "Central dedicada de esterilização com fluxo sanitário unidirecional e autoclave",
+      },
+      {
+        src: "/images/real/clinica/clinic-biosecurity.webp",
+        alt: "Protocolos rigorosos de assepsia, desinfecção e barreiras de proteção individual",
+        caption: "Protocolos rigorosos de assepsia hospitalar e materiais rastreados",
+      },
+    ],
+    features: [
+      {label: "Autoclave Monitorada", detail: "Testes biológicos e químicos garantem a esterilização perfeita a cada ciclo"},
+      {label: "Instrumentais Lacrados", detail: "Embalagens cirúrgicas estéreis abertas exclusivamente na presença do paciente"},
+      {label: "Desinfecção de Superfícies", detail: "Higienização hospitalar rigorosa e troca de barreiras descartáveis a cada atendimento"},
     ],
   },
 ];
 
 export function VirtualTour() {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const touchStartXRef = useRef<number | null>(null);
+  const [activeStepId, setActiveStepId] = useState<string>("chegada");
 
-  const currentStep = JOURNEY_STEPS[currentStepIndex];
-  const isLastStep = currentStepIndex === JOURNEY_STEPS.length - 1;
+  // Observer para destacar a aba correspondente durante a rolagem natural da página
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
 
-  const goToStep = (index: number) => {
-    if (index === currentStepIndex || isAnimating) return;
-    setIsAnimating(true);
-    setCurrentStepIndex(index);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
-
-  const handleNext = () => {
-    if (currentStepIndex < JOURNEY_STEPS.length - 1) {
-      goToStep(currentStepIndex + 1);
-    } else {
-      goToStep(0); // looping suave
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentStepIndex > 0) {
-      goToStep(currentStepIndex - 1);
-    } else {
-      goToStep(JOURNEY_STEPS.length - 1);
-    }
-  };
-
-  // Suporte a gestos touch (swipe suave no mobile)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartXRef.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartXRef.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartXRef.current - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        handleNext();
-      } else {
-        handlePrev();
+      for (let i = JOURNEY_STEPS.length - 1; i >= 0; i--) {
+        const step = JOURNEY_STEPS[i];
+        const element = document.getElementById(step.id);
+        if (element) {
+          const top = element.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveStepId(step.id);
+            break;
+          }
+        }
       }
+    };
+
+    window.addEventListener("scroll", handleScroll, {passive: true});
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToStep = (id: string) => {
+    setActiveStepId(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -90; // compensação do cabeçalho sticky
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: "smooth"});
     }
-    touchStartXRef.current = null;
   };
 
   const whatsappMessage = encodeURIComponent(
-    "Olá! Conheci a estrutura da clínica pelo site e gostaria de agendar uma avaliação com a Dra. Sara Michelon."
+    "Olá! Conheci os ambientes da clínica pelo site e gostaria de agendar uma avaliação com a Dra. Sara Michelon."
   );
 
   return (
-    <Section className="overflow-hidden bg-[var(--color-surface)] py-8 sm:py-10" id="tour-virtual">
+    <section className="bg-[var(--color-surface)] py-10 sm:py-14" id="tour-virtual">
       <Container>
-        {/* 1. Header Editorial */}
+        {/* 1. Header Editorial da Jornada */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/15 bg-white/90 px-4 py-1.5 text-xs font-semibold tracking-wide text-[var(--color-primary)] shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/15 bg-white px-4 py-1.5 text-xs font-semibold tracking-wide text-[var(--color-primary)] shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-gold)] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-gold)]" />
             </span>
             A Experiência do Paciente
           </div>
-          <Heading as="h2" className="mt-4">
+          <Heading as="h2" className="mt-4 text-3xl sm:text-4xl lg:text-5xl">
             A Sua Jornada Dentro da Clínica
           </Heading>
           <p className="mt-4 text-base leading-7 text-[var(--color-muted)] sm:text-lg">
-            Acompanhe o caminho de uma visita real: desde o desembarque privativo no 2º andar até o planejamento digital do seu sorriso com a Dra. Sara Michelon.
+            Acompanhe o caminho de uma visita real pela Sala 218: desde o desembarque privativo no 2º andar até os consultórios, estúdio 3D e central de esterilização.
           </p>
         </div>
 
-        {/* 2. LINHA DO TEMPO CONTÍNUA (TIMELINE DOURADA) */}
-        <div className="mt-10 sm:mt-14">
-          <div className="relative mx-auto max-w-4xl px-4">
-            {/* Linha de Base */}
-            <div className="absolute left-8 right-8 top-1/2 h-0.5 -translate-y-1/2 bg-[var(--color-border)] sm:left-12 sm:right-12" />
-
-            {/* Linha Preenchida com Gradiente Dourado */}
-            <div
-              className="absolute left-8 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gold)] transition-all duration-500 ease-out sm:left-12"
-              style={{
-                width: `${(currentStepIndex / (JOURNEY_STEPS.length - 1)) * 88}%`,
-              }}
-            />
-
-            {/* Os 4 Nós da Timeline */}
-            <div className="relative flex items-center justify-between">
-              {JOURNEY_STEPS.map((step, idx) => {
-                const isActive = idx === currentStepIndex;
-                const isPassed = idx < currentStepIndex;
-                return (
-                  <button
-                    key={step.id}
-                    type="button"
-                    onClick={() => goToStep(idx)}
-                    aria-label={`Ir para etapa ${step.stepNumber}: ${step.timelineLabel}`}
-                    className="group relative flex flex-col items-center focus:outline-none"
-                  >
-                    {/* Indicador Circular */}
-                    <div
-                      className={`relative flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold transition-all duration-300 sm:h-12 sm:w-12 sm:text-sm ${
-                        isActive
-                          ? "scale-110 border-2 border-white bg-[var(--color-primary)] text-white shadow-xl ring-4 ring-[var(--color-gold)]/40"
-                          : isPassed
-                          ? "border-2 border-[var(--color-primary)] bg-white text-[var(--color-primary)]"
-                          : "border border-[var(--color-border)] bg-white text-[var(--color-muted)] hover:border-[var(--color-primary)]/50"
-                      }`}
-                    >
-                      {isPassed ? (
-                        <svg className="h-4 w-4 text-[var(--color-primary)]" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      ) : (
-                        step.stepNumber
-                      )}
-                    </div>
-
-                    {/* Rótulo da Etapa */}
-                    <span
-                      className={`mt-2 hidden text-xs font-semibold transition-colors duration-200 sm:block ${
-                        isActive
-                          ? "text-[var(--color-primary)] font-bold"
-                          : "text-[var(--color-muted)] group-hover:text-[var(--color-ink)]"
-                      }`}
-                    >
-                      {step.timelineLabel}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+        {/* 2. ABAS FLUTUANTES (STICKY SUBNAV / ÂNCORAS RÁPIDAS) */}
+        <div className="sticky top-0 z-20 mt-8 -mx-5 px-5 sm:mx-0 sm:px-0 bg-[var(--color-surface)]/95 backdrop-blur-md py-3 border-y border-[var(--color-border)] shadow-sm">
+          <nav
+            aria-label="Navegação pelos ambientes da clínica"
+            className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 sm:justify-center [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {JOURNEY_STEPS.map((step) => {
+              const isActive = activeStepId === step.id;
+              return (
+                <button
+                  key={step.id}
+                  type="button"
+                  onClick={() => scrollToStep(step.id)}
+                  className={`inline-flex shrink-0 items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all ${
+                    isActive
+                      ? "bg-[var(--color-primary)] text-white shadow-md scale-[1.02]"
+                      : "bg-white text-[var(--color-muted)] hover:bg-white/90 hover:text-[var(--color-primary)] border border-[var(--color-border)]"
+                  }`}
+                >
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      isActive ? "bg-[var(--color-gold-light)]" : "bg-neutral-300"
+                    }`}
+                  />
+                  <span>{step.timelineLabel}</span>
+                </button>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* 3. O PALCO CINEMATOGRÁFICO: Foto 100% Limpa + Card Glassmorphism Responsivo */}
-        <div
-          className="relative mt-8 overflow-hidden rounded-3xl border border-[var(--color-border)] bg-white shadow-2xl sm:mt-12 lg:bg-neutral-900"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* A Fotografia 100% Limpa (Sem Pinos ou Interferências) */}
-          <div className="relative aspect-[4/3] w-full min-h-[260px] sm:aspect-[16/10] sm:min-h-[380px] lg:aspect-[21/10] lg:min-h-[500px]">
-            <Image
-              key={currentStep.id}
-              src={currentStep.image}
-              alt={currentStep.imageAlt}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 85vw"
-              className="object-cover transition-opacity duration-500 ease-in-out"
-            />
-
-            {/* Gradiente sutil nas bordas para profundidade */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 lg:bg-gradient-to-r lg:from-black/75 lg:via-black/30 lg:to-transparent" />
-
-            {/* Badge de Dica de Deslize no Topo */}
-            <div className="absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[11px] font-medium text-white shadow-md backdrop-blur-md sm:left-4 sm:top-4 sm:px-3.5 sm:py-1.5 sm:text-xs">
-              <svg className="h-3.5 w-3.5 text-[var(--color-gold)] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-              </svg>
-              <span>Deslize para navegar</span>
-            </div>
-
-            {/* Contador da Etapa */}
-            <div className="absolute right-3 top-3 z-10 rounded-full bg-black/60 px-3 py-1 text-xs font-bold text-white shadow-md backdrop-blur-md sm:right-4 sm:top-4 sm:px-3.5 sm:py-1.5">
-              {currentStep.stepNumber} / 04
-            </div>
-
-            {/* Setas de Navegação Flutuantes nas Laterais da Foto */}
-            <button
-              type="button"
-              onClick={handlePrev}
-              aria-label="Etapa anterior"
-              className="absolute left-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-black/80 active:scale-95 sm:left-4 sm:h-12 sm:w-12"
+        {/* 3. TIMELINE VERTICAL CONTÍNUA COM FOTOS LIMPAS EM LARGURA GENEROSA */}
+        <div className="mt-8 space-y-16 sm:space-y-20">
+          {JOURNEY_STEPS.map((step, stepIndex) => (
+            <article
+              key={step.id}
+              id={step.id}
+              className="scroll-mt-28 rounded-3xl border border-[var(--color-border)] bg-white p-6 shadow-sm transition-all sm:p-8 lg:p-10"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-            </button>
+              {/* Header do Passo */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[var(--color-border)] pb-5">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)] font-title text-base font-bold text-white shadow-sm">
+                    {step.stepNumber}
+                  </span>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-mauve)]">
+                      {step.phaseBadge}
+                    </span>
+                    <h3 className="font-title text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">
+                      {step.roomName}
+                    </h3>
+                  </div>
+                </div>
 
-            <button
-              type="button"
-              onClick={handleNext}
-              aria-label="Próxima etapa"
-              className="absolute right-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-black/80 active:scale-95 sm:right-4 sm:h-12 sm:w-12"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </button>
-          </div>
-
-          {/* O CARD RESPONSIVO: Abaixo da foto em mobile e sobreposto (glassmorphism) em desktop */}
-          <div className="relative z-20 p-5 sm:p-7 lg:absolute lg:bottom-8 lg:left-8 lg:max-w-xl lg:p-0">
-            <div className="rounded-2xl border border-[var(--color-border)] bg-white/95 p-5 shadow-lg backdrop-blur-xl sm:rounded-3xl sm:p-7 lg:border-white/40 lg:bg-white/90 lg:shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
-              {/* Header do Card */}
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-md bg-[var(--color-primary)]/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--color-primary)]">
-                  {currentStep.phaseBadge}
-                </span>
-                <span className="rounded-full border border-neutral-300/80 bg-white/80 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-700">
-                  {currentStep.pillTag}
+                <span className="self-start rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold text-[var(--color-muted)] sm:self-center">
+                  {step.pillTag}
                 </span>
               </div>
 
-              {/* Título & Subtítulo */}
-              <h3 className="mt-3 font-title text-xl font-bold text-[var(--color-ink)] sm:text-2xl">
-                {currentStep.roomName}
-              </h3>
-              <p className="text-xs font-semibold text-[var(--color-primary)] sm:text-sm">
-                {currentStep.subtitle}
-              </p>
+              {/* Subtítulo & Narrativa */}
+              <div className="mt-5 max-w-3xl">
+                <p className="text-sm font-semibold text-[var(--color-mauve)] sm:text-base">
+                  {step.subtitle}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)] sm:text-base sm:leading-7">
+                  {step.narrative}
+                </p>
+              </div>
 
-              {/* Texto da Narrativa */}
-              <p className="mt-3 text-xs leading-5 text-[var(--color-muted)] sm:text-sm sm:leading-6">
-                {currentStep.narrative}
-              </p>
-
-              {/* Grid de Diferenciais */}
-              <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {currentStep.features.map((feat) => (
+              {/* Grid de Diferenciais Clínicos */}
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {step.features.map((feat) => (
                   <div
                     key={feat.label}
-                    className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 shadow-sm transition-all lg:border-white/60 lg:bg-white/75"
+                    className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3.5 shadow-sm"
                   >
-                    <div className="flex items-center gap-1.5 text-emerald-700">
-                      <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <div className="flex items-center gap-2 text-emerald-700">
+                      <svg className="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                       <span className="text-xs font-bold text-[var(--color-ink)]">{feat.label}</span>
                     </div>
-                    <p className="mt-1 text-[11px] leading-4 text-[var(--color-muted)]">{feat.detail}</p>
+                    <p className="mt-1 text-xs leading-5 text-[var(--color-muted)]">{feat.detail}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Ações de Navegação e Conversão */}
-              <div className="mt-5 flex flex-col gap-3 border-t border-neutral-200/80 pt-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-2">
+              {/* GRADE DE FOTOGRAFIAS REAIS 100% LIMPAS (SEM CARDS SOBREPOSTOS) */}
+              <div className="mt-8">
+                {step.images.length === 1 ? (
+                  // Caso 1: Foto Única em Destaque Amplo (Lounge)
+                  <figure className="group">
+                    <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
+                      <Image
+                        src={step.images[0].src}
+                        alt={step.images[0].alt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 1120px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
+                    {step.images[0].caption && (
+                      <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                        <span>{step.images[0].caption}</span>
+                      </figcaption>
+                    )}
+                  </figure>
+                ) : step.images.length === 2 ? (
+                  // Caso 2: Duas Fotos Lado a Lado (Consultórios, Planejamento, Biossegurança)
+                  <div className="grid gap-5 md:grid-cols-2">
+                    {step.images.map((img) => (
+                      <figure key={img.src} className="group">
+                        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
+                          <Image
+                            src={img.src}
+                            alt={img.alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 560px"
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                          />
+                        </div>
+                        {img.caption && (
+                          <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                            <span>{img.caption}</span>
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                  </div>
+                ) : (
+                  // Caso 3: Três Fotos com Destaque Principal + 2 Secundárias (Chegada)
+                  <div className="grid gap-5 lg:grid-cols-3">
+                    <figure className="group lg:col-span-2">
+                      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
+                        <Image
+                          src={step.images[0].src}
+                          alt={step.images[0].alt}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 750px"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                        />
+                      </div>
+                      {step.images[0].caption && (
+                        <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                          <span>{step.images[0].caption}</span>
+                        </figcaption>
+                      )}
+                    </figure>
+
+                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+                      {step.images.slice(1).map((img) => (
+                        <figure key={img.src} className="group">
+                          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
+                            <Image
+                              src={img.src}
+                              alt={img.alt}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 360px"
+                              className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                            />
+                          </div>
+                          {img.caption && (
+                            <figcaption className="mt-2 flex items-center gap-1.5 text-xs text-[var(--color-muted)]">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                              <span>{img.caption}</span>
+                            </figcaption>
+                          )}
+                        </figure>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Botão de Próximo Passo na base de cada card */}
+              {stepIndex < JOURNEY_STEPS.length - 1 && (
+                <div className="mt-8 flex justify-end border-t border-[var(--color-border)] pt-4">
                   <button
                     type="button"
-                    onClick={handlePrev}
-                    className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-xl border border-neutral-300 bg-white/90 px-3.5 py-2 text-xs font-semibold text-neutral-800 shadow-sm transition-all hover:bg-white active:scale-95"
+                    onClick={() => scrollToStep(JOURNEY_STEPS[stepIndex + 1].id)}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-primary)] hover:underline hover:text-[var(--color-primary-hover)]"
                   >
-                    ← Voltar
+                    <span>Avançar para {JOURNEY_STEPS[stepIndex + 1].timelineLabel}</span>
+                    <span>↓</span>
                   </button>
-
-                  {!isLastStep ? (
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-[var(--color-primary)] px-4 py-2 text-xs font-semibold text-white shadow-md transition-all hover:bg-[var(--color-primary-dark)] active:scale-95"
-                    >
-                      <span>Próximo Passo</span>
-                      <span>→</span>
-                    </button>
-                  ) : (
-                    <a
-                      href={`https://wa.me/5548985063001?text=${whatsappMessage}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-[#25D366] px-4 py-2 text-xs font-bold text-white shadow-md transition-all hover:bg-[#20ba5a] active:scale-95"
-                    >
-                      <span>Agendar no WhatsApp</span>
-                      <span>→</span>
-                    </a>
-                  )}
                 </div>
+              )}
+            </article>
+          ))}
+        </div>
 
-                <Link
-                  href="/contato"
-                  className="text-center text-xs font-semibold text-[var(--color-primary)] underline underline-offset-4 hover:text-[var(--color-primary-dark)] sm:text-right"
-                >
-                  Ver localização & rotas →
-                </Link>
-              </div>
-            </div>
+        {/* 4. BLOCO DE CONVERSÃO FINAL DA JORNADA */}
+        <div className="mt-14 rounded-3xl border border-[var(--color-gold)]/40 bg-[var(--color-primary)] p-8 text-center text-white shadow-xl sm:p-10">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gold-light)]">
+            Atendimento Exclusivo nos Ingleses
+          </span>
+          <h3 className="mt-3 font-title text-2xl sm:text-3xl lg:text-4xl text-white">
+            Gostaria de conhecer o nosso espaço pessoalmente?
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
+            A clínica está pronta para receber você com privacidade, ergonomia e pontualidade na Sala 218 do Ingleses Saúde & Office. Agende uma avaliação individual com a Dra. Sara Michelon.
+          </p>
+
+          <div className="mt-7 flex flex-col justify-center gap-3.5 sm:flex-row">
+            <a
+              href={`https://wa.me/5548985063001?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-lg transition-all hover:bg-[#20ba5a] active:scale-95"
+            >
+              <span>Agendar Avaliação via WhatsApp</span>
+              <span>→</span>
+            </a>
+            <Link
+              href="/contato"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            >
+              Ver rotas, mapa e estacionamento
+            </Link>
           </div>
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

@@ -85,14 +85,16 @@ export default async function EquipePage() {
       {/* 2. Foto Oficial da Equipe */}
       <Section className="py-8 sm:py-10">
         <Container>
-          <ImageFrame
-            src={page.image ?? "/images/real/equipe/team-main.webp"}
-            alt={page.imageAlt ?? "Equipe da clínica da Dra. Sara Michelon"}
-            fill
-            sizes="100vw"
-            className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[16/10] max-h-[640px] rounded-2xl border border-[var(--color-border)] shadow-sm"
-            imageClassName="object-top"
-          />
+          <div className="mx-auto flex w-full max-w-5xl justify-center">
+            <ImageFrame
+              src={page.image ?? "/images/real/equipe/team-main.webp"}
+              alt={page.imageAlt ?? "Equipe da clínica da Dra. Sara Michelon"}
+              fill
+              sizes="100vw"
+              className="w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[16/10] max-h-[640px] rounded-2xl border border-[var(--color-border)] shadow-sm"
+              imageClassName="object-top"
+            />
+          </div>
         </Container>
       </Section>
 
