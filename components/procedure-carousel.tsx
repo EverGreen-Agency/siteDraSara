@@ -126,26 +126,26 @@ export function ProcedureCarousel({
   return (
     <section
       id={id}
-      className={`relative w-full overflow-hidden bg-[var(--color-primary)] py-6 text-white sm:py-8 lg:py-10 ${className}`}
+      className={`relative w-full overflow-hidden bg-[var(--color-primary)] py-5 text-white sm:py-6 lg:py-7 ${className}`}
     >
       {/* Centered Header */}
       <Container className="text-center">
         {eyebrow && (
-          <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.24em] text-white/60">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/60">
             {eyebrow}
           </p>
         )}
-        <h2 className="font-title text-2xl tracking-[0.14em] text-white sm:text-3xl lg:text-4xl">
+        <h2 className="font-title text-xl tracking-[0.14em] text-white sm:text-2xl lg:text-3xl">
           {title}
         </h2>
       </Container>
 
       {/* Full-width Marquee Track with Alpha Fade Mask */}
-      <div className="carousel-fade-mask relative mt-7 w-full overflow-hidden sm:mt-9">
+      <div className="carousel-fade-mask relative mt-4 w-full overflow-hidden sm:mt-5">
         <div
           tabIndex={0}
           aria-label="Carrossel contínuo de procedimentos"
-          className="animate-marquee-continuous flex gap-5 py-4 sm:gap-6"
+          className="animate-marquee-continuous flex gap-4 py-2.5 sm:gap-5"
         >
           {displayItems.map((item, index) => {
             // Alternating rhythm: even index = dark plum card, odd index = white card
@@ -154,16 +154,16 @@ export function ProcedureCarousel({
             return (
               <article
                 key={item.href + index}
-                className={`group relative flex w-[290px] shrink-0 flex-col justify-between rounded-3xl p-7 transition-all duration-300 sm:w-[330px] md:w-[350px] sm:p-8 ${
+                className={`group relative flex w-[280px] shrink-0 flex-col justify-between rounded-3xl p-5 transition-all duration-300 sm:w-[320px] md:w-[340px] sm:p-6 ${
                   isWhiteCard
-                    ? "bg-white text-[var(--color-ink)] shadow-[0_16px_38px_rgba(0,0,0,0.25)] hover:-translate-y-2 hover:shadow-[0_22px_45px_rgba(0,0,0,0.32)]"
-                    : "border border-white/15 bg-[#523348]/90 text-white shadow-[0_14px_32px_rgba(33,23,30,0.3)] backdrop-blur-xs hover:-translate-y-2 hover:border-white/35 hover:bg-[#5b3850]"
+                    ? "bg-white text-[var(--color-ink)] shadow-[0_16px_38px_rgba(0,0,0,0.25)] hover:-translate-y-1.5 hover:shadow-[0_22px_45px_rgba(0,0,0,0.32)]"
+                    : "border border-white/15 bg-[#523348]/90 text-white shadow-[0_14px_32px_rgba(33,23,30,0.3)] backdrop-blur-xs hover:-translate-y-1.5 hover:border-white/35 hover:bg-[#5b3850]"
                 }`}
               >
                 {/* Card Title & Content */}
                 <div>
                   <h3
-                    className={`font-title text-center text-xl leading-snug sm:text-2xl ${
+                    className={`font-title text-center text-lg leading-snug sm:text-xl ${
                       isWhiteCard ? "text-[var(--color-primary)]" : "text-white"
                     }`}
                   >
@@ -171,7 +171,7 @@ export function ProcedureCarousel({
                   </h3>
 
                   <p
-                    className={`mt-5 text-center text-sm leading-relaxed ${
+                    className={`mt-3 text-center text-xs sm:text-sm leading-relaxed ${
                       isWhiteCard ? "text-[var(--color-muted)]" : "text-white/80"
                     }`}
                   >
@@ -180,7 +180,7 @@ export function ProcedureCarousel({
                 </div>
 
                 {/* Card CTA Link */}
-                <div className="mt-6 flex justify-center border-t border-current/10 pt-5">
+                <div className="mt-4 flex justify-center border-t border-current/10 pt-3.5">
                   <Link
                     href={item.href}
                     className={`group/link inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] transition-colors ${

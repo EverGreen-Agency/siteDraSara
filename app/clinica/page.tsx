@@ -82,26 +82,26 @@ export default async function ClinicaPage() {
         />
 
         <Container className="relative z-10">
-          <div className="flex flex-col justify-end min-h-[560px] pt-[72vw] pb-8 sm:min-h-[600px] sm:pt-[54vw] sm:pb-10 md:min-h-[500px] md:pt-14 md:pb-12 lg:min-h-[580px] lg:justify-center lg:py-16">
+          <div className="flex flex-col justify-end min-h-[460px] pt-[48vw] pb-6 sm:min-h-[480px] sm:pt-[38vw] sm:pb-7 md:min-h-[420px] md:pt-8 md:pb-8 lg:min-h-[480px] lg:justify-center lg:py-10">
             <div className="max-w-xl md:max-w-lg lg:max-w-[54%]">
               <Breadcrumbs
                 hideCurrentOnMobile
-                className="mb-3 sm:mb-6"
+                className="mb-2.5 sm:mb-4"
                 items={[
                   {label: "Início", href: "/"},
                   {label: "A clínica"},
                 ]}
               />
-              <p className="mb-2 sm:mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-mauve)]">
+              <p className="mb-2 sm:mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-mauve)]">
                 {page.eyebrow}
               </p>
               <h1 className="font-title text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] tracking-[-0.02em] text-[var(--color-primary)]">
                 {page.title}
               </h1>
-              <p className="mt-3 sm:mt-5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
+              <p className="mt-2.5 sm:mt-3.5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
                 {page.description}
               </p>
-              <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink href="#tour-virtual" variant="primary">
                   Conhecer a clínica ↓
                 </ButtonLink>
@@ -115,26 +115,26 @@ export default async function ClinicaPage() {
       </section>
 
       {/* 2. Destaque de Estrutura */}
-      <Section className="py-8 sm:py-10">
-        <Container className="grid items-center gap-12 lg:grid-cols-2">
+      <Section className="py-4 sm:py-6">
+        <Container className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2">
           <ImageFrame
             src={page.image ?? "/images/real/clinica/clinic-consultorio-1.webp"}
             alt={page.imageAlt ?? "Consultório 1 com cadeira odontológica e mesa de atendimento"}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="min-h-[520px]"
+            className="min-h-[340px] lg:min-h-[380px]"
           />
-          <div className="lg:px-10">
+          <div className="lg:px-8">
             <Eyebrow>O espaço</Eyebrow>
             <Heading>Ambientes pensados para o cuidado clínico</Heading>
-            <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+            <p className="mt-4 text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
               A experiência começa no acolhimento e segue por todas as etapas do atendimento. As imagens desta página pertencem ao acervo real da clínica, nos Ingleses.
             </p>
-            <p className="mt-5 leading-7 text-[var(--color-muted)]">
+            <p className="mt-3 leading-6 sm:leading-7 text-[var(--color-muted)]">
               Cada recurso disponível participa do planejamento conforme a necessidade do caso, integrando ergonomia, biossegurança rigorosa e diagnóstico digital.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-3.5">
               <ButtonLink href="#tour-virtual" variant="primary">
                 Fazer Tour Virtual pela Clínica ↓
               </ButtonLink>
@@ -150,7 +150,7 @@ export default async function ClinicaPage() {
       <VirtualTour />
 
       {/* 4. PILARES CLÍNICOS DA MATRIZ: ESTRUTURA, TECNOLOGIA & BIOSSEGURANÇA */}
-      <Section className="bg-[var(--color-primary)] py-12 text-white sm:py-16">
+      <Section className="bg-[var(--color-primary)] py-6 text-white sm:py-8">
         <Container>
           <div className="max-w-2xl">
             <Eyebrow light>Pilares de Atendimento</Eyebrow>
@@ -224,16 +224,16 @@ export default async function ClinicaPage() {
       </Section>
 
       {/* 4. Galeria de Ambientes */}
-      <Section className="py-8 sm:py-10">
+      <Section className="py-4 sm:py-6">
         <Container>
           <div className="max-w-2xl">
             <Eyebrow>Galeria real</Eyebrow>
             <Heading>Conheça alguns ambientes da clínica</Heading>
-            <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">
+            <p className="mt-2.5 text-sm leading-6 text-[var(--color-muted)]">
               Fotografias reais da sala 218 no complexo comercial Ingleses Saúde & Office.
             </p>
           </div>
-          <div className="mt-10">
+          <div className="mt-6">
             <Gallery
               images={[
                 {src: "/images/real/clinica/clinic-operatory-main.webp", alt: "Consultório odontológico principal com cadeira ergonômica"},

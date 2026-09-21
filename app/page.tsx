@@ -73,16 +73,16 @@ export default async function HomePage() {
         </picture>
 
         <Container className="relative z-10">
-          <div className="flex flex-col justify-end pt-[46vw] pb-5 sm:pt-[36vw] sm:pb-6 md:justify-center md:py-7 lg:py-8">
+          <div className="flex flex-col justify-end pt-[40vw] pb-4 sm:pt-[30vw] sm:pb-5 md:justify-center md:py-6 lg:py-7">
             <div className="max-w-xl md:max-w-lg lg:max-w-[52%]">
               <Eyebrow>{home.eyebrow}</Eyebrow>
               <Heading as="h1">{home.title}</Heading>
-              <p className="mt-4 text-lg sm:text-xl leading-8 sm:leading-9 text-[var(--color-ink)]/85">{home.description}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-3.5 sm:gap-4">
+              <p className="mt-3.5 text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-ink)]/85">{home.description}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-3 sm:gap-3.5">
                 <ButtonLink href="/contato" event="appointment_cta_click" location="home_hero">Agende uma avaliação</ButtonLink>
                 <ButtonLink href="#tratamentos" variant="secondary" event="treatment_view" location="home_hero">Conheça os tratamentos</ButtonLink>
               </div>
-              <div className="mt-6 flex items-center gap-4 border-t border-[var(--color-border)] pt-3 text-sm text-[var(--color-ink)]/70 sm:mt-7 sm:gap-5 sm:pt-3.5">
+              <div className="mt-5 flex items-center gap-4 border-t border-[var(--color-border)] pt-2.5 text-sm text-[var(--color-ink)]/70 sm:mt-6 sm:gap-5 sm:pt-3">
                 <span className="font-title text-2xl text-[var(--color-primary)]">01</span>
                 <span>Ingleses · Norte da Ilha · Florianópolis</span>
               </div>
@@ -93,11 +93,11 @@ export default async function HomePage() {
 
       <Section>
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid gap-8 sm:gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div><Eyebrow>Duas áreas, um só planejamento</Eyebrow><Heading>O cuidado começa por entender o caso</Heading></div>
             <div className="grid gap-px bg-[var(--color-border)] sm:grid-cols-2">
-              <article className="bg-white p-7 sm:p-9"><span className="text-xs tracking-[0.2em] text-[var(--color-mauve)]">01</span><h3 className="mt-10 font-title text-3xl text-[var(--color-primary)]">Odontologia</h3><p className="mt-5 leading-7 text-[var(--color-muted)]">Prevenção, estética do sorriso, reabilitação, cirurgia e ortodontia organizadas conforme cada necessidade.</p><ButtonLink href="/odontologia" variant="secondary" event="treatment_view" location="home_areas">Conhecer odontologia</ButtonLink></article>
-              <article className="bg-[var(--color-primary)] p-7 text-white sm:p-9"><span className="text-xs tracking-[0.2em] text-white/55">02</span><h3 className="mt-10 font-title text-3xl">Estética Orofacial</h3><p className="mt-5 leading-7 text-white/70">Avaliação facial e indicação individual com naturalidade e atenção ao conjunto da face.</p><ButtonLink href="/estetica-orofacial" variant="light" event="treatment_view" location="home_areas">Conhecer estética</ButtonLink></article>
+              <article className="bg-white p-5 sm:p-7"><span className="text-xs tracking-[0.2em] text-[var(--color-mauve)]">01</span><h3 className="mt-5 sm:mt-6 font-title text-2xl sm:text-3xl text-[var(--color-primary)]">Odontologia</h3><p className="mt-3 leading-6 sm:leading-7 text-[var(--color-muted)]">Prevenção, estética do sorriso, reabilitação, cirurgia e ortodontia organizadas conforme cada necessidade.</p><div className="mt-4"><ButtonLink href="/odontologia" variant="secondary" event="treatment_view" location="home_areas">Conhecer odontologia</ButtonLink></div></article>
+              <article className="bg-[var(--color-primary)] p-5 text-white sm:p-7"><span className="text-xs tracking-[0.2em] text-white/55">02</span><h3 className="mt-5 sm:mt-6 font-title text-2xl sm:text-3xl">Estética Orofacial</h3><p className="mt-3 leading-6 sm:leading-7 text-white/70">Avaliação facial e indicação individual com naturalidade e atenção ao conjunto da face.</p><div className="mt-4"><ButtonLink href="/estetica-orofacial" variant="light" event="treatment_view" location="home_areas">Conhecer estética</ButtonLink></div></article>
             </div>
           </div>
         </Container>
@@ -105,22 +105,22 @@ export default async function HomePage() {
 
       <Section className="bg-[var(--color-surface)]">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2">
             <ImageFrame
               src="/images/real/tecnologia/planning-digital-scan.webp"
               alt="Dra. Sara Michelon durante planejamento odontológico digital"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="min-h-[520px]"
+              className="min-h-[340px] lg:min-h-[380px]"
             />
-            <div className="lg:px-10">
+            <div className="lg:px-8">
               <Eyebrow>Método de planejamento</Eyebrow>
               <Heading>Planejamento antes da escolha do procedimento</Heading>
-              <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+              <p className="mt-4 text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
                 A clínica trabalha em uma sequência clara: avaliação, diagnóstico, indicação, tratamento e acompanhamento. O diagnóstico estabelece prioridades, limites e a sequência do tratamento. A indicação é construída a partir das necessidades de cada paciente, e não de uma lista pré-definida de procedimentos.
               </p>
               {/* Linha do Tempo Contínua (Timeline Unificada) */}
-              <ol className="relative mt-10 grid grid-cols-2 gap-y-7 sm:grid-cols-5 sm:gap-0">
+              <ol className="relative mt-7 grid grid-cols-2 gap-y-6 sm:grid-cols-5 sm:gap-0">
                 {[
                   {step: "01", title: "Avaliação"},
                   {step: "02", title: "Diagnóstico"},
@@ -156,11 +156,11 @@ export default async function HomePage() {
                       </div>
 
                       {/* Conteúdo textual */}
-                      <div className="mt-3.5">
+                      <div className="mt-3">
                         <span className="font-title text-xs font-semibold tracking-wider text-[var(--color-mauve)]">
                           {item.step}
                         </span>
-                        <span className="mt-1 block text-sm font-bold tracking-tight text-[var(--color-primary)]">
+                        <span className="mt-0.5 block text-sm font-bold tracking-tight text-[var(--color-primary)]">
                           {item.title}
                         </span>
                       </div>
@@ -180,15 +180,15 @@ export default async function HomePage() {
       />
 
       <Section>
-        <Container className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <ImageFrame src="/images/real/sara/sara-autoridade-2025.webp" alt="Dra. Sara Michelon em retrato profissional de autoridade" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[600px]" />
-          <div className="lg:px-10">
+        <Container className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <ImageFrame src="/images/real/sara/sara-autoridade-2025.webp" alt="Dra. Sara Michelon em retrato profissional de autoridade" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[360px] lg:min-h-[420px]" />
+          <div className="lg:px-8">
             <Eyebrow>Dra. Sara Michelon</Eyebrow>
             <Heading>Uma visão integrada da Odontologia e da Estética Facial</Heading>
-            <p className="mt-7 text-lg leading-8 text-[var(--color-muted)]">
+            <p className="mt-4 text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">
               A experiência em diferentes áreas da Odontologia permite avaliar cada caso de forma mais ampla, considerando saúde, função, sorriso e face antes de definir qualquer tratamento.
             </p>
-            <div className="mt-9">
+            <div className="mt-6">
               <ButtonLink href="/dra-sara-michelon" variant="secondary" event="appointment_cta_click" location="home_authority">Conheça a Dra. Sara</ButtonLink>
             </div>
           </div>
@@ -196,15 +196,15 @@ export default async function HomePage() {
       </Section>
 
       <Section className="bg-[var(--color-pink)]">
-        <Container><div className="max-w-2xl"><Eyebrow>Equipe</Eyebrow><Heading>Profissionais conectados ao mesmo planejamento</Heading></div><div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{professionals.map((professional) => <ProfessionalCard key={professional.name} {...professional} />)}</div><div className="mt-12"><ButtonLink href="/equipe" variant="secondary">Conheça a equipe</ButtonLink></div></Container>
+        <Container><div className="max-w-2xl"><Eyebrow>Equipe</Eyebrow><Heading>Profissionais conectados ao mesmo planejamento</Heading></div><div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{professionals.map((professional) => <ProfessionalCard key={professional.name} {...professional} />)}</div><div className="mt-6"><ButtonLink href="/equipe" variant="secondary">Conheça a equipe</ButtonLink></div></Container>
       </Section>
 
       <Section>
-        <Container><div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-9"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-operatory-main.webp" alt="Consultório odontológico da clínica da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[540px]" /></div></Container>
+        <Container><div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-4 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-6"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-operatory-main.webp" alt="Consultório odontológico da clínica da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[340px] lg:min-h-[380px]" /></div></Container>
       </Section>
 
       <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
-        <Container><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]"><div><Eyebrow>Conteúdos</Eyebrow><Heading>Informação clínica para decisões mais conscientes</Heading><div className="mt-8"><ButtonLink href="/conteudos" variant="secondary">Ver conteúdos</ButtonLink></div></div><div>{articles.map((article) => <ArticleCard key={article.slug} category={article.categories[0] ?? "Conteúdo"} title={article.title} description={article.excerpt} href={article.path} meta={`Por ${article.author.name}`} />)}</div></div></Container>
+        <Container><div className="grid gap-8 sm:gap-10 lg:grid-cols-[0.7fr_1.3fr]"><div><Eyebrow>Conteúdos</Eyebrow><Heading>Informação clínica para decisões mais conscientes</Heading><div className="mt-5"><ButtonLink href="/conteudos" variant="secondary">Ver conteúdos</ButtonLink></div></div><div>{articles.map((article) => <ArticleCard key={article.slug} category={article.categories[0] ?? "Conteúdo"} title={article.title} description={article.excerpt} href={article.path} meta={`Por ${article.author.name}`} />)}</div></div></Container>
       </Section>
 
       <Section><Container><LocalClinicBlock /></Container></Section>

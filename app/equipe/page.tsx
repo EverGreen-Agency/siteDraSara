@@ -90,7 +90,7 @@ export default async function EquipePage() {
             alt={page.imageAlt ?? "Equipe da clínica da Dra. Sara Michelon"}
             fill
             sizes="100vw"
-            className="min-h-[440px] sm:min-h-[520px] lg:min-h-[620px]"
+            className="min-h-[320px] sm:min-h-[380px] lg:min-h-[440px]"
           />
         </Container>
       </Section>
@@ -101,11 +101,11 @@ export default async function EquipePage() {
           <div className="max-w-2xl">
             <Eyebrow>Profissionais</Eyebrow>
             <Heading as="h2">Uma equipe, diferentes áreas de cuidado</Heading>
-            <p className="mt-6 leading-7 text-[var(--color-muted)]">
+            <p className="mt-4 leading-7 text-[var(--color-muted)]">
               A integração entre as áreas ajuda a organizar prioridades e responsabilidades dentro do planejamento clínico.
             </p>
           </div>
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {professionals.map((professional) => (
               <ProfessionalCard key={professional.name} {...professional} />
             ))}
@@ -120,11 +120,11 @@ export default async function EquipePage() {
             <div className="max-w-2xl">
               <Eyebrow>Suporte Clínico & Recepção</Eyebrow>
               <Heading as="h2">Cuidado, acolhimento e biossegurança</Heading>
-              <p className="mt-6 leading-7 text-[var(--color-muted)]">
+              <p className="mt-4 leading-7 text-[var(--color-muted)]">
                 A atenção com o paciente começa no primeiro contato e se estende a cada etapa do atendimento na clínica.
               </p>
             </div>
-            <div className="mt-12 grid gap-8 md:grid-cols-2 max-w-4xl">
+            <div className="mt-6 grid gap-6 md:grid-cols-2 max-w-4xl">
               {supportStaff.map((member) => (
                 <div
                   key={member.name}

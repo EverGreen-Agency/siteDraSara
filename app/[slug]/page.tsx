@@ -73,28 +73,28 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
           />
 
           <Container className="relative z-10">
-            <div className="flex flex-col justify-end min-h-[580px] pt-[66vw] pb-8 sm:min-h-[620px] sm:pt-[52vw] sm:pb-10 md:min-h-[520px] md:pt-14 md:pb-12 lg:min-h-[600px] lg:justify-center lg:py-16">
+            <div className="flex flex-col justify-end min-h-[460px] pt-[48vw] pb-6 sm:min-h-[480px] sm:pt-[36vw] sm:pb-7 md:min-h-[420px] md:pt-8 md:pb-8 lg:min-h-[480px] lg:justify-center lg:py-10">
               <div className="max-w-xl md:max-w-lg lg:max-w-[54%]">
                 <Breadcrumbs
                   light
                   hideCurrentOnMobile
-                  className="mb-3 sm:mb-6"
+                  className="mb-2.5 sm:mb-4"
                   items={[
                     {label: "Início", href: "/"},
                     {label: hubLabel, href: hubHref},
                     {label: treatment.title},
                   ]}
                 />
-                <p className="mb-2 sm:mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
+                <p className="mb-2 sm:mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   {treatment.eyebrow}
                 </p>
-                <h1 className="font-title text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] leading-[1.1] tracking-[-0.02em] text-white">
+                <h1 className="font-title text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[3.6rem] leading-[1.1] tracking-[-0.02em] text-white">
                   {treatment.title}
                 </h1>
-                <p className="mt-3 sm:mt-5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-white/85">
+                <p className="mt-2.5 sm:mt-3.5 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-white/85">
                   {treatment.shortDescription}
                 </p>
-                <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-5 sm:mt-6 flex flex-col gap-3 sm:flex-row">
                   <ButtonLink href="/contato" variant="light" location="treatment_hero">
                     Agendar uma avaliação
                   </ButtonLink>
@@ -114,24 +114,24 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
         </section>
       ) : (
         <section className={`overflow-hidden ${darkHero ? "bg-[var(--color-primary)] text-white" : treatment.variant === "symptom-led" ? "bg-[var(--color-surface-strong)]" : "bg-[var(--color-pink)]"}`}>
-          <Container className="py-6 sm:py-8">
+          <Container className="py-4 sm:py-6">
             <Breadcrumbs light={darkHero} items={[{label: "Início", href: "/"}, {label: hubLabel, href: hubHref}, {label: treatment.title}]} />
-            <div className={`grid items-center gap-12 ${showCustomImage ? "lg:grid-cols-[1.08fr_0.92fr]" : "lg:grid-cols-[0.72fr_0.28fr]"}`}>
-              <div className="py-4">
+            <div className={`grid items-center gap-8 sm:gap-10 ${showCustomImage ? "lg:grid-cols-[1.08fr_0.92fr]" : "lg:grid-cols-[0.72fr_0.28fr]"}`}>
+              <div className="py-3">
                 <Eyebrow light={darkHero}>{treatment.eyebrow}</Eyebrow>
                 <Heading as="h1" className={darkHero ? "text-white" : undefined}>{treatment.title}</Heading>
-                <p className={`mt-7 max-w-2xl text-lg leading-8 ${darkHero ? "text-white/75" : "text-[var(--color-muted)]"}`}>{treatment.shortDescription}</p>
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row"><ButtonLink href="/contato" variant={darkHero ? "light" : "primary"} location="treatment_hero">Agendar uma avaliação</ButtonLink><ButtonLink href="#conteudo" variant={darkHero ? "light" : "secondary"} event="treatment_view" location="treatment_hero">Entender o tratamento</ButtonLink></div>
+                <p className={`mt-4 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 ${darkHero ? "text-white/75" : "text-[var(--color-muted)]"}`}>{treatment.shortDescription}</p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row"><ButtonLink href="/contato" variant={darkHero ? "light" : "primary"} location="treatment_hero">Agendar uma avaliação</ButtonLink><ButtonLink href="#conteudo" variant={darkHero ? "light" : "secondary"} event="treatment_view" location="treatment_hero">Entender o tratamento</ButtonLink></div>
               </div>
-              {showCustomImage ? <ImageFrame src={treatment.heroImage!} alt={treatment.heroImageAlt ?? treatment.title} fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="aspect-[4/5] min-h-[520px]" /> : <div className="hidden border-l border-[var(--color-border)] pl-8 lg:block"><span className="font-title text-8xl text-[var(--color-mauve)]/30">01</span><p className="mt-4 text-sm leading-6 text-[var(--color-muted)]">Sintomas precisam ser relacionados ao histórico e ao exame clínico.</p></div>}
+              {showCustomImage ? <ImageFrame src={treatment.heroImage!} alt={treatment.heroImageAlt ?? treatment.title} fill priority sizes="(max-width: 1024px) 100vw, 46vw" className="aspect-[4/5] min-h-[360px] max-h-[440px]" /> : <div className="hidden border-l border-[var(--color-border)] pl-8 lg:block"><span className="font-title text-8xl text-[var(--color-mauve)]/30">01</span><p className="mt-4 text-sm leading-6 text-[var(--color-muted)]">Sintomas precisam ser relacionados ao histórico e ao exame clínico.</p></div>}
             </div>
           </Container>
         </section>
       )}
       <div id="conteudo"><ContentSectionRenderer sections={treatment.sections} /></div>
-      {treatment.aftercare && <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]"><Container className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"><div><Eyebrow>Continuidade do cuidado</Eyebrow><Heading>Acompanhamento e manutenção</Heading></div><div>{treatment.aftercare.body.map((paragraph) => <p key={paragraph} className="mb-4 max-w-2xl leading-7 text-[var(--color-muted)]">{paragraph}</p>)}{treatment.aftercare.href && treatment.aftercare.label && <ButtonLink href={treatment.aftercare.href} variant="secondary" event="treatment_view" location="aftercare">{treatment.aftercare.label}</ButtonLink>}</div></Container></Section>}
+      {treatment.aftercare && <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]"><Container className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]"><div><Eyebrow>Continuidade do cuidado</Eyebrow><Heading>Acompanhamento e manutenção</Heading></div><div>{treatment.aftercare.body.map((paragraph) => <p key={paragraph} className="mb-3 max-w-2xl leading-7 text-[var(--color-muted)]">{paragraph}</p>)}{treatment.aftercare.href && treatment.aftercare.label && <ButtonLink href={treatment.aftercare.href} variant="secondary" event="treatment_view" location="aftercare">{treatment.aftercare.label}</ButtonLink>}</div></Container></Section>}
       {treatment.clinicalLead && <ProfessionalBlock professional={treatment.clinicalLead} />}
-      {treatment.faq.length > 0 && <Section className="bg-[var(--color-pink)]"><Container className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr]"><div><Eyebrow>Perguntas frequentes</Eyebrow><Heading>O que costuma gerar dúvida</Heading></div><FAQ items={treatment.faq} /></Container></Section>}
+      {treatment.faq.length > 0 && <Section className="bg-[var(--color-pink)]"><Container className="grid gap-8 sm:gap-10 lg:grid-cols-[0.75fr_1.25fr]"><div><Eyebrow>Perguntas frequentes</Eyebrow><Heading>O que costuma gerar dúvida</Heading></div><FAQ items={treatment.faq} /></Container></Section>}
       <ProcedureCarousel
         title="CONHEÇA OUTROS PROCEDIMENTOS"
         eyebrow="Tratamentos Prioritários"
