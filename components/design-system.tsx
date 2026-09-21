@@ -261,7 +261,7 @@ export function ProfessionalBlock({professional}: {professional: Professional}) 
       <Container className="grid items-center gap-10 lg:grid-cols-[0.42fr_0.58fr]">
         {professional.image ? <ImageFrame src={professional.image} alt={`Retrato profissional de ${professional.name}`} fill sizes="(max-width: 1024px) 100vw, 40vw" className="aspect-[4/5] max-h-[620px]" /> : <div className="min-h-72 bg-[var(--color-surface-strong)]" aria-hidden="true" />}
         <div className="lg:px-10">
-          <Eyebrow>Profissional responsável</Eyebrow>
+          <Eyebrow>Direção Clínica e Responsabilidade Técnica</Eyebrow>
           <Heading>{professional.name}</Heading>
           <p className="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-mauve)]">{professional.role}</p>
           {(professional.cro || professional.graduation) && (

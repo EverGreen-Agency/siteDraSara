@@ -20,6 +20,7 @@ async function Footer() {
           <div>
             <Image src="/images/logo-dra-sara.webp" alt={settings.clinicName} width={151} height={85} className="h-9 w-auto brightness-0 invert" />
             <p className="mt-2.5 max-w-sm text-xs leading-5 text-white/60 sm:text-sm sm:leading-6">Odontologia e estética com planejamento individual nos Ingleses, Norte da Ilha de Florianópolis.</p>
+            <p className="mt-2 text-xs text-white/80"><span className="font-semibold text-white">Responsável Técnica:</span> Dra. Sara Michelon · CRO-SC 10632</p>
           </div>
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-xs">Navegação</p>
@@ -93,7 +94,11 @@ async function Footer() {
           </div>
         </div>
         <div className="flex flex-col gap-2 pt-3.5 text-[11px] text-white/40 sm:flex-row sm:items-center sm:justify-between sm:text-xs">
-          <p>© {new Date().getFullYear()} {settings.clinicName}. Todos os direitos reservados.</p>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+            <p>© {new Date().getFullYear()} {settings.clinicName}. Todos os direitos reservados.</p>
+            <span className="hidden sm:inline" aria-hidden="true">•</span>
+            <p className="text-white/60">Responsável Técnica: Dra. Sara Michelon · CRO-SC 10632</p>
+          </div>
           <div className="flex flex-wrap gap-4">
             <Link href="/politica-de-privacidade" className="hover:text-white">Privacidade</Link>
             <Link href="/politica-de-cookies" className="hover:text-white">Cookies</Link>

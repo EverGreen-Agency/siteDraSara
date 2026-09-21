@@ -250,7 +250,7 @@ function createSections(seed: TreatmentSeed): ContentSection[] {
 }
 
 function createTreatment(seed: TreatmentSeed): Treatment {
-  const clinicalLead = professionalBySlug[seed.lead];
+  const clinicalLead = professionalBySlug["dra-sara-michelon"];
   return {
     contentType: "treatment",
     title: seed.title,
@@ -386,7 +386,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Implantes Dentários para Substituição de Dentes",
     specialty: "Implantodontia",
     variant: "process",
-    lead: "dra-camila-cecchin",
+    lead: "dra-sara-michelon",
     description: "Planejamento reabilitador guiado pela tomografia 3D, escaneamento intraoral e função mastigatória para repor um, vários ou todos os dentes.",
     seoTitle: "Implantes Dentários em Florianópolis | Clínica nos Ingleses",
     seoDescription: "Implantes dentários em Florianópolis para substituir um ou mais dentes, com avaliação, tomografia, planejamento e acompanhamento da reabilitação.",
@@ -433,7 +433,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Prótese Protocolo: Dentes Fixos sobre Implantes",
     specialty: "Implantodontia",
     variant: "process",
-    lead: "dra-camila-cecchin",
+    lead: "dra-sara-michelon",
     description: "Reabilitação fixa para arcada completa sobre implantes, devolvendo firmeza mastigatória e estabilidade sem o desconforto de dentaduras móveis.",
     seoTitle: "Prótese Protocolo em Florianópolis | Implantes Dentários",
     seoDescription: "Prótese protocolo em Florianópolis: entenda indicação, implantes, materiais, carga imediata, provisórios e manutenção da prótese fixa.",
@@ -479,7 +479,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Periodontia e Tratamento da Gengiva",
     specialty: "Periodontia",
     variant: "symptom-led",
-    lead: "dr-ericson-pessanha",
+    lead: "dra-sara-michelon",
     description: "Diagnóstico e tratamento de gengivite, periodontite, sangramento, retração e manutenção dos tecidos ao redor de dentes e implantes.",
     seoTitle: "Periodontia em Florianópolis | Especialista em Gengiva",
     seoDescription: "Periodontia e tratamento de gengiva em Florianópolis. Avaliação de gengivite, periodontite, sangramento, retração e saúde ao redor de implantes.",
@@ -525,7 +525,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Gengivoplastia e Cirurgia Gengival",
     specialty: "Periodontia",
     variant: "symptom-led",
-    lead: "dr-ericson-pessanha",
+    lead: "dra-sara-michelon",
     description: "Correção estética e biológica do contorno gengival: gengivoplastia, aumento de coroa clínica, sorriso gengival e enxertos para retrações.",
     seoTitle: "Gengivoplastia e Cirurgia Gengival em Florianópolis",
     seoDescription: "Cirurgia gengival e gengivoplastia em Florianópolis para casos indicados de contorno gengival, sorriso gengival e retração, após avaliação periodontal.",
@@ -703,7 +703,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Tratamento de Canal e Endodontia",
     specialty: "Endodontia",
     variant: "process",
-    lead: "dra-maria-clara",
+    lead: "dra-sara-michelon",
     description: "Tratamento especializado da polpa dentária com instrumentação mecanizada, localizador apical e planejamento integrado da restauração definitiva.",
     seoTitle: "Tratamento de Canal em Florianópolis | Endodontia",
     seoDescription: "Tratamento de canal em Florianópolis com avaliação, instrumentação moderna e planejamento da restauração do dente após a endodontia.",
@@ -1064,7 +1064,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Enxerto Ósseo para Implante Dentário",
     specialty: "Implantodontia",
     variant: "process",
-    lead: "dra-camila-cecchin",
+    lead: "dra-sara-michelon",
     description: "Reconstrução de volume e espessura óssea com biomateriais modernos para viabilizar a ancoragem segura de implantes dentários.",
     seoTitle: "Enxerto Ósseo para Implante em Florianópolis | Dra. Sara",
     seoDescription: "Enxerto ósseo para implante em Florianópolis: entenda quando pode ser indicado, exames, etapas, recuperação e relação com o implante dentário.",
@@ -1107,7 +1107,7 @@ const treatmentSeeds: TreatmentSeed[] = [
     title: "Extração de Siso: Avaliação e Cirurgia",
     specialty: "Cirurgia Oral",
     variant: "symptom-led",
-    lead: "dr-ericson-pessanha",
+    lead: "dra-sara-michelon",
     description: "Avaliação clínica e por imagem para remoção segura de sisos inclusos, impactados ou inflamados, com acompanhamento pós-operatório dedicado.",
     seoTitle: "Extração de Siso em Florianópolis | Avaliação e Cirurgia",
     seoDescription: "Extração de siso em Florianópolis com avaliação clínica e por imagem. Entenda indicações, cirurgia, recuperação e sinais que pedem atendimento.",
