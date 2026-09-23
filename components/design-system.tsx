@@ -217,6 +217,7 @@ export function ProfessionalCard({
           fill
           sizes="(max-width: 768px) 100vw, 25vw"
           className="aspect-[4/5] w-full"
+          imageClassName="object-top"
         />
       ) : (
         <div className="aspect-[4/5] w-full bg-[var(--color-surface-strong)] flex items-center justify-center text-[var(--color-muted)] font-serif text-3xl" aria-hidden="true">
@@ -276,7 +277,7 @@ export function ProfessionalBlock({professional}: {professional: Professional}) 
   return (
     <Section className="bg-[var(--color-surface)]">
       <Container className="grid items-center gap-8 lg:grid-cols-[0.42fr_0.58fr]">
-        {professional.image ? <ImageFrame src={professional.image} alt={`Retrato profissional de ${professional.name}`} fill sizes="(max-width: 1024px) 100vw, 40vw" className="aspect-[4/5] max-h-[440px]" /> : <div className="min-h-60 bg-[var(--color-surface-strong)]" aria-hidden="true" />}
+        {professional.image ? <ImageFrame src={professional.image} alt={`Retrato profissional de ${professional.name}`} fill sizes="(max-width: 1024px) 100vw, 40vw" className="aspect-[4/5] max-h-[440px]" imageClassName="object-top" /> : <div className="min-h-60 bg-[var(--color-surface-strong)]" aria-hidden="true" />}
         <div className="lg:px-8">
           <Eyebrow>Direção Clínica e Responsabilidade Técnica</Eyebrow>
           <Heading>{professional.name}</Heading>

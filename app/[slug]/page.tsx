@@ -59,7 +59,7 @@ async function TreatmentPage({treatment}: {treatment: Treatment}) {
             alt={treatment.heroImageAlt ?? banner?.alt}
             priority
             className="absolute inset-0 block h-full w-full pointer-events-none"
-            imgClassName="h-full w-full object-cover object-top md:object-right lg:object-center"
+            imgClassName="h-full w-full object-cover object-top md:object-[right_top] lg:object-[right_top]"
           />
 
           {/* Scrim overlay for contrast while preserving clean photography */}
@@ -276,7 +276,7 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
               height={heroBanner.desktopHeight ?? 941}
               fetchPriority="high"
               decoding="async"
-              className="h-full w-full object-cover object-top md:object-right lg:object-center"
+              className="h-full w-full object-cover object-top md:object-[right_top] lg:object-[right_top]"
             />
           </picture>
 
@@ -351,6 +351,7 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="min-h-[520px]"
+              imageClassName="object-top"
             />
             <div className="lg:px-10">
               <Eyebrow>Planejamento individual</Eyebrow>

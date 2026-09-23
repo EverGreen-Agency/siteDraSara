@@ -121,7 +121,7 @@ export function ContactView({settings}: ContactViewProps) {
             alt="Recepção e atendimento da clínica Dra. Sara Michelon nos Ingleses"
             width={1672}
             height={941}
-            className="h-full w-full object-cover object-top md:object-[85%_center] lg:object-center"
+            className="h-full w-full object-cover object-top md:object-[85%_top] lg:object-[85%_top]"
             loading="eager"
             fetchPriority="high"
           />

@@ -35,7 +35,7 @@ export default async function EquipePage() {
             height={941}
             fetchPriority="high"
             decoding="async"
-            className="h-full w-full object-cover object-top md:object-right lg:object-center"
+            className="h-full w-full object-cover object-top md:object-[right_top] lg:object-[right_top]"
           />
         </picture>
 

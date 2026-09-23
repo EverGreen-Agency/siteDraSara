@@ -116,7 +116,8 @@ export default async function HomePage() {
               alt="Dra. Sara Michelon durante planejamento odontológico digital"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="min-h-[340px] lg:min-h-[380px]"
+              className="aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] max-h-[460px] rounded-2xl border border-[var(--color-border)] shadow-sm"
+              imageClassName="object-top"
             />
             <div className="lg:px-8">
               <Eyebrow>Método de planejamento</Eyebrow>
@@ -186,7 +187,14 @@ export default async function HomePage() {
 
       <Section>
         <Container className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <ImageFrame src="/images/real/sara/sara-autoridade-2025.webp" alt="Dra. Sara Michelon em retrato profissional de autoridade" fill sizes="(max-width: 1024px) 100vw, 42vw" className="min-h-[360px] lg:min-h-[420px]" />
+          <ImageFrame
+            src="/images/real/sara/sara-autoridade-2025.webp"
+            alt="Dra. Sara Michelon em retrato profissional de autoridade"
+            fill
+            sizes="(max-width: 1024px) 100vw, 42vw"
+            className="aspect-[4/5] max-h-[540px] rounded-2xl border border-[var(--color-border)] shadow-sm"
+            imageClassName="object-top"
+          />
           <div className="lg:px-8">
             <Eyebrow>Dra. Sara Michelon</Eyebrow>
             <Heading>Uma visão integrada da Odontologia e da Estética Facial</Heading>
