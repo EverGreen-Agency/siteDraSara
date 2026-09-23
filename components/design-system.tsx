@@ -216,29 +216,46 @@ export function ProfessionalCard({
           alt={`Retrato profissional de ${name}`}
           fill
           sizes="(max-width: 768px) 100vw, 25vw"
-          className="aspect-[4/5]"
+          className="aspect-[4/5] w-full"
         />
       ) : (
-        <div className="aspect-[4/5] bg-[var(--color-surface-strong)] flex items-center justify-center text-[var(--color-muted)] font-serif text-3xl" aria-hidden="true">
+        <div className="aspect-[4/5] w-full bg-[var(--color-surface-strong)] flex items-center justify-center text-[var(--color-muted)] font-serif text-3xl" aria-hidden="true">
           {name.charAt(0)}
         </div>
       )}
-      <h3 className="mt-5 font-title text-2xl text-[var(--color-primary)]">{name}</h3>
-      <p className="mt-1 text-sm font-medium leading-6 text-[var(--color-mauve)]">{role}</p>
-      {(cro || graduation) && (
-        <div className="mt-2 space-y-0.5 text-xs text-[var(--color-muted)]">
-          {cro && <p className="font-mono tracking-wide">{cro}</p>}
-          {graduation && <p>{graduation}</p>}
-        </div>
-      )}
-      {profileHref && (
-        <span className="mt-4 inline-block text-sm font-semibold text-[var(--color-primary)]">
-          Conhecer perfil <span aria-hidden="true">→</span>
-        </span>
-      )}
+      <div className="mt-5 flex flex-1 flex-col">
+        <h3 className="font-title text-2xl leading-tight text-[var(--color-primary)] min-h-[3.6rem] flex items-start">
+          {name}
+        </h3>
+        <p className="mt-1 text-sm font-medium leading-5 text-[var(--color-mauve)] min-h-[2.5rem] flex items-start">
+          {role}
+        </p>
+        {(cro || graduation) && (
+          <div className="mt-2 space-y-0.5 text-xs text-[var(--color-muted)] min-h-[2.5rem]">
+            {cro && <p className="font-mono tracking-wide">{cro}</p>}
+            {graduation && <p>{graduation}</p>}
+          </div>
+        )}
+        {profileHref && (
+          <div className="mt-auto pt-4">
+            <span className="inline-flex items-center text-sm font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-primary-hover)]">
+              <span>Conhecer perfil</span>
+              <span className="ml-1.5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
+            </span>
+          </div>
+        )}
+      </div>
     </>
   );
-  return profileHref ? <Link href={profileHref} className="group block">{content}</Link> : <article>{content}</article>;
+  return profileHref ? (
+    <Link href={profileHref} className="group flex flex-col h-full">
+      {content}
+    </Link>
+  ) : (
+    <article className="group flex flex-col h-full">{content}</article>
+  );
 }
 
 export function ArticleCard({category, title, description, href, meta}: {category: string; title: string; description: string; href?: string; meta?: string}) {
@@ -415,7 +432,7 @@ export function CTASection({
             {/* Micro Informações no Rodapé do Card */}
             <div className="mt-3.5 border-t border-white/10 pt-3 text-center">
               <p className="text-xs text-white/70">
-                Segunda a Sexta · 08h às 19h · (48) 98506-3001
+                Segunda a Sexta · 09h às 12h e 14h às 19h · (48) 98506-3001
               </p>
             </div>
           </div>
