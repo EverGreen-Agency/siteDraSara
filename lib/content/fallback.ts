@@ -8,11 +8,14 @@ export const fallbackSiteSettings: SiteSettings = {
   phone: "(48) 98506-3001",
   whatsapp: "(48) 98506-3001",
   commercialPhone: "(48) 99181-6291",
-  email: "contato@odontoestetica.net",
+  email: "odontoestetica.net@gmail.com",
   streetAddress: "SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001",
   openingHours: ["Segunda a Sexta: 09:00 às 12:00 e 14:00 às 19:00"],
   geo: { latitude: -27.4373, longitude: -48.3998 },
-  socialLinks: [],
+  socialLinks: [
+    "https://www.instagram.com/drasaramichelon",
+    "https://www.facebook.com/drasaramichelon",
+  ],
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0)
     ? process.env.NEXT_PUBLIC_SITE_URL.trim()
     : "https://odontoestetica.net",
@@ -231,11 +234,11 @@ function createSections(seed: TreatmentSeed): ContentSection[] {
   };
   const comparison: ContentSection | null = seed.comparison
     ? {
-        _key: `${seed.slug}-comparison`,
-        _type: "comparison",
-        heading: seed.comparisonHeading ?? "Possibilidades que precisam ser diferenciadas",
-        columns: seed.comparison,
-      }
+      _key: `${seed.slug}-comparison`,
+      _type: "comparison",
+      heading: seed.comparisonHeading ?? "Possibilidades que precisam ser diferenciadas",
+      columns: seed.comparison,
+    }
     : null;
   const local: ContentSection = {
     _key: `${seed.slug}-local`,
@@ -701,7 +704,7 @@ const treatmentSeeds: TreatmentSeed[] = [
   },
   {
     slug: "tratamento-de-canal",
-    title: "Tratamento de Canal e Endodontia",
+    title: "Tratamento de Canal | Endodontia",
     specialty: "Endodontia",
     variant: "process",
     lead: "dra-sara-michelon",
@@ -1496,7 +1499,7 @@ export const fallbackPages: Record<string, InstitutionalPage> = {
           { title: "Endodontia", text: "Especialista desde 2007 · Diagnóstico e tratamento de canais radiculares." },
           { title: "Ortodontia", text: "Especialista desde 2012 · Alinhadores transparentes e ortodontia corretiva." },
           { title: "Harmonização Facial", text: "Atuação desde 2015 · Proporções faciais, contorno e naturalidade." },
-          { title: "Registro Profissional", text: "CRO-SC 10632 · Atuação ética e responsável em Florianópolis." },
+          { title: "Instagram Profissional", text: "@drasaramichelon · Acompanhe casos clínicos e orientações no Instagram.", href: "https://www.instagram.com/drasaramichelon" },
         ],
       },
       {

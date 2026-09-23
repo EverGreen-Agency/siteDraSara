@@ -160,9 +160,9 @@ export function ContactView({settings}: ContactViewProps) {
       {/* 2. Canais Diretos de Atendimento (Cards em Grid) */}
       <Section className="py-8 sm:py-10">
         <Container>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {/* Card WhatsApp */}
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-6 sm:p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
               <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-emerald-500/10 blur-xl pointer-events-none" />
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
@@ -171,8 +171,8 @@ export function ContactView({settings}: ContactViewProps) {
                   </svg>
                 </div>
                 <p className="mt-5 text-xs font-bold uppercase tracking-wider text-emerald-700">Canal Principal</p>
-                <h3 className="mt-1 font-title text-2xl text-[var(--color-ink)]">WhatsApp</h3>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
+                <h3 className="mt-1 font-title text-xl sm:text-2xl text-[var(--color-ink)]">WhatsApp</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
                   Canal mais ágil para esclarecer dúvidas, confirmar horários e organizar sua primeira avaliação.
                 </p>
               </div>
@@ -183,9 +183,9 @@ export function ContactView({settings}: ContactViewProps) {
                   rel="noopener noreferrer"
                   data-track-event="whatsapp_click"
                   data-track-location="contact_card"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#20ba5a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#25D366]/40"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-xs sm:text-sm font-semibold text-white shadow-md transition-all hover:bg-[#20ba5a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#25D366]/40"
                 >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.15c-1.49 0-2.95-.4-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 012.41 5.83c.01 4.54-3.68 8.23-8.2 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.55.13.17 1.74 2.65 4.21 3.72.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z" />
                   </svg>
                   <span>{settings.whatsapp ?? "(48) 98506-3001"}</span>
@@ -193,22 +193,22 @@ export function ContactView({settings}: ContactViewProps) {
               </div>
             </div>
 
-            {/* Card Horários & Agendamento com Hora Marcada */}
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
+            {/* Card Horários */}
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-6 sm:p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-surface)] text-[var(--color-primary)]">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Atendimento com Hora Marcada</p>
-                <h3 className="mt-1 font-title text-2xl text-[var(--color-ink)]">Horário de Atendimento</h3>
-                <div className="mt-2 space-y-1 text-sm leading-6 text-[var(--color-muted)]">
+                <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Hora Marcada</p>
+                <h3 className="mt-1 font-title text-xl sm:text-2xl text-[var(--color-ink)]">Horários</h3>
+                <div className="mt-2 space-y-1 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
                   <p className="font-semibold text-[var(--color-ink)]">
                     {settings.openingHours[0] ?? "Segunda a Sexta: 09:00 às 12:00 e 14:00 às 19:00"}
                   </p>
                   <p>
-                    Consultas e avaliações conduzidas com reserva prévia para garantir pontualidade e dedicação exclusiva.
+                    Consultas e avaliações conduzidas com reserva prévia para garantir pontualidade.
                   </p>
                 </div>
               </div>
@@ -219,18 +219,50 @@ export function ContactView({settings}: ContactViewProps) {
                   rel="noopener noreferrer"
                   data-track-event="whatsapp_click"
                   data-track-location="contact_hours_card"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3.5 text-sm font-semibold text-[var(--color-primary)] transition-all hover:border-[var(--color-primary)] hover:bg-white"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-xs sm:text-sm font-semibold text-[var(--color-primary)] transition-all hover:border-[var(--color-primary)] hover:bg-white"
                 >
                   <svg className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 7.5h18M4.5 4.5h15A2.25 2.25 0 0121.75 6.75v13.5A2.25 2.25 0 0119.5 22.5H4.5A2.25 2.25 0 012.25 20.25V6.75A2.25 2.25 0 014.5 4.5z" />
                   </svg>
-                  <span>Consultar Disponibilidade</span>
+                  <span>Consultar Horários</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card E-mail & Contato Institucional */}
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-6 sm:p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
+              <div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-surface)] text-[var(--color-primary)]">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+                <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Contato Direto</p>
+                <h3 className="mt-1 font-title text-xl sm:text-2xl text-[var(--color-ink)]">E-mail</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
+                  Canal para envio de documentação, laudos, contato comercial e parcerias institucionais.
+                </p>
+                <p className="mt-2 font-mono text-xs text-[var(--color-ink)] break-all font-medium">
+                  {settings.email ?? "odontoestetica.net@gmail.com"}
+                </p>
+              </div>
+              <div className="mt-6">
+                <a
+                  href={`mailto:${settings.email ?? "odontoestetica.net@gmail.com"}`}
+                  data-track-event="email_click"
+                  data-track-location="contact_card_email"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-xs sm:text-sm font-semibold text-[var(--color-primary)] transition-all hover:border-[var(--color-primary)] hover:bg-white"
+                >
+                  <svg className="h-4 w-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                  </svg>
+                  <span>Enviar E-mail</span>
                 </a>
               </div>
             </div>
 
             {/* Card Endereço & Copiar */}
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-6 sm:p-7 shadow-[0_10px_35px_rgba(63,39,56,0.05)] transition-all hover:border-[var(--color-primary)]/30 hover:shadow-lg">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-surface)] text-[var(--color-primary)]">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -239,18 +271,18 @@ export function ContactView({settings}: ContactViewProps) {
                   </svg>
                 </div>
                 <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Endereço Oficial</p>
-                <h3 className="mt-1 font-title text-2xl text-[var(--color-ink)]">Centro de Odontologia Estética</h3>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">
+                <h3 className="mt-1 font-title text-xl sm:text-2xl text-[var(--color-ink)]">Localização</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
                   Drª Sara Michelon<br />
                   <strong>SC-403, 6201 - Sala 218</strong><br />
-                  Ingleses Norte, Florianópolis — SC, 88058-001
+                  Ingleses Norte, Florianópolis — SC
                 </p>
               </div>
               <div className="mt-6">
                 <button
                   type="button"
                   onClick={handleCopyAddress}
-                  className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border px-5 py-3.5 text-sm font-semibold transition-all ${
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 text-xs sm:text-sm font-semibold transition-all ${
                     copied
                       ? "border-emerald-500 bg-emerald-50 text-emerald-700"
                       : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-primary)] hover:border-[var(--color-primary)] hover:bg-white"
@@ -261,14 +293,14 @@ export function ContactView({settings}: ContactViewProps) {
                       <svg className="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
-                      <span>Endereço copiado!</span>
+                      <span>Copiado!</span>
                     </>
                   ) : (
                     <>
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                       </svg>
-                      <span>Copiar Endereço Completo</span>
+                      <span>Copiar Endereço</span>
                     </>
                   )}
                 </button>
@@ -462,6 +494,85 @@ export function ContactView({settings}: ContactViewProps) {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4.5. REDES SOCIAIS & BASTIDORES CLÍNICOS */}
+      <Section className="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-8 sm:py-10">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Conexão & Conteúdo</Eyebrow>
+            <Heading as="h2">Acompanhe Nosso Trabalho nas Redes</Heading>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--color-muted)]">
+              Siga nossos canais oficiais para acompanhar casos clínicos, orientações de cuidados preventivos e o dia a dia da clínica nos Ingleses.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
+            {/* Card Instagram */}
+            <a
+              href="https://www.instagram.com/drasaramichelon"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-event="social_click"
+              data-track-location="contact_instagram_card"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#E1306C]/50 hover:shadow-xl"
+            >
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-gradient-to-tr from-[#FFDC80]/20 via-[#E1306C]/15 to-[#833AB4]/20 blur-xl transition-all group-hover:scale-125" />
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-[#FD1D1D]/10 via-[#E1306C]/10 to-[#833AB4]/10 text-[#E1306C] transition-transform duration-300 group-hover:scale-110">
+                    <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                  </div>
+                  <span className="rounded-full bg-[#E1306C]/10 px-3 py-1 text-xs font-semibold text-[#E1306C]">
+                    Instagram
+                  </span>
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[var(--color-ink)]">@drasaramichelon</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
+                  Publicações e vídeos sobre tratamentos estéticos, procedimentos faciais e bastidores clínicos.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-[#E1306C] transition-colors group-hover:text-[#c1275d]">
+                <span>Seguir no Instagram</span>
+                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </div>
+            </a>
+
+            {/* Card Facebook */}
+            <a
+              href="https://www.facebook.com/drasaramichelon"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-event="social_click"
+              data-track-location="contact_facebook_card"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1877F2]/50 hover:shadow-xl"
+            >
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-[#1877F2]/10 blur-xl transition-all group-hover:bg-[#1877F2]/20" />
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#1877F2]/10 text-[#1877F2] transition-transform duration-300 group-hover:scale-110">
+                    <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                  </div>
+                  <span className="rounded-full bg-[#1877F2]/10 px-3 py-1 text-xs font-semibold text-[#1877F2]">
+                    Facebook
+                  </span>
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-[var(--color-ink)]">Centro de Odontologia Estética Dra Sara Michelon</h3>
+                <p className="mt-2 text-xs sm:text-sm leading-6 text-[var(--color-muted)]">
+                  Página institucional com novidades, comunicados e artigos sobre saúde bucal e estética.
+                </p>
+              </div>
+              <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-[#1877F2] transition-colors group-hover:text-[#125ec0]">
+                <span>Acessar Página no Facebook</span>
+                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </div>
+            </a>
           </div>
         </Container>
       </Section>

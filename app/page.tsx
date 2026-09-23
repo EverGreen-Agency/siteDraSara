@@ -18,6 +18,11 @@ export default async function HomePage() {
     name: settings.legalName,
     url: settings.siteUrl,
     telephone: settings.phone,
+    email: settings.email ?? "odontoestetica.net@gmail.com",
+    sameAs: [
+      "https://www.instagram.com/drasaramichelon",
+      "https://www.facebook.com/drasaramichelon",
+    ],
     image: `${settings.siteUrl}/images/real/sara/sara-home-hero-17.webp`,
     address: {
       "@type": "PostalAddress",
