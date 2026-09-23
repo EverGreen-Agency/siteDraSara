@@ -110,14 +110,14 @@ export default async function HomePage() {
 
       <Section className="bg-[var(--color-surface)]">
         <Container>
-          <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2">
+          <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2">
             <ImageFrame
               src="/images/real/tecnologia/planning-digital-scan.webp"
               alt="Dra. Sara Michelon durante planejamento odontológico digital"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] max-h-[460px] rounded-2xl border border-[var(--color-border)] shadow-sm"
-              imageClassName="object-top"
+              className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] w-full rounded-2xl border border-[var(--color-border)] shadow-md"
+              imageClassName="object-[center_60%]"
             />
             <div className="lg:px-8">
               <Eyebrow>Método de planejamento</Eyebrow>
@@ -186,14 +186,14 @@ export default async function HomePage() {
       />
 
       <Section>
-        <Container className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <Container className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <ImageFrame
             src="/images/real/sara/sara-autoridade-2025.webp"
             alt="Dra. Sara Michelon em retrato profissional de autoridade"
             fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            className="aspect-[4/5] max-h-[540px] rounded-2xl border border-[var(--color-border)] shadow-sm"
-            imageClassName="object-top"
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] min-h-[500px] sm:min-h-[560px] lg:min-h-[640px] w-full rounded-2xl border border-[var(--color-border)] shadow-md"
+            imageClassName="object-[center_20%]"
           />
           <div className="lg:px-8">
             <Eyebrow>Dra. Sara Michelon</Eyebrow>
@@ -213,7 +213,7 @@ export default async function HomePage() {
       </Section>
 
       <Section>
-        <Container><div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-4 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-6"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-consultorio-1-novo.webp" alt="Consultório odontológico moderno com nova cadeira anatômica da clínica Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[340px] lg:min-h-[380px]" imageClassName="object-top" /></div></Container>
+        <Container><div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-4 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-6"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-consultorio-1-novo.webp" alt="Consultório odontológico moderno com nova cadeira anatômica da clínica Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] min-h-[380px] lg:min-h-[440px] w-full rounded-2xl border border-[var(--color-border)] shadow-md" imageClassName="object-center" /></div></Container>
       </Section>
 
       <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
