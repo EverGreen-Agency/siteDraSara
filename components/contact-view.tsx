@@ -644,8 +644,8 @@ export function ContactView({settings}: ContactViewProps) {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
                   <Image
-                    src="/images/clinica-entrada.webp"
-                    alt="Fachada e entrada do complexo Ingleses Saúde & Office"
+                    src="/images/real/clinica/clinica-entrada-nova.webp"
+                    alt="Acesso e entrada à clínica Dra. Sara Michelon na Sala 218"
                     fill
                     sizes="(max-width: 640px) 100vw, 25vw"
                     className="object-cover transition-transform duration-500 hover:scale-105"

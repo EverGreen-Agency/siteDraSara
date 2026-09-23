@@ -206,7 +206,7 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
         "https://www.instagram.com/drasaramichelon",
         "https://www.facebook.com/odontoesteticadrasara",
       ],
-      image: `${settings.siteUrl}/images/clinica-entrada.webp`,
+      image: `${settings.siteUrl}/images/real/clinica/clinica-entrada-nova.webp`,
       address: {
         "@type": "PostalAddress",
         streetAddress: settings.streetAddress ?? "SC-403, 6201 - 218 - Ingleses Norte, Florianópolis - SC, 88058-001",

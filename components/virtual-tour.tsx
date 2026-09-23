@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef, useCallback} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {Container, Heading, Section} from "@/components/design-system";
@@ -40,19 +40,24 @@ const JOURNEY_STEPS: JourneyStep[] = [
     pillTag: "Acesso & Pontualidade",
     images: [
       {
-        src: "/images/real/clinica/clinic-reception-rear.webp",
-        alt: "Recepção e acesso privativo da clínica Dra. Sara Michelon na Sala 218",
-        caption: "Acesso privativo e confortável no 2º andar da torre comercial",
+        src: "/images/real/clinica/clinic-recepcao-nova.webp",
+        alt: "Recepção moderna e ampla da clínica Dra. Sara Michelon na Sala 218",
+        caption: "Recepção principal espaçosa e acolhedora no 2º andar da torre comercial",
       },
       {
         src: "/images/real/clinica/clinic-counter.webp",
-        alt: "Balcão de recepção e atendimento com equipe dedicada",
-        caption: "Balcão de acolhimento e suporte administrativo",
+        alt: "Balcão de acolhimento e suporte administrativo com equipe dedicada",
+        caption: "Balcão de atendimento e orientação ao paciente",
       },
       {
-        src: "/images/real/clinica/clinic-reception-side.webp",
-        alt: "Ambiente de recepção amplo, moderno e organizado",
+        src: "/images/real/clinica/clinic-recepcao-lado-nova.webp",
+        alt: "Ambiente de recepção amplo, moderno e organizado em ângulo lateral",
         caption: "Ambiente reservado com atendimento por hora marcada",
+      },
+      {
+        src: "/images/real/clinica/clinica-entrada-nova.webp",
+        alt: "Acesso privativo à sala 218 da clínica Dra. Sara Michelon",
+        caption: "Acesso privativo e confortável no Ingleses Saúde & Office",
       },
     ],
     features: [
@@ -92,24 +97,39 @@ const JOURNEY_STEPS: JourneyStep[] = [
     roomName: "Consultórios Integrados de Alta Performance",
     subtitle: "Ergonomia internacional, precisão técnica e conforto anatômico",
     narrative:
-      "O espaço onde a saúde, a estética e a função mastigatória são conduzidas com excelência. Os consultórios contam com cadeiras odontológicas anatômicas com múltiplos ajustes, iluminação cirúrgica LED precisa sem sombras e estrutura completa para procedimentos estéticos, restauradores e cirúrgicos com máximo relaxamento.",
+      "O espaço onde a saúde, a estética e a função mastigatória são conduzidas com excelência. Os consultórios contam com novas cadeiras odontológicas anatômicas com múltiplos ajustes, iluminação cirúrgica LED precisa sem sombras e estrutura completa para procedimentos estéticos, restauradores e cirúrgicos com máximo relaxamento.",
     pillTag: "Ergonomia & Alta Tecnologia",
     images: [
       {
-        src: "/images/real/clinica/clinic-operatory-main.webp",
-        alt: "Consultório odontológico principal com cadeira anatômica ergonômica",
-        caption: "Consultório principal com cadeira ergonômica e iluminação cirúrgica LED",
+        src: "/images/real/clinica/clinic-consultorio-1-novo.webp",
+        alt: "Consultório odontológico 1 com nova cadeira ergonômica anatômica e mesa integrada",
+        caption: "Consultório 1: Cadeira odontológica de última geração com foco cirúrgico LED",
       },
       {
-        src: "/images/real/clinica/clinic-consultorio-1.webp",
-        alt: "Consultório clínico com mesa de diagnóstico e cadeira odontológica integrada",
-        caption: "Consultório integrado para avaliação clínica e procedimentos especializados",
+        src: "/images/real/clinica/clinic-consultorio-1-angulo.webp",
+        alt: "Consultório 1 em ângulo clínico com estrutura ergonômica completa",
+        caption: "Consultório 1: Ambiente preparado para máxima biossegurança e precisão",
+      },
+      {
+        src: "/images/real/clinica/clinic-consultorio-1-b.webp",
+        alt: "Consultório odontológico com visão integrada do atendimento",
+        caption: "Consultório 1: Ergonomia pensada para o conforto total durante o atendimento",
+      },
+      {
+        src: "/images/real/clinica/clinic-consultorio-2.webp",
+        alt: "Consultório odontológico 2 com cadeira moderna e estrutura clínica",
+        caption: "Consultório 2: Espaço privativo complementar para especialidades integradas",
+      },
+      {
+        src: "/images/real/clinica/clinic-transicao-alas.webp",
+        alt: "Corredor e transição entre as alas e consultórios da clínica",
+        caption: "Transição interna entre as salas de consulta e áreas clínicas",
       },
     ],
     features: [
-      {label: "Cadeiras Ergonômicas", detail: "Estofamento anatômico para relaxamento contínuo durante o procedimento"},
+      {label: "Novas Cadeiras Ergonômicas", detail: "Estofamento anatômico para relaxamento contínuo durante o procedimento"},
       {label: "Iluminação Cirúrgica LED", detail: "Foco sem calor e de alta fidelidade cromática para máxima precisão"},
-      {label: "Ambientes Climatizados", detail: "Salas privativas com filtragem de ar e isolamento acústico"},
+      {label: "Salas Climatizadas", detail: "Consultórios privativos com isolamento acústico e filtragem de ar contínua"},
     ],
   },
   {
@@ -169,6 +189,170 @@ const JOURNEY_STEPS: JourneyStep[] = [
     ],
   },
 ];
+
+function EnvironmentCarousel({
+  images,
+  title,
+}: {
+  images: JourneyImage[];
+  title: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const total = images.length;
+
+  const scrollToSlide = useCallback((index: number) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const targetIndex = (index + total) % total;
+    const targetElement = container.children[targetIndex] as HTMLElement;
+    if (targetElement) {
+      container.scrollTo({
+        left: targetElement.offsetLeft,
+        behavior: "smooth",
+      });
+      setActiveIndex(targetIndex);
+    }
+  }, [total]);
+
+  // Autoplay suave com pausa em interação/hover
+  useEffect(() => {
+    if (total <= 1 || isPaused) return;
+    const interval = setInterval(() => {
+      scrollToSlide(activeIndex + 1);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [activeIndex, isPaused, scrollToSlide, total]);
+
+  // Sincronização do slide ativo com scroll manual / touch swipe
+  const handleScroll = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const scrollLeft = container.scrollLeft;
+    const slideWidth = container.clientWidth;
+    if (slideWidth > 0) {
+      const newIndex = Math.round(scrollLeft / slideWidth);
+      if (newIndex >= 0 && newIndex < total && newIndex !== activeIndex) {
+        setActiveIndex(newIndex);
+      }
+    }
+  }, [activeIndex, total]);
+
+  if (total === 1) {
+    const img = images[0];
+    return (
+      <figure className="group">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1120px"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+          />
+          {img.caption && (
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-4 sm:p-5">
+              <p className="flex items-center gap-2 text-xs sm:text-sm font-medium text-white/95 drop-shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-[var(--color-gold-light)] shrink-0" />
+                <span>{img.caption}</span>
+              </p>
+            </div>
+          )}
+        </div>
+      </figure>
+    );
+  }
+
+  return (
+    <div
+      className="group relative select-none"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+      role="region"
+      aria-label={`Galeria de fotos do ambiente: ${title}`}
+    >
+      {/* Container de Rolagem Suave com CSS Scroll Snap */}
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((img, idx) => (
+          <div
+            key={img.src}
+            className="relative aspect-[16/10] sm:aspect-[16/9] w-full shrink-0 snap-center snap-always overflow-hidden"
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              priority={idx === 0}
+              sizes="(max-width: 1024px) 100vw, 1120px"
+              className="object-cover transition-transform duration-500"
+            />
+            {/* Scrim com Legenda Integrada */}
+            {img.caption && (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-4 sm:p-6">
+                <p className="flex items-center gap-2 text-xs sm:text-sm font-medium text-white/95 drop-shadow-sm">
+                  <span className="h-2 w-2 rounded-full bg-[var(--color-gold-light)] shrink-0" />
+                  <span>{img.caption}</span>
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Contador Discreto no Topo Direito */}
+      <div className="absolute top-3.5 right-3.5 z-10 rounded-full bg-black/50 px-2.5 py-1 text-[11px] font-semibold tracking-wider text-white backdrop-blur-md shadow-sm">
+        {activeIndex + 1} / {total}
+      </div>
+
+      {/* Botões de Navegação Anterior / Próximo */}
+      <button
+        type="button"
+        onClick={() => scrollToSlide(activeIndex - 1)}
+        aria-label="Foto anterior"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all hover:bg-black/70 hover:scale-105 active:scale-95 shadow-md focus-visible:outline-2 focus-visible:outline-white opacity-80 group-hover:opacity-100"
+      >
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => scrollToSlide(activeIndex + 1)}
+        aria-label="Próxima foto"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all hover:bg-black/70 hover:scale-105 active:scale-95 shadow-md focus-visible:outline-2 focus-visible:outline-white opacity-80 group-hover:opacity-100"
+      >
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
+      {/* Indicadores de Paginação / Dots */}
+      <div className="mt-3.5 flex items-center justify-center gap-1.5 sm:gap-2">
+        {images.map((_, dotIdx) => (
+          <button
+            key={dotIdx}
+            type="button"
+            onClick={() => scrollToSlide(dotIdx)}
+            aria-label={`Ir para a foto ${dotIdx + 1} de ${total}`}
+            className={`h-1.5 transition-all duration-300 rounded-full ${
+              dotIdx === activeIndex
+                ? "w-7 bg-[var(--color-primary)]"
+                : "w-2 bg-[var(--color-border)] hover:bg-[var(--color-muted)]"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function VirtualTour() {
   const [activeStepId, setActiveStepId] = useState<string>("chegada");
@@ -321,94 +505,9 @@ export function VirtualTour() {
                 ))}
               </div>
 
-              {/* GRADE DE FOTOGRAFIAS REAIS 100% LIMPAS (SEM CARDS SOBREPOSTOS) */}
+              {/* CARROSSEL SUAVE DE AMBIENTES (SLIDER CONTÍNUO COM NAVEGAÇÃO E TOUCH SWIPE) */}
               <div className="mt-8">
-                {step.images.length === 1 ? (
-                  // Caso 1: Foto Única em Destaque Amplo (Lounge)
-                  <figure className="group">
-                    <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
-                      <Image
-                        src={step.images[0].src}
-                        alt={step.images[0].alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 1120px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                      />
-                    </div>
-                    {step.images[0].caption && (
-                      <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                        <span>{step.images[0].caption}</span>
-                      </figcaption>
-                    )}
-                  </figure>
-                ) : step.images.length === 2 ? (
-                  // Caso 2: Duas Fotos Lado a Lado (Consultórios, Planejamento, Biossegurança)
-                  <div className="grid gap-5 md:grid-cols-2">
-                    {step.images.map((img) => (
-                      <figure key={img.src} className="group">
-                        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
-                          <Image
-                            src={img.src}
-                            alt={img.alt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 560px"
-                            className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                          />
-                        </div>
-                        {img.caption && (
-                          <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                            <span>{img.caption}</span>
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
-                  </div>
-                ) : (
-                  // Caso 3: Três Fotos com Destaque Principal + 2 Secundárias (Chegada)
-                  <div className="grid gap-5 lg:grid-cols-3">
-                    <figure className="group lg:col-span-2">
-                      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
-                        <Image
-                          src={step.images[0].src}
-                          alt={step.images[0].alt}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 750px"
-                          className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                        />
-                      </div>
-                      {step.images[0].caption && (
-                        <figcaption className="mt-2.5 flex items-center gap-2 text-xs text-[var(--color-muted)]">
-                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                          <span>{step.images[0].caption}</span>
-                        </figcaption>
-                      )}
-                    </figure>
-
-                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-                      {step.images.slice(1).map((img) => (
-                        <figure key={img.src} className="group">
-                          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md">
-                            <Image
-                              src={img.src}
-                              alt={img.alt}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 360px"
-                              className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                            />
-                          </div>
-                          {img.caption && (
-                            <figcaption className="mt-2 flex items-center gap-1.5 text-xs text-[var(--color-muted)]">
-                              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                              <span>{img.caption}</span>
-                            </figcaption>
-                          )}
-                        </figure>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <EnvironmentCarousel images={step.images} title={step.roomName} />
               </div>
 
               {/* Botão de Próximo Passo na base de cada card */}

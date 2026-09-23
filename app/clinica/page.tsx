@@ -118,12 +118,13 @@ export default async function ClinicaPage() {
       <Section className="py-4 sm:py-6">
         <Container className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2">
           <ImageFrame
-            src={page.image ?? "/images/real/clinica/clinic-consultorio-1.webp"}
-            alt={page.imageAlt ?? "Consultório 1 com cadeira odontológica e mesa de atendimento"}
+            src="/images/real/clinica/clinic-consultorio-1-novo.webp"
+            alt="Consultório 1 da clínica Dra. Sara Michelon com nova cadeira odontológica ergonômica"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="min-h-[340px] lg:min-h-[380px]"
+            imageClassName="object-top"
           />
           <div className="lg:px-8">
             <Eyebrow>O espaço</Eyebrow>

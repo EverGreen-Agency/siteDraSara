@@ -213,7 +213,7 @@ export default async function HomePage() {
       </Section>
 
       <Section>
-        <Container><div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-4 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-6"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-operatory-main.webp" alt="Consultório odontológico da clínica da Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[340px] lg:min-h-[380px]" /></div></Container>
+        <Container><div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]"><div><Eyebrow>A clínica</Eyebrow><Heading>Estrutura real para avaliar, planejar e acompanhar</Heading><p className="mt-4 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-[var(--color-muted)]">Ambientes fotografados na própria clínica apoiam uma experiência humana e organizada, nos Ingleses.</p><div className="mt-6"><ButtonLink href="/clinica" variant="secondary">Conheça a clínica</ButtonLink></div></div><ImageFrame src="/images/real/clinica/clinic-consultorio-1-novo.webp" alt="Consultório odontológico moderno com nova cadeira anatômica da clínica Dra. Sara Michelon" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[340px] lg:min-h-[380px]" imageClassName="object-top" /></div></Container>
       </Section>
 
       <Section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">

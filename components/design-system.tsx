@@ -446,7 +446,7 @@ export function CTASection({
 export function LocalClinicBlock({heading = "Clínica nos Ingleses, Norte da Ilha"}: {heading?: string}) {
   return (
     <div className="grid overflow-hidden bg-[var(--color-surface-strong)] lg:grid-cols-2">
-      <ImageFrame src="/images/clinica-entrada.webp" alt="Entrada da clínica da Dra. Sara Michelon nos Ingleses" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[260px] lg:min-h-[300px]" />
+      <ImageFrame src="/images/real/clinica/clinica-entrada-nova.webp" alt="Entrada privativa da clínica da Dra. Sara Michelon nos Ingleses" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[260px] lg:min-h-[300px]" imageClassName="object-top" />
       <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
         <Eyebrow>Localização</Eyebrow>
         <Heading as="h3">{heading}</Heading>
