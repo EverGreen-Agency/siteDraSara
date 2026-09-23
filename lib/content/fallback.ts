@@ -14,7 +14,7 @@ export const fallbackSiteSettings: SiteSettings = {
   geo: { latitude: -27.4373, longitude: -48.3998 },
   socialLinks: [
     "https://www.instagram.com/drasaramichelon",
-    "https://www.facebook.com/drasaramichelon",
+    "https://www.facebook.com/odontoesteticadrasara",
   ],
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim().length > 0)
     ? process.env.NEXT_PUBLIC_SITE_URL.trim()

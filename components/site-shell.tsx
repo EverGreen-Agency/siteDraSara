@@ -40,7 +40,7 @@ async function Footer() {
                 <span>@drasaramichelon</span>
               </a>
               <a
-                href="https://www.facebook.com/drasaramichelon"
+                href="https://www.facebook.com/odontoesteticadrasara"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-track-event="social_click"

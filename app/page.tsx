@@ -21,7 +21,7 @@ export default async function HomePage() {
     email: settings.email ?? "odontoestetica.net@gmail.com",
     sameAs: [
       "https://www.instagram.com/drasaramichelon",
-      "https://www.facebook.com/drasaramichelon",
+      "https://www.facebook.com/odontoesteticadrasara",
     ],
     image: `${settings.siteUrl}/images/real/sara/sara-home-hero-17.webp`,
     address: {

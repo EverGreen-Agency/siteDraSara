@@ -544,7 +544,7 @@ export function ContactView({settings}: ContactViewProps) {
 
             {/* Card Facebook */}
             <a
-              href="https://www.facebook.com/drasaramichelon"
+              href="https://www.facebook.com/odontoesteticadrasara"
               target="_blank"
               rel="noopener noreferrer"
               data-track-event="social_click"

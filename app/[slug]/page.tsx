@@ -204,7 +204,7 @@ async function InstitutionalPageView({page}: {page: InstitutionalPage}) {
       email: settings.email ?? "odontoestetica.net@gmail.com",
       sameAs: [
         "https://www.instagram.com/drasaramichelon",
-        "https://www.facebook.com/drasaramichelon",
+        "https://www.facebook.com/odontoesteticadrasara",
       ],
       image: `${settings.siteUrl}/images/clinica-entrada.webp`,
       address: {
