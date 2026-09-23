@@ -651,15 +651,15 @@ export function ContactView({settings}: ContactViewProps) {
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4 text-white">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Edifício Comercial</p>
-                    <p className="text-sm font-bold">Ingleses Saúde & Office</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Acesso Sala 218</p>
+                    <p className="text-sm font-bold">Entrada da Clínica</p>
                   </div>
                 </div>
 
                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-neutral-100 shadow-md">
                   <Image
-                    src="/images/clinica-consultorio.webp"
-                    alt="Consultório da clínica odontológica da Dra. Sara Michelon"
+                    src="/images/real/clinica/clinic-consultorio-1-angulo.webp"
+                    alt="Consultório da clínica odontológica da Dra. Sara Michelon com nova cadeira"
                     fill
                     sizes="(max-width: 640px) 100vw, 25vw"
                     className="object-cover transition-transform duration-500 hover:scale-105"

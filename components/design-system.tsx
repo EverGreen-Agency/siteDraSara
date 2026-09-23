@@ -445,13 +445,26 @@ export function CTASection({
 
 export function LocalClinicBlock({heading = "Clínica nos Ingleses, Norte da Ilha"}: {heading?: string}) {
   return (
-    <div className="grid overflow-hidden bg-[var(--color-surface-strong)] lg:grid-cols-2">
-      <ImageFrame src="/images/real/clinica/clinica-entrada-nova.webp" alt="Entrada privativa da clínica da Dra. Sara Michelon nos Ingleses" fill sizes="(max-width: 1024px) 100vw, 50vw" className="min-h-[260px] lg:min-h-[300px]" imageClassName="object-top" />
+    <div className="grid overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-strong)] shadow-sm lg:grid-cols-2">
+      <ImageFrame
+        src="/images/real/clinica/clinic-recepcao-nova.webp"
+        alt="Recepção moderna e acolhedora da clínica Dra. Sara Michelon nos Ingleses"
+        fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className="min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]"
+        imageClassName="object-cover object-center"
+      />
       <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
         <Eyebrow>Localização</Eyebrow>
         <Heading as="h3">{heading}</Heading>
-        <p className="mt-4 max-w-lg text-sm sm:text-base leading-6 sm:leading-7 text-[var(--color-muted)]">Atendimento odontológico nos Ingleses, Norte da Ilha de Florianópolis, com avaliação, planejamento e acompanhamento individual.</p>
-        <div className="mt-5"><ButtonLink href="/contato" variant="secondary" event="directions_click" location="local_block">Ver contato e localização</ButtonLink></div>
+        <p className="mt-4 max-w-lg text-sm sm:text-base leading-6 sm:leading-7 text-[var(--color-muted)]">
+          Atendimento odontológico nos Ingleses, Norte da Ilha de Florianópolis, no complexo empresarial Ingleses Saúde &amp; Office, sala 218, com avaliação, planejamento e acompanhamento individual.
+        </p>
+        <div className="mt-6">
+          <ButtonLink href="/contato" variant="secondary" event="directions_click" location="local_block">
+            Ver contato e localização
+          </ButtonLink>
+        </div>
       </div>
     </div>
   );
