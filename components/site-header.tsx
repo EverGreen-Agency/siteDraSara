@@ -140,7 +140,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
         ref={headerRef}
         className="site-header sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-white/95 backdrop-blur-md transition-shadow"
       >
-        <Container className="relative flex min-h-[82px] sm:min-h-[90px] py-2 sm:py-2.5 items-center justify-between gap-3 sm:gap-6">
+        <Container className="relative flex min-h-[82px] sm:min-h-[90px] py-2 sm:py-2.5 items-center justify-between gap-2 xl:gap-4 max-w-[1380px]">
           {/* Brand Logo & Authority Identifier */}
           <Link
             href="/"
@@ -170,8 +170,8 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav aria-label="Navegação principal" className="hidden xl:block">
-            <ul className="flex items-center gap-1 xl:gap-1.5">
+          <nav aria-label="Navegação principal" className="hidden xl:block shrink-0">
+            <ul className="flex items-center gap-0.5 2xl:gap-1.5">
               {fallbackNavigation.map((item: NavigationItem) => {
                 const hasGroups = Boolean(item.groups && item.groups.length > 0);
                 const isOpen = openDropdown === item.label;
@@ -184,7 +184,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                         onClick={() => toggleDropdown(item.label)}
                         aria-expanded={isOpen}
                         aria-haspopup="true"
-                        className={`${focusClass} flex cursor-pointer items-center gap-1.5 rounded-full px-3 xl:px-3.5 py-2 text-sm font-medium transition-colors ${
+                        className={`${focusClass} flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-full px-2.5 2xl:px-3.5 py-2 text-xs 2xl:text-sm font-medium transition-colors ${
                           isOpen
                             ? "bg-[var(--color-pink)] text-[var(--color-primary)] font-semibold"
                             : "text-[var(--color-primary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]"
@@ -192,7 +192,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                       >
                         <span>{item.label}</span>
                         <ChevronDownIcon
-                          className={`h-4 w-4 transition-transform duration-200 ${
+                          className={`h-3.5 w-3.5 2xl:h-4 2xl:w-4 transition-transform duration-200 ${
                             isOpen
                               ? "rotate-180 text-[var(--color-primary)]"
                               : "text-[var(--color-muted)]"
@@ -207,7 +207,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`${focusClass} block rounded-full px-3 xl:px-3.5 py-2 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
+                      className={`${focusClass} block whitespace-nowrap rounded-full px-2.5 2xl:px-3.5 py-2 text-xs 2xl:text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
                     >
                       {item.label}
                     </Link>
@@ -218,8 +218,8 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
           </nav>
 
           {/* Action Button (Desktop CTA) */}
-          <div className="hidden sm:block">
-            <ButtonLink href="/contato" location="header">
+          <div className="hidden sm:block shrink-0">
+            <ButtonLink href="/contato" location="header" className="whitespace-nowrap px-4 2xl:px-6">
               Agendar avaliação
             </ButtonLink>
           </div>
