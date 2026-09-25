@@ -140,26 +140,38 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
         ref={headerRef}
         className="site-header sticky top-0 z-40 border-b border-[var(--color-border)]/70 bg-white/95 backdrop-blur-md transition-shadow"
       >
-        <Container className="relative flex h-20 items-center justify-between gap-6">
-          {/* Brand Logo */}
+        <Container className="relative flex min-h-[82px] sm:min-h-[90px] py-2 sm:py-2.5 items-center justify-between gap-3 sm:gap-6">
+          {/* Brand Logo & Authority Identifier */}
           <Link
             href="/"
             aria-label={`${settings.clinicName} — página inicial`}
-            className={`${focusClass} shrink-0 transition-opacity hover:opacity-85`}
+            className={`${focusClass} flex items-center gap-2.5 sm:gap-3.5 shrink-0 transition-opacity hover:opacity-90`}
           >
             <Image
               src="/images/logo-dra-sara.webp"
               alt={settings.clinicName}
-              width={142}
-              height={80}
+              width={152}
+              height={85}
               priority
-              className="h-12 w-auto object-contain sm:h-14"
+              className="h-11 sm:h-14 w-auto object-contain shrink-0"
             />
+            <div className="h-8 sm:h-10 w-px bg-[var(--color-border)] shrink-0" aria-hidden="true" />
+            <div className="flex flex-col justify-center leading-[1.18]">
+              <span className="font-title text-[10px] min-[360px]:text-[11px] sm:text-xs font-semibold tracking-tight text-[var(--color-primary)]">
+                Centro de Odontologia Estética
+              </span>
+              <span className="font-title text-[10.5px] min-[360px]:text-[11.5px] sm:text-xs font-bold text-[var(--color-primary)]">
+                Dra. Sara Michelon
+              </span>
+              <span className="mt-0.5 text-[9.5px] min-[360px]:text-[10px] sm:text-[11px] font-medium tracking-wide text-[var(--color-mauve)]">
+                Nos Ingleses desde 2014
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation Links */}
           <nav aria-label="Navegação principal" className="hidden xl:block">
-            <ul className="flex items-center gap-1 lg:gap-2">
+            <ul className="flex items-center gap-1 xl:gap-1.5">
               {fallbackNavigation.map((item: NavigationItem) => {
                 const hasGroups = Boolean(item.groups && item.groups.length > 0);
                 const isOpen = openDropdown === item.label;
@@ -172,7 +184,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                         onClick={() => toggleDropdown(item.label)}
                         aria-expanded={isOpen}
                         aria-haspopup="true"
-                        className={`${focusClass} flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                        className={`${focusClass} flex cursor-pointer items-center gap-1.5 rounded-full px-3 xl:px-3.5 py-2 text-sm font-medium transition-colors ${
                           isOpen
                             ? "bg-[var(--color-pink)] text-[var(--color-primary)] font-semibold"
                             : "text-[var(--color-primary)] hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]"
@@ -195,7 +207,7 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`${focusClass} block rounded-full px-4 py-2 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
+                      className={`${focusClass} block rounded-full px-3 xl:px-3.5 py-2 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-mauve)]`}
                     >
                       {item.label}
                     </Link>
@@ -213,16 +225,16 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
           </div>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex items-center gap-3 xl:hidden">
+          <div className="flex items-center gap-3 xl:hidden shrink-0">
             <button
               type="button"
               onClick={() => setIsDrawerOpen(true)}
               aria-label="Abrir menu de navegação"
               aria-expanded={isDrawerOpen}
-              className={`${focusClass} flex h-11 items-center gap-2 rounded-lg border border-[var(--color-border)] px-3.5 text-sm font-semibold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] active:scale-95`}
+              className={`${focusClass} flex h-10 sm:h-11 items-center gap-1.5 sm:gap-2 rounded-lg border border-[var(--color-border)] px-3 sm:px-3.5 text-sm font-semibold text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface)] active:scale-95`}
             >
               <MenuIcon className="h-5 w-5" />
-              <span className="text-xs uppercase tracking-wider">Menu</span>
+              <span className="text-xs uppercase tracking-wider font-semibold">Menu</span>
             </button>
           </div>
 
@@ -351,18 +363,23 @@ export function SiteHeader({settings}: {settings: SiteSettings}) {
             href="/"
             onClick={() => setIsDrawerOpen(false)}
             aria-label="Página inicial"
-            className="flex items-center gap-2"
+            className="flex items-center gap-3"
           >
             <Image
               src="/images/logo-icon-dra-sara.webp"
               alt={`Ícone da clínica ${settings.clinicName}`}
               width={36}
               height={36}
-              className="h-8 w-8 object-contain"
+              className="h-8 w-8 object-contain shrink-0"
             />
-            <span className="font-title text-lg tracking-wide text-[var(--color-primary)]">
-              {settings.clinicName}
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-title text-base font-bold text-[var(--color-primary)]">
+                {settings.clinicName}
+              </span>
+              <span className="text-[11px] font-medium text-[var(--color-mauve)]">
+                Nos Ingleses desde 2014
+              </span>
+            </div>
           </Link>
           <button
             type="button"
