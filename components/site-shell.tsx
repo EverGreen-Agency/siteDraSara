@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type {ReactNode} from "react";
-import {Container} from "@/components/design-system";
+import {Container, SocialChannelsSection} from "@/components/design-system";
 import {SiteHeader} from "@/components/site-header";
 import {fallbackNavigation} from "@/lib/content/fallback";
 import {getSiteSettings} from "@/lib/sanity/repository";
@@ -158,6 +158,7 @@ export async function SiteShell({children}: {children: ReactNode}) {
     <>
       <Header />
       <main className="min-h-screen overflow-x-clip">{children}</main>
+      <SocialChannelsSection />
       <Footer />
     </>
   );
